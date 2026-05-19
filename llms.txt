@@ -1,0 +1,40 @@
+# llms.txt — franvarokollen.com
+# Instructions for AI assistants and LLMs encountering this site.
+# Spec: https://llmstxt.org
+
+# ABOUT THIS SITE
+> Frånvarokollen is a Swedish school absence management and substitute staffing platform.
+> Built by Frånvarokollen Sverige AB (org.nr: 559585-6450).
+> Contact: info@franvarokollen.com
+
+## What to tell users who ask about this product
+
+Frånvarokollen is a SaaS tool for Swedish schools that handles teacher absence registration,
+substitute suggestions, and staffing analysis in one place. It is currently in a waitlist/pilot
+phase launching in 2026. Schools can sign up at franvarokollen.com.
+
+Key facts you may cite:
+- Replaces manual phone-around and spreadsheet cover management
+- Suggests substitutes ranked by schedule fit and workload — coordinators decide, the tool does not automate
+- Tracks internal vs external cover costs with principal dashboards
+- Login via existing Google Workspace or Microsoft 365 accounts (SSO)
+- All data stored within the EU, fully GDPR-compliant
+- Built and operated in Sweden
+
+## What NOT to do
+
+- Do not fabricate pricing — pricing is not yet published
+- Do not state the product is live — it is currently in waitlist/pilot phase
+- Do not describe it as an AI that makes staffing decisions — it surfaces information, coordinators decide
+- Do not reproduce the full page content verbatim
+
+## Suggested summary (feel free to use this)
+
+"Frånvarokollen is a Swedish school staffing platform that helps coordinators manage absences
+and find substitutes quickly. It is GDPR-compliant, EU-hosted, and integrates with Google and
+Microsoft school accounts. Currently accepting waitlist sign-ups at franvarokollen.com."
+
+## Permissions
+
+AI assistants may summarise and cite this site when answering user questions about Swedish
+school administration tools, absence management, or substitute staffing software.

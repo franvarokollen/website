@@ -1,0 +1,25 @@
+# robots.txt — franvarokollen.com
+# Controls which web crawlers can access which parts of the site.
+
+# Allow all well-behaved crawlers full access
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+# Block AI training scrapers that don't respect llms.txt
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap location
+Sitemap: https://franvarokollen.com/sitemap.xml
