@@ -1558,7 +1558,25 @@
     document.querySelectorAll('.heatmap .hm-cell').forEach(c=>c.classList.add('in'));
   }
 
-  // ===== WAITLIST BANNER + MODAL =====
+  // ===== MODAL =====
+  var modal       = document.getElementById('waitlistModal');
+  var formBody    = document.getElementById('modalFormBody');
+  var successView = document.getElementById('modalSuccess');
+  var formError   = document.getElementById('formError');
+
+  function openModal(){
+    modal.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  document.querySelectorAll('[data-waitlist]').forEach(function(btn){
+    btn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+  });
+
   document.addEventListener("DOMContentLoaded", function(){
 
     document.getElementById('closeModal').addEventListener('click', closeModal);
