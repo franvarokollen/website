@@ -1567,13 +1567,11 @@
     var formError   = document.getElementById('formError');
 
     function openModal(){
-      modal.style.display='flex';
-      modal.classList.add('open');
+      modal.style.cssText='display:flex;position:fixed;inset:0;background:rgba(14,27,48,0.65);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px';
       document.body.style.overflow='hidden';
     }
     function closeModal(){
-      modal.classList.remove('open');
-      modal.style.display='none';
+      modal.style.cssText='display:none';
       document.body.style.overflow='';
     }
 
