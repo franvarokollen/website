@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Integritetspolicy — Frånvarokollen</title>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --navy:#0D1E36;
+    --navy-deep:#081526;
+    --blue:#2563EB;
+    --red:#DC2626;
+    --cream:#F8FAFC;
+    --cream-deep:#F1F5F9;
+    --ink:#0F172A;
+    --muted:#64748B;
+    --line:#E2E8F0;
+    --white:#ffffff;
+    --shadow:0 4px 20px rgba(15,23,42,0.09),0 1px 4px rgba(15,23,42,0.05);
+    --shadow-sm:0 2px 10px rgba(15,23,42,0.07),0 1px 2px rgba(15,23,42,0.04);
+    --radius:12px;
+    --radius-sm:8px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    font-weight:400;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  img,svg{display:block;max-width:100%}
+
+  /* ---------- shared ---------- */
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+  .mono{font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:0.02em}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--blue);
+    margin:0 0 14px;
+  }
+  h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin:0}
+  h2{font-size:clamp(28px,3.4vw,42px);color:var(--navy)}
+  h3{font-size:20px;color:var(--navy)}
+  p{margin:0}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:13px 22px;
+    border-radius:var(--radius-sm);
+    font-weight:700;
+    font-size:15px;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    border:none;
+    box-shadow:var(--shadow-sm);
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(15,23,42,0.13)}
+  .btn:active{transform:translateY(0);box-shadow:var(--shadow-sm)}
+  .btn-primary{background:linear-gradient(135deg,#1E40AF,#2563EB);color:#fff;box-shadow:0 2px 12px rgba(37,99,235,0.3)}
+  .btn-primary:hover{box-shadow:0 6px 20px rgba(37,99,235,0.38)}
+  .btn-secondary{background:var(--white);color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.18);box-shadow:none}
+  .btn-ghost:hover{background:rgba(255,255,255,0.14);transform:none;box-shadow:none}
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 2px 10px rgba(220,38,38,0.3)}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,244,239,0.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--navy)}
+  .brand-logo{height:36px;width:auto;display:block}
+  .brand-logo-light{height:32px}
+  .nav-links{display:flex;gap:28px;align-items:center}
+  .nav-links a{font-weight:600;font-size:14px;color:var(--ink);opacity:0.75;transition:opacity .15s}
+  .nav-links a:hover{opacity:1;color:var(--navy)}
+  .nav-actions{display:flex;align-items:center;gap:12px}
+  .lang{
+    display:flex;
+    background:var(--cream-deep);
+    border-radius:8px;
+    padding:3px;
+    border:1px solid var(--line);
+  }
+  .lang button{
+    padding:5px 10px;
+    font-size:12px;
+    font-weight:700;
+    border-radius:6px;
+    color:var(--muted);
+    transition:all .15s;
+  }
+  .lang button.active{background:var(--navy);color:#fff}
+  .nav-login{
+    padding:10px 18px;
+    background:var(--red);
+    color:#fff;
+    border:none;
+    border-radius:7px;
+    font-weight:700;
+    font-size:14px;
+    box-shadow:0 2px 10px rgba(220,38,38,0.28);
+    transition:transform .15s,box-shadow .15s;
+    cursor:pointer;
+  }
+  .nav-login:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(220,38,38,0.38)}
+  .nav-toggle{display:none;width:40px;height:40px;border-radius:8px;background:var(--cream-deep);align-items:center;justify-content:center}
+  .nav-toggle svg{width:20px;height:20px}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:linear-gradient(160deg,#10243F 0%,#0D1E36 55%,#0A1828 100%);
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+    background-size:56px 56px;
+    pointer-events:none;
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px;
+    align-items:center;
+    padding:72px 0 96px;
+    position:relative;
+  }
+  .hero h1{
+    font-size:clamp(36px,4.6vw,58px);
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent{color:var(--blue)}
+  .hero-lead{
+    font-size:18px;
+    color:rgba(255,255,255,0.78);
+    max-width:520px;
+    margin-bottom:32px;
+  }
+  .hero-eyebrow{color:#7FB6FF;margin-bottom:18px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+  .hero-trust{
+    display:flex;gap:24px;flex-wrap:wrap;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.12);
+  }
+  .hero-trust-item{
+    display:flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:600;
+    color:rgba(255,255,255,0.7);
+  }
+  .hero-trust-item .dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+  .hero-trust-item:nth-child(2) .dot{background:#43C77F}
+  .hero-trust-item:nth-child(3) .dot{background:var(--red)}
+
+  .hero-visual{position:relative;display:flex;justify-content:center}
+
+  /* ---------- sections ---------- */
+  section{padding:96px 0}
+  .section-head{max-width:680px;margin:0 auto 56px;text-align:center}
+  .section-head .eyebrow{justify-content:center}
+  .section-head p{margin-top:14px;color:var(--muted);font-size:17px}
+
+  /* features */
+  .features{background:var(--cream)}
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .feature{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .feature:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(15,23,42,0.1)}
+  .feature-icon{
+    width:48px;height:48px;
+    border-radius:10px;
+    background:var(--cream-deep);
+    border:2px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .feature:nth-child(1) .feature-icon{background:#DCEAFF}
+  .feature:nth-child(2) .feature-icon{background:#E5F7EC}
+  .feature:nth-child(3) .feature-icon{background:#FFE5E7}
+  .feature:nth-child(4) .feature-icon{background:#FFF1D6}
+  .feature:nth-child(5) .feature-icon{background:#E8E2FB}
+  .feature:nth-child(6) .feature-icon{background:#DCEAFF}
+  .feature h3{margin-bottom:8px}
+  .feature p{color:var(--muted);font-size:15px}
+
+  /* how it works */
+  .how{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    counter-reset:step;
+  }
+  .step{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px 28px;
+    box-shadow:var(--shadow-sm);
+    position:relative;
+  }
+  .step-num{
+    font-family:'JetBrains Mono',monospace;
+    font-weight:600;
+    font-size:13px;
+    color:var(--blue);
+    margin-bottom:14px;
+  }
+  .step h3{margin-bottom:8px}
+  .step p{color:var(--muted);font-size:15px}
+
+  /* security */
+  .security{background:linear-gradient(160deg,#10243F 0%,#0D1E36 100%);color:#fff;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+  .security .section-head h2{color:#fff}
+  .security .section-head p{color:rgba(255,255,255,0.72)}
+  .security .section-head .eyebrow{color:#7FB6FF}
+  .security-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .sec-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.09);
+    border-radius:var(--radius);
+    padding:28px;
+    backdrop-filter:blur(8px);
+  }
+  .sec-card h3{color:#fff;margin-bottom:8px;font-size:18px}
+  .sec-card p{color:rgba(255,255,255,0.7);font-size:14px}
+  .sec-icon{
+    width:40px;height:40px;border-radius:8px;
+    background:rgba(30,123,255,0.18);
+    color:#7FB6FF;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;
+  }
+
+  /* contact */
+  .contact{background:var(--cream)}
+  .contact-card{
+    max-width:780px;
+    margin:0 auto;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:48px;
+    box-shadow:0 8px 40px rgba(15,23,42,0.1),0 2px 8px rgba(15,23,42,0.05);
+    text-align:center;
+  }
+  .contact-card h2{margin-bottom:14px}
+  .contact-card p{color:var(--muted);margin-bottom:28px;font-size:17px}
+  .contact-meta{
+    display:flex;justify-content:center;gap:32px;flex-wrap:wrap;
+    margin-top:28px;padding-top:24px;
+    border-top:1px solid var(--line);
+    font-size:14px;color:var(--muted);
+  }
+  .contact-meta strong{color:var(--ink);font-weight:700}
+
+  /* footer */
+  .footer{
+    background:#060F1C;
+    color:rgba(255,255,255,0.6);
+    padding:56px 0 32px;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    margin-bottom:40px;
+  }
+  .footer h4{
+    font-size:13px;font-weight:700;
+    text-transform:uppercase;letter-spacing:0.08em;
+    color:#fff;margin:0 0 16px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .footer ul{list-style:none;padding:0;margin:0}
+  .footer li{margin-bottom:10px}
+  .footer a{font-size:14px;color:rgba(255,255,255,0.65);transition:color .15s}
+  .footer a:hover{color:#fff}
+  .footer-brand{color:#fff}
+  .footer-brand .brand{margin-bottom:14px}
+  .footer-brand .brand-name{color:#fff}
+  .footer-brand p{font-size:14px;color:rgba(255,255,255,0.6);max-width:300px}
+  .footer-bottom{
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px;
+    font-size:13px;color:rgba(255,255,255,0.5);
+  }
+
+  /* mockup styles */
+  .mockup{
+    width:100%;max-width:520px;
+    filter:drop-shadow(8px 8px 0 rgba(0,0,0,0.4));
+  }
+
+  /* ---------- smart suggestions ---------- */
+  .smart{background:#fff;border-bottom:1px solid var(--line)}
+  .smart-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+  }
+  .smart-copy h2{margin-bottom:18px}
+  .smart-copy>p{color:var(--muted);font-size:17px;margin-bottom:28px}
+  .smart-criteria{
+    display:flex;flex-direction:column;gap:18px;
+    margin-bottom:20px;
+  }
+  .smart-criterion{
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  .smart-criterion-icon{
+    flex:none;width:36px;height:36px;border-radius:8px;
+    background:#DCEAFF;
+    border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--blue);
+  }
+  .smart-criterion strong{display:block;font-size:15px;color:var(--navy);margin-bottom:2px}
+  .smart-criterion span{font-size:14px;color:var(--muted);line-height:1.5}
+
+  .smart-visual{position:relative}
+  .candidates{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 8px 32px rgba(15,23,42,0.1),0 2px 6px rgba(15,23,42,0.05);
+    padding:22px;
+  }
+  .candidates-head{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:4px;padding-bottom:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .candidates-title{font-weight:800;font-size:14px;color:var(--navy)}
+  .candidates-context{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--muted);
+  }
+
+  /* the suggest button — visual centerpiece */
+  .suggest-btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:13px 22px;
+    background:var(--blue);color:#fff;
+    border:2px solid var(--ink);
+    border-radius:10px;
+    box-shadow:4px 4px 0 var(--ink);
+    font-weight:700;font-size:14px;
+    position:relative;
+  }
+  .suggest-btn::after{
+    content:"";
+    position:absolute;
+    inset:-6px;
+    border-radius:14px;
+    border:2px dashed var(--blue);
+    opacity:0.4;
+    animation:pulse 2s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes pulse{
+    0%,100%{transform:scale(1);opacity:0.4}
+    50%{transform:scale(1.04);opacity:0.15}
+  }
+
+  .candidate{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    margin-bottom:8px;
+    background:#fff;
+  }
+  .candidate.soft{background:#F4F8FF;border-color:#D6E5FF}
+  .candidate-info strong{display:block;font-size:14px;color:var(--navy);font-weight:700;margin-bottom:2px}
+  .candidate-info .meta{font-size:12px;color:var(--muted);font-weight:600}
+  .candidate-pick{
+    font-family:'Nunito',sans-serif;
+    font-size:12px;font-weight:700;
+    color:var(--blue);
+    padding:6px 12px;
+    border:1.5px solid var(--blue);
+    border-radius:6px;
+    background:#fff;
+  }
+
+  /* ---------- analytics ---------- */
+  .analytics{background:var(--cream);border-top:1px solid var(--line)}
+  .analytics-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+  }
+  .insight{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px;
+    box-shadow:var(--shadow-sm);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .insight:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(15,23,42,0.1)}
+  .insight-head{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .insight-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:600;
+    color:var(--blue);
+    text-transform:uppercase;letter-spacing:0.08em;
+  }
+  .insight-pill{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;font-weight:600;
+    background:#E5F7EC;color:#3F8B5C;
+    padding:3px 8px;border-radius:5px;
+  }
+  .insight-pill.warn{background:#FFE5E7;color:var(--red)}
+  .insight-pill.amber{background:#FFF1D6;color:#A8731A}
+  .insight h3{font-size:18px;margin-bottom:6px}
+  .insight p{color:var(--muted);font-size:13px;margin-bottom:16px;line-height:1.5}
+  .insight-viz{
+    background:var(--cream);
+    border-radius:8px;
+    padding:14px;
+    border:1px solid var(--line);
+  }
+
+  /* mini chart bars */
+  .bars{display:flex;align-items:flex-end;gap:6px;height:80px}
+  .bar{
+    flex:1;
+    background:var(--blue);
+    background-image:linear-gradient(180deg, #4A95FF, var(--blue));
+    border-radius:3px 3px 0 0;
+    position:relative;
+    transition:height 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .bar.ext{
+    background:var(--red);
+    background-image:linear-gradient(180deg, #FF5563, var(--red));
+  }
+  .bar::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+    background-size:100% 200%;
+    animation:shimmerV 2.6s linear infinite;
+    border-radius:3px 3px 0 0;
+  }
+  @keyframes shimmerV{
+    0%{background-position:0 -200%}
+    100%{background-position:0 200%}
+  }
+  .bar-day{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);font-weight:600}
+
+  /* workload distribution rings */
+  .workload{display:flex;flex-direction:column;gap:10px}
+  .workload-row{display:flex;align-items:center;gap:10px;font-size:12px}
+  .workload-row .name{flex:none;width:130px;font-weight:700;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .workload-row .track{flex:1;height:12px;background:#E8E2D4;border-radius:6px;overflow:hidden;position:relative;box-shadow:inset 0 1px 2px rgba(14,27,48,0.08)}
+  .workload-row .fill{
+    display:block;
+    height:100%;
+    background:var(--blue);
+    border-radius:6px;
+    transition:width 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    position:relative;
+    background-image:linear-gradient(90deg, var(--blue), #4A95FF);
+  }
+  .workload-row .fill.warn{
+    background:var(--red);
+    background-image:linear-gradient(90deg, #C81E2C, var(--red));
+  }
+  .workload-row .fill::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+    background-size:200% 100%;
+    animation:shimmer 2.4s linear infinite;
+    border-radius:6px;
+  }
+  @keyframes shimmer{
+    0%{background-position:200% 0}
+    100%{background-position:-200% 0}
+  }
+  .workload-row .pct{flex:none;width:38px;text-align:right;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy);font-size:11px}
+
+  /* heatmap */
+  .heatmap{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}
+  .heatmap .hm-cell{
+    aspect-ratio:1;border-radius:3px;
+    opacity:0;transform:scale(0.4);
+    transition:opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), filter 1.4s ease;
+  }
+  .heatmap .hm-cell.in{opacity:1;transform:scale(1)}
+  .heatmap .hm-cell.pulse{filter:brightness(1.35) saturate(1.2)}
+  .heatmap .hm-label{font-size:9px;color:var(--muted);font-weight:600;display:flex;align-items:center;justify-content:center}
+
+  @media (prefers-reduced-motion:reduce){
+    .bar,.workload-row .fill,.heatmap .hm-cell{transition:none}
+    .heatmap .hm-cell{opacity:1;transform:none}
+    .bar::after,.workload-row .fill::after{animation:none;display:none}
+  }
+
+  /* cost breakdown */
+  .cost-stack{display:flex;flex-direction:column;gap:10px}
+  .cost-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--cream);border-radius:6px;font-size:12px}
+  .cost-row strong{font-family:'JetBrains Mono',monospace;color:var(--navy);font-weight:700}
+  .cost-row.total{background:var(--navy);color:#fff}
+  .cost-row.total strong{color:#fff}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .hero-inner{grid-template-columns:1fr;gap:40px;padding:48px 0 64px}
+    .hero-visual{order:-1}
+    .mockup{max-width:420px}
+    .feature-grid,.steps,.security-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .smart-grid{grid-template-columns:1fr;gap:48px}
+    .smart-criteria{grid-template-columns:1fr 1fr}
+    section{padding:72px 0}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none}
+    .nav-toggle{display:flex}
+    .feature-grid,.steps,.security-grid{grid-template-columns:1fr}
+    .analytics-grid{grid-template-columns:1fr}
+    .smart-criteria{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr}
+    .contact-card{padding:32px 24px}
+    .hero-ctas{flex-direction:column;align-items:stretch}
+    .hero-ctas .btn{justify-content:center}
+    .container{padding:0 20px}
+  }
+
+  /* ============ MOBILE CUT-DOWN ============ */
+  /* Aggressive content reduction for screens ≤640px.
+     Mobile users are mostly returning customers heading to login
+     or principals quickly evaluating — they don't need the full
+     marketing showcase. */
+
+  .mobile-only{display:none}
+
+  .mobile-trust{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:var(--radius);
+    padding:24px;
+    text-align:center;
+  }
+  .mobile-trust h3{color:#fff;font-size:18px;margin-bottom:10px}
+  .mobile-trust p{color:rgba(255,255,255,0.72);font-size:14px;margin-bottom:14px;line-height:1.6}
+  .mobile-trust .badges{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  }
+  .mobile-trust .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:600;
+    color:#7FB6FF;
+    padding:5px 10px;
+    background:rgba(30,123,255,0.12);
+    border:1px solid rgba(127,182,255,0.25);
+    border-radius:6px;
+  }
+
+  @media (max-width:640px){
+    /* hide elements that don't earn their place on small screens */
+    .hero-visual{display:none}
+    .smart-visual{display:none}
+    .feature.mobile-hide{display:none}
+    .how{display:none}
+    .analytics{display:none}
+    .security .section-head{display:none}
+    .security-grid{display:none}
+    .footer-grid > div:nth-child(3),
+    .footer-grid > div:nth-child(4){display:none}
+
+    /* surface the mobile-only trust strip */
+    .mobile-only{display:block}
+    .security{padding:40px 0}
+
+    /* tighten section padding on mobile */
+    section{padding:56px 0}
+    .hero-inner{padding:36px 0 48px;gap:0}
+
+    /* hero copy: tighter */
+    .hero h1{font-size:34px;margin-bottom:14px}
+    .hero-lead{font-size:16px;margin-bottom:24px}
+    .hero-trust{gap:14px;padding-top:18px}
+    .hero-eyebrow{margin-bottom:14px;font-size:11px}
+
+    /* smart section: copy only */
+    .smart-grid{gap:0}
+    .smart-copy h2{font-size:26px;margin-bottom:14px}
+    .smart-copy>p{font-size:15px;margin-bottom:22px}
+    .smart-criterion-icon{width:32px;height:32px}
+    .smart-criterion strong{font-size:14px}
+    .smart-criterion span{font-size:13px}
+
+    /* features tighter */
+    .feature{padding:22px}
+    .feature h3{font-size:18px}
+    .section-head{margin-bottom:36px}
+    .section-head h2{font-size:26px}
+    .section-head p{font-size:15px}
+
+    /* contact tighter */
+    .contact-card h2{font-size:24px}
+    .contact-card p{font-size:15px;margin-bottom:22px}
+    .contact-meta{flex-direction:column;gap:10px;text-align:left;align-items:flex-start}
+
+    /* footer slim */
+    .footer{padding:36px 0 24px}
+    .footer-grid{gap:24px;margin-bottom:24px}
+    .footer-bottom{flex-direction:column;align-items:flex-start;gap:6px;font-size:12px}
+  }
+
+  /* mobile menu */
+  .mobile-menu{
+    display:none;
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+    padding:16px 24px 24px;
+  }
+  .mobile-menu.open{display:block}
+  .mobile-menu a{
+    display:block;padding:10px 0;
+    font-weight:600;font-size:15px;
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-menu a:last-child{border-bottom:none}
+
+  /* hidden lang content */
+  [data-lang]:not(.active){display:none}
+
+  /* small reveal */
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:1;transform:none}
+    /* Safety fallback — if JS fails, reveals are still visible */
+    @media (prefers-reduced-motion: no-preference) {}
+    .no-js .reveal{opacity:1;transform:none}
+  }
+
+  /* ===== WAITLIST BANNER ===== */to{transform:translateX(-50%)}}
+
+  /* ===== MODAL ===== */
+  .modal-backdrop{display:none!important;position:fixed;inset:0;background:rgba(14,27,48,0.65);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px}
+  .modal-backdrop.open{display:flex!important}
+  .modal{background:var(--cream);border:2px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative}
+  .modal-header{background:var(--cream-deep);border-bottom:2px solid var(--ink);padding:22px 28px 18px;border-radius:calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0}
+  .modal-header .eyebrow{color:var(--blue)}
+  .modal-header h3{color:var(--navy);font-size:22px}
+  .modal-header p{color:var(--muted);font-size:14px;margin-top:6px}
+  .modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;background:rgba(0,0,0,0.06);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;border:1px solid var(--line);transition:background .15s}
+  .modal-close:hover{background:rgba(0,0,0,0.12)}
+  .modal-body{padding:28px;background:#fff;border-radius:0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px)}
+  .form-error{display:none;background:#FFE5E7;border:1.5px solid var(--red);border-radius:8px;padding:12px 14px;font-size:14px;color:#8B0010;font-weight:600;margin-bottom:18px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .form-field{margin-bottom:18px}
+  .form-field label{display:block;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:6px}
+  .form-field label .req{color:var(--red)}
+  .form-field input,.form-field textarea{width:100%;padding:11px 14px;border:2px solid var(--line);border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:15px;color:var(--ink);background:#fff;outline:none;transition:border-color .15s,box-shadow .15s}
+  .form-field input:focus,.form-field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,123,255,0.12)}
+  .form-field textarea{resize:vertical;min-height:90px}
+  .form-submit{width:100%;padding:14px;background:var(--navy);color:#fff;border:2px solid var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;cursor:pointer;transition:transform .12s,box-shadow .12s;margin-top:4px}
+  .form-submit:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .form-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:var(--shadow-sm)}
+  .form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+  .modal-success{display:none;flex-direction:column;align-items:center;padding:48px 28px;text-align:center;background:#fff;border-radius:0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px)}
+  .modal-success.show{display:flex}
+  .success-icon{width:64px;height:64px;background:#E5F7EC;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px;box-shadow:var(--shadow-sm)}
+  .modal-success h3{margin-bottom:10px}
+  .modal-success p{color:var(--muted);font-size:15px;max-width:340px}
+  .modal-success .btn{margin-top:24px}
+  @media(max-width:640px){.form-row{grid-template-columns:1fr}}
+
+
+
+  /* policy pages */
+  .policy-wrap{max-width:780px;margin:0 auto;padding:60px 24px 100px}
+  .back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:700;font-size:14px;text-decoration:none;padding:10px 0;margin-bottom:32px}
+  .back-btn:hover{color:var(--navy)}
+  .back-btn svg{width:16px;height:16px}
+  .policy-wrap h1{font-size:clamp(28px,5vw,42px);color:var(--navy);margin-bottom:8px;line-height:1.15}
+  .policy-meta{font-size:13px;color:var(--muted);margin-bottom:48px}
+  .policy-wrap h2{font-size:20px;color:var(--navy);margin:40px 0 12px;padding-top:40px;border-top:1px solid var(--line)}
+  .policy-wrap h2:first-of-type{border-top:none;padding-top:0}
+  .policy-wrap h3{font-size:16px;color:var(--navy);margin:24px 0 8px;font-weight:700}
+  .policy-wrap p{color:var(--ink);line-height:1.75;margin-bottom:16px}
+  .policy-wrap ul,.policy-wrap ol{color:var(--ink);line-height:1.75;margin:0 0 16px 24px}
+  .policy-wrap li{margin-bottom:6px}
+  .policy-wrap table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+  .policy-wrap th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-weight:700}
+  .policy-wrap td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .policy-wrap tr:nth-child(even) td{background:var(--cream-deep)}
+  .policy-wrap a{color:var(--blue);text-decoration:underline}
+  .policy-wrap strong{font-weight:700;color:var(--navy)}
+  .back-bottom{margin-top:60px;padding-top:40px;border-top:1px solid var(--line)}
+  .lang-notice{background:var(--cream-deep);border:1px solid var(--line);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--muted);margin-bottom:32px}
+
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="brand" aria-label="FrånvaroKollen">
+      <svg class="brand-logo" viewBox="0 0 784 248" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path style="fill:#0e70f4" d="m 246.56165,187.85079 c -1.65,-0.42834 -7.9725,-0.83204 -14.05,-0.89712 -11.41915,-0.12226 -13.45,-0.78551 -13.45,-4.39255 0,-1.03083 2.41394,-4.42833 5.36432,-7.55 2.95038,-3.12167 5.91762,-6.7376 6.59387,-8.03541 1.14026,-2.1883 0.80318,-2.77428 -4.64182,-8.06939 -10.16508,-9.88524 -28.58112,-21.01578 -41.44129,-25.04686 -11.65675,-3.65386 -14.87508,-2.33126 -14.87508,6.11307 0,6.1745 -0.98838,6.55752 -3.00391,9.16559 -0.96208,1.24492 -3.373,3.81393 -4.46371,4.7902 -1.55276,1.38986 -11.58965,1.90704 -36.44806,1.90704 -27.04712,0 -28.12543,-0.22334 -32.555646,-6.74298 l -2.528678,-3.72129 V 116.83536 88.29963 l 2.528678,-3.721284 c 4.497186,-6.618207 5.162656,-6.742985 35.961506,-6.742985 25.51076,0 27.88153,0.148985 31.46544,1.977361 5.81629,2.967247 8.2515,7.07298 8.99294,15.161983 0.45162,4.927085 1.19431,7.447965 2.61195,8.865615 2.00413,2.00412 13.94309,7.36065 24.93949,11.18933 15.22425,5.30072 37.81004,19.3314 49.22028,30.5765 5.0202,4.94754 5.49144,4.86377 13.63787,-2.42444 3.6692,-3.28265 5.67176,-4.34635 8.18262,-4.34635 2.56066,0 3.49524,0.51694 4.06781,2.25 0.87922,2.66126 0.70095,20.77358 -0.35678,36.25 l -0.7518,11 -11,0.14711 c -6.05,0.0809 -12.35,-0.20335 -14,-0.63168 z"/>
+        <path style="fill:#e4223d" d="m 242.06165,246.50414 c -10.34393,-4.83591 -11.48206,-8.21984 -11.49219,-34.16878 l -0.008,-20 11,0.18362 c 6.05,0.101 15.28171,0.47833 20.5149,0.83852 8.95234,0.61618 9.63228,0.52537 11.5,-1.53574 1.60399,-1.77007 2.08645,-4.10122 2.51299,-12.14223 0.38364,-7.23223 0.93016,-10.20599 2,-10.88257 0.80966,-0.51204 5.81607,-0.93787 11.12536,-0.94629 l 9.65326,0.92272 5.96916,1.68494 4.48395,5.90604 -0.0884,8.56367 c -0.0599,5.80074 -0.0427,50.75817 -1.74588,54.05172 -1.70678,3.30055 -6.51421,6.85561 -9.27068,6.85561 -1.12014,0 -2.31473,0.45 -2.65465,1 -0.91311,1.47744 -50.28511,1.17178 -53.5,-0.33122 z"/>
+        <path style="fill:#355b84" d="m 103.2317,247.58282 c -0.41339,-0.18131 -1.94268,-1.10106 -3.57188,-1.93548 -1.6292,-0.83441 -4.662891,-3.10372 -6.194729,-5.66192 l -3.011454,-5.02917 -0.663283,-28.3938 0.110547,-28.33853 3.916714,-4.96384 c 5.464665,-6.92564 4.347654,-6.18505 36.578215,-6.18822 27.32374,-0.003 29.8545,0.50065 32.97142,2.40099 1.91004,1.16452 4.28536,3.85962 5.39386,6.30153 1.73514,3.82234 2.14311,7.09018 2.16296,30.8431 0.0243,29.09152 -0.40013,30.87804 -6.29249,36.0516 -4.48692,3.93957 -6.10994,4.76834 -10.58906,4.8195 -2.29293,0.0262 -10.93877,0.37243 -13.14101,0.35182 -3.97912,-0.0372 -13.11913,-0.12515 -17.50381,-0.0597 -2.74852,0.041 -3.22724,-0.1248 -5.14161,-0.11054 -2.48363,0.0185 -13.70464,0.49154 -15.02439,-0.0873 z m -74.277929,-4.1018 C 21.236993,240.30663 16.765542,237.40108 13.003868,233.11677 9.155134,228.73331 4.2659891,218.76258 3.4157742,213.5632 3.0765163,211.48851 2.4080501,209.54945 1.9302938,209.25418 0.5008567,208.37074 0.851043,178.01313 2.3116461,176.19479 c 3.4445584,-4.2882 7.4926389,-7.40212 10.2180329,-7.86004 1.667582,-0.28019 15.181967,-0.39467 30.031967,-0.25441 l 27,0.25502 3.659695,2.79981 c 6.534181,4.9989 6.840305,6.52648 6.840305,34.13344 0,26.31898 1.128551,30.08332 -3.734356,35.37304 -4.643017,5.05054 -10.815014,6.47881 -27.078318,6.47688 -13.375401,-0.002 -15.294696,-1.58049 -20.295201,-3.63751 z M 425.50528,211.97527 c -4.60779,-0.82119 -11.87958,-4.8099 -15.14478,-8.3072 -3.53838,-3.7899 -6.37924,-11.38465 -6.96287,-18.61447 -0.4373,-5.41727 -0.1152,-7.84758 1.66336,-12.5502 2.84664,-7.52669 6.7833,-11.92534 13.70247,-15.31058 4.63075,-2.26562 6.85286,-2.71441 13.23621,-2.67331 12.58331,0.081 21.68782,5.50144 26.13323,15.55857 3.27131,7.40088 3.33179,19.33715 0.13115,25.88456 -6.03408,12.34368 -18.67497,18.5226 -32.75877,16.01263 z m 12.0222,-13.56119 c 4.15766,-1.73718 8.51936,-8.04939 9.23166,-13.35998 0.64889,-4.83789 -2.404,-12.32511 -5.98126,-14.66902 -6.90471,-4.52414 -14.61954,-3.70175 -19.71492,2.10157 -6.77228,7.7132 -4.17116,20.98005 5.01862,25.59716 4.22213,2.12127 6.9697,2.20055 11.4459,0.33027 z m 106.26757,13.39215 c -7.25436,-1.82295 -12.7916,-6.32119 -16.58239,-13.47087 -2.38224,-4.49307 -2.65101,-6.06454 -2.65101,-15.5 0,-9.76519 0.19954,-10.83316 2.85128,-15.26068 5.49948,-9.18227 12.15944,-12.74907 23.76474,-12.7274 5.35285,0.01 7.35309,0.54975 12.38398,3.34171 7.96079,4.41794 11.51492,9.96309 12.24924,19.11124 0.43423,5.40959 0.21037,6.92228 -1.26584,8.55348 -1.64876,1.82186 -3.11391,1.98165 -18.16977,1.98165 -13.94756,0 -16.46561,0.23248 -16.97789,1.56746 -0.87137,2.27076 1.55031,6.199 5.21957,8.46672 4.31548,2.66712 12.25004,2.61593 17.60025,-0.11354 5.00245,-2.55206 8.51975,-1.90483 9.93933,1.82894 1.58973,4.18132 -0.31849,7.00562 -6.71049,9.93197 -6.22138,2.84825 -15.51586,3.83102 -21.651,2.28932 z m 17.87499,-36.39273 c 0.81418,-2.12172 -1.28921,-5.36173 -4.58837,-7.06779 -3.88625,-2.00965 -9.73396,-1.90851 -13.94513,0.2412 -4.46103,2.27727 -5.8851,4.56728 -4.14446,6.66463 1.82459,2.19849 21.84161,2.34145 22.67796,0.16196 z m -220.60839,34.42186 c -1.92003,-1.92003 -2,-3.33333 -2,-35.34501 0,-31.03412 0.12674,-33.45971 1.82874,-35 2.37456,-2.14895 8.51203,-2.15272 10.29882,-0.006 0.95058,1.1419 1.52613,5.80469 1.87244,15.16952 0.28439,7.6905 0.93121,13.65381 1.5,13.82917 0.55,0.16957 8.397,-6.88171 17.43778,-15.66952 15.3638,-14.93422 16.68536,-15.97816 20.22695,-15.97816 2.8936,0 4.15992,0.56584 5.35785,2.39411 0.94746,1.44601 1.32622,3.36012 0.95644,4.83346 -0.33673,1.34164 -5.53226,7.34411 -11.54563,13.33883 -6.01336,5.99472 -10.93339,11.3156 -10.93339,11.82417 0,0.50858 1.74409,3.21625 3.87575,6.01706 10.63303,13.97079 18.17266,25.33351 18.70985,28.19698 0.32861,1.75164 0.0933,4.12687 -0.52293,5.27829 -1.37784,2.57452 -5.46616,3.71172 -8.9531,2.49038 -2.35811,-0.82596 -10.60042,-11.00216 -20.83896,-25.7284 -1.77617,-2.55468 -3.80117,-4.63726 -4.5,-4.62794 -0.69884,0.009 -3.40811,2.02204 -6.02061,4.4727 l -4.75,4.45576 v 8.39244 c 0,6.97621 -0.34975,8.83708 -2.07258,11.0273 -2.53576,3.2237 -7.0499,3.51238 -9.92742,0.63486 z m 133.01426,0.21263 c -2.19611,-1.7783 -2.20808,-1.96781 -2.36078,-37.38673 -0.14538,-33.72074 -0.053,-35.71088 1.75151,-37.71263 2.52083,-2.79645 7.66181,-2.80141 10.19002,-0.01 1.7131,1.89155 1.94042,4.13285 2.25675,22.25 0.19347,11.08061 0.0313,27.05878 -0.36046,35.50703 -0.60908,13.13597 -0.98587,15.63411 -2.60176,17.25 -2.37722,2.37722 -6.01401,2.41909 -8.87528,0.10217 z m 28.05832,-0.84749 c -2.00636,-2.55067 -2.07258,-3.74388 -2.07258,-37.34501 0,-31.78983 0.14724,-34.84284 1.75,-36.28723 3.0662,-2.76322 6.53378,-3.04882 9.00979,-0.74206 2.23893,2.08588 2.24021,2.10737 2.24021,37.54812 0,34.12771 -0.0752,35.53624 -2,37.46104 -2.79084,2.79084 -6.43671,2.53157 -8.92742,-0.63486 z m 87.14993,1.07816 c -2.1954,-1.53772 -2.22232,-1.85797 -2.2072,-26.25 0.008,-13.58132 0.34592,-25.18843 0.75,-25.7936 2.44475,-3.66134 8.79414,-3.99274 12.50055,-0.65245 1.62358,1.46321 2.14727,1.39819 6.5,-0.80697 8.14413,-4.12595 19.377,-2.85986 24.46017,2.75699 3.90789,4.31817 4.77397,9.73741 4.77397,29.87175 0,18.82861 -0.0563,19.35697 -2.22251,20.87428 -2.97791,2.08581 -6.36994,1.96425 -8.64397,-0.30978 -1.62424,-1.62424 -1.93011,-3.99272 -2.35683,-18.25 -0.30725,-10.26554 -0.96898,-17.39244 -1.77208,-19.08533 -2.70557,-5.70319 -12.49134,-7.31146 -17.00764,-2.79516 -3.01263,3.01263 -3.90198,8.49303 -3.89351,23.99266 0.007,13.66544 -0.11616,14.59617 -2.15855,16.25 -2.67864,2.16903 -5.80663,2.2399 -8.7224,0.19761 z M 10.382499,155.32822 C 8.737735,154.63665 6.4225821,152.78034 5.2377155,151.20309 4.0528489,149.62584 2.6285151,147.79185 2.0725293,147.12757 0.8892172,145.71376 0.6403029,87.835361 1.8175347,87.835361 c 0.4157388,0 1.3713559,-1.390437 2.1235938,-3.08986 0.7522378,-1.699423 2.7745879,-3.947741 4.4941115,-4.996262 2.877465,-1.754604 5.346518,-1.9067 31.008372,-1.91014 26.81456,-0.0036 28.015548,0.07882 31.371285,2.152779 1.919125,1.186085 4.78474,4.199186 6.368034,6.695781 l 2.878715,4.539263 v 27.301338 27.30134 l -3.674849,4.06762 c -6.294978,6.96778 -6.063324,6.92414 -36.093841,6.79984 -19.14434,-0.0793 -27.783754,-0.47463 -29.910457,-1.36884 z M 247.05036,132.08536 c -10.41941,-8.93849 -19.32788,-14.79968 -31.48871,-20.71749 -7.15,-3.4794 -16.05251,-7.31428 -19.78336,-8.52197 -3.73085,-1.2077 -8.11835,-3.31912 -9.75,-4.69207 -2.44861,-2.060363 -2.96664,-3.25312 -2.96664,-6.830637 0,-3.251312 0.6755,-5.137166 2.70331,-7.547081 4.75223,-5.647703 6.53018,-5.940908 36.01457,-5.939197 30.99521,0.0018 32.17535,0.264065 36.0209,8.005044 1.99127,4.008345 2.31256,6.627972 2.90602,23.693981 l 0.66724,19.18738 -3.55602,3.55602 c -1.95581,1.95581 -4.19502,3.55602 -4.97602,3.55602 -0.781,0 -3.38708,-1.6875 -5.79129,-3.75 z m 209.29292,-23.29133 c -11.67574,-2.33489 -19.28746,-13.48854 -19.27605,-28.245689 0.007,-8.769117 1.06776,-12.860234 4.90389,-18.909173 2.32001,-3.658277 4.31182,-5.284513 9.51249,-7.766562 3.61792,-1.726675 6.57804,-3.356382 6.57804,-3.621571 0,-0.265189 -1.14801,-2.747645 -2.55113,-5.51657 -2.12618,-4.195819 -2.43481,-5.810035 -1.85285,-9.690824 1.68877,-11.261568 13.74782,-13.973283 18.65243,-4.194369 2.37578,4.736896 2.20231,7.84045 -0.74845,13.390064 -1.375,2.58602 -2.5,5.360323 -2.5,6.165118 0,0.804795 1.61057,2.231292 3.57905,3.169993 3.3778,1.61076 3.74784,1.60985 6.58104,-0.01618 3.95678,-2.270879 7.1178,-2.178314 9.33657,0.273406 1.62414,1.794646 1.81658,4.294895 1.90499,24.75 0.0541,12.514528 -0.25172,24.007107 -0.67958,25.539057 -1.14929,4.11501 -5.04286,5.27059 -9.65633,2.86591 -3.50787,-1.8284 -3.79473,-1.83479 -7.11054,-0.15843 -4.41479,2.23197 -11.28956,3.04251 -16.67357,1.96582 z M 472.1209,94.132052 c 4.12957,-3.474802 5.94169,-7.905007 5.93701,-14.514572 -0.0128,-18.132962 -22.458,-21.673881 -27.98912,-4.415527 -1.59748,4.984509 -0.77747,10.885419 2.09527,15.077921 3.1738,4.631848 6.62376,6.497862 12.07086,6.528878 3.64367,0.02075 5.3811,-0.56898 7.88598,-2.6767 z m -4.71103,-54.114469 c 0.1702,-1.459349 -0.28317,-5.861638 -1.18962,-6.613951 -1.34475,-1.116041 -3.74027,-1.344647 -5.1072,0.02229 -1.34877,1.348767 -1.70021,5.11343 -0.71517,7.275347 1.51306,3.320815 6.59625,2.881166 7.01202,-0.683684 z m 169.64531,68.935887 c -11.22301,-3.64874 -17.8113,-12.839027 -18.76563,-26.17696 -0.90597,-12.662103 4.15921,-23.121138 13.71277,-28.315368 4.78733,-2.602849 5.96024,-2.828294 12.42289,-2.387796 3.92504,0.267533 8.8141,1.302083 10.86457,2.299001 3.49056,1.697074 3.84605,1.705855 5.57874,0.137796 1.01784,-0.92113 3.48685,-1.674782 5.48669,-1.674782 5.82793,0 6.08756,1.248713 5.8105,27.945846 -0.13383,12.895216 -0.65012,24.205953 -1.14731,25.134973 -1.38803,2.59355 -5.41634,3.14453 -9.33343,1.27659 -3.26926,-1.559 -3.69839,-1.54842 -7.29841,0.17992 -4.20554,2.01905 -13.40301,2.85794 -17.33138,1.58078 z M 651.4413,95.450093 c 4.22646,-1.76593 7.53717,-7.116787 8.27906,-13.380846 1.56919,-13.249405 -10.70405,-22.721311 -20.70676,-15.980488 -5.06021,3.410072 -7.43967,8.223422 -7.34941,14.866911 0.1658,12.20318 9.27784,18.8813 19.77711,14.494423 z m 93.4409,13.049677 c -13.42618,-3.78561 -21.607,-18.238582 -19.01978,-33.602068 1.25433,-7.448514 4.62277,-12.876816 11.01671,-17.753639 5.43585,-4.146061 11.07998,-5.659004 18.81885,-5.044506 7.33837,0.582697 15.17692,4.482034 19.50358,9.702182 4.15641,5.014746 6.20378,12.804599 5.63873,21.454238 -0.513,7.852925 -2.89762,13.544522 -7.67736,18.324263 -6.6582,6.65819 -18.73112,9.61211 -28.28073,6.91953 z m 15.88911,-13.628918 c 4.81794,-2.937651 7.61027,-9.164056 7.06399,-15.751483 -0.4963,-5.984675 -2.61549,-9.52015 -7.8656,-13.122311 -2.6399,-1.811265 -4.34538,-2.23571 -7.56671,-1.883132 -5.0056,0.547868 -9.78509,3.745093 -11.99929,8.026869 -2.26231,4.37484 -2.10459,12.704149 0.31916,16.854177 4.29335,7.351239 13.29965,9.990838 20.04845,5.87588 z m -419.39935,11.551588 -2.81031,-2.42074 0.24881,-30.333171 c 0.13684,-16.683243 0.24934,-31.120668 0.25,-32.083168 6.5e-4,-0.9625 0.90119,-2.65 2.00119,-3.75 1.86563,-1.865625 3.33333,-2 21.84501,-2 17.95554,0 20.00259,0.174118 21.5,1.828741 0.91025,1.005807 1.65499,2.961063 1.65499,4.345012 0,4.712423 -2.30699,5.508905 -17.90502,6.181659 -7.92276,0.341715 -14.65254,0.868812 -14.95505,1.171328 -0.30252,0.302516 -0.73537,3.460752 -0.9619,7.018302 -0.26957,4.233496 0.0163,6.98422 0.8275,7.961615 0.98146,1.182598 3.91169,1.493343 14.08173,1.493343 11.67342,0 12.9366,0.176062 13.87756,1.934259 1.64413,3.072087 1.21025,6.597327 -1.06546,8.656815 -1.75676,1.589848 -4.00763,1.955904 -13.75,2.236147 -9.24519,0.265941 -11.90733,0.667361 -12.89936,1.945068 -0.8285,1.067094 -1.25,5.358836 -1.25,12.727711 0,12.030789 -0.62574,13.825399 -5.18969,14.883969 -2.00302,0.46459 -3.40714,0.006 -5.5,-1.79689 z m 164.93969,0.89089 c -2.23037,-1.57749 -2.25,-1.80838 -2.25,-26.463244 0,-21.277456 0.2271,-25.098966 1.57143,-26.443296 2.19234,-2.192337 6.66613,-1.959006 9.80684,0.511477 l 2.64798,2.082906 5.18322,-2.582906 c 12.36208,-6.160284 25.49053,-0.713664 27.86147,11.55893 0.46308,2.39699 0.86156,11.795536 0.88551,20.885658 0.0507,19.245685 -0.51665,20.972505 -6.89071,20.972505 -6.11598,0 -6.50169,-1.11372 -7.06574,-20.402052 -0.31607,-10.808353 -0.95206,-17.886932 -1.72889,-19.242763 -1.54625,-2.698704 -6.46983,-4.46544 -10.30616,-3.698175 -3.39985,0.67997 -7.8019,4.71357 -8.45751,7.749612 -0.24863,1.151358 -0.57701,8.940556 -0.72975,17.309329 -0.2981,16.334079 -0.66498,17.524889 -5.77769,18.752919 -1.53801,0.36941 -3.36579,-0.0119 -4.75,-0.9909 z m 75.29471,-0.72797 c -1.58408,-1.38857 -5.66998,-9.332887 -10.67207,-20.749999 -11.46532,-26.169245 -11.51132,-26.302841 -10.11277,-29.372314 0.64466,-1.414881 2.35159,-2.868541 3.79317,-3.230355 4.706,-1.18113 7.40931,2.110839 13.62625,16.593465 3.13918,7.312852 6.1528,13.741296 6.69694,14.285432 0.54413,0.544135 1.58208,0.75568 2.30655,0.470098 0.72447,-0.285581 3.94247,-7.056374 7.1511,-15.046206 5.11615,-12.739747 6.19819,-14.677869 8.79506,-15.753528 2.22363,-0.921058 3.57264,-0.947962 5.41612,-0.108015 4.33219,1.973878 3.32734,6.539831 -6.18168,28.089147 -10.23971,23.205185 -10.98333,24.578085 -14.0757,25.987065 -3.28065,1.49476 -3.81405,1.40262 -6.74297,-1.16479 z m 107.23355,1.56612 c -2.93834,-0.77119 -3.7669,-7.05939 -3.77268,-28.63186 -0.007,-24.65768 0.55833,-26.634362 7.62198,-26.668946 1.72015,-0.0084 3.68775,0.659687 4.37244,1.484687 1.6693,2.011383 3.18384,1.893304 8.01509,-0.624881 3.09794,-1.614741 5.19143,-1.999231 8.71998,-1.601513 4.94757,0.557663 7.26493,2.555277 7.26493,6.262536 0,3.230483 -3.0693,5.386921 -8.57308,6.023295 -8.21072,0.949364 -9.33239,1.366912 -11.16427,4.155957 -1.44763,2.204024 -1.85201,5.702372 -2.26265,19.574605 -0.48115,16.25426 -0.58899,16.96294 -2.86078,18.80048 -2.31188,1.86996 -3.89906,2.13423 -7.36096,1.22564 z m -291.99308,-2.56612 c -1.88831,-3.30592 -2.37659,-41.841844 -0.5984,-47.226975 1.77127,-5.364156 5.13169,-6.597046 10.45774,-3.836799 l 3.85548,1.998117 4.40728,-2.342171 c 5.76888,-3.065763 11.05442,-3.07629 13.91841,-0.02772 2.73852,2.915028 2.77175,6.088107 0.0918,8.768041 -1.767,1.767001 -2.81593,1.98162 -6.92374,1.416651 -4.55176,-0.626026 -5.07004,-0.456319 -8.66751,2.838113 l -3.82624,3.503953 -0.26798,14.829396 c -0.14739,8.156167 -0.48557,15.810424 -0.7515,17.009464 -0.75075,3.38493 -3.30294,5.31993 -7.01676,5.31993 -2.47161,0 -3.7425,-0.61119 -4.67858,-2.25 z M 102.65151,64.003486 C 98.32484,63.510069 95.46025,61.214784 93.218136,56.444894 91.507541,52.805758 91.154327,49.573107 90.816433,34.464244 90.36889,14.452475 91.05425,11.438779 97.169348,6.5289156 99.03511,5.030878 101.10516,3.3619946 101.76944,2.8202858 c 1.57819,-1.2869742 57.29221,-1.337846 57.29221,-0.052313 0,0.5129368 0.90335,1.2193259 2.00745,1.5697535 1.1041,0.3504276 3.5791,2.6954631 5.5,5.2111907 l 3.49255,4.574049 V 33.83128 c 0,18.791124 -0.10487,19.86393 -2.2534,23.052132 -4.53525,6.729857 -5.41498,6.909026 -35.32671,7.194778 -14.80594,0.141444 -28.22945,0.107827 -29.83003,-0.0747 z M 7.7116461,60.539817 c -6.6679057,-6.975994 -6.65,-6.926946 -6.65,-18.215887 0,-5.768713 0.4142451,-10.488569 0.9205447,-10.488569 0.5062996,0 1.2122482,-1.328117 1.5687747,-2.951371 C 4.5914869,24.146527 11.363323,14.553946 15.630191,11.773276 20.120503,8.84699 29.023493,5.1467025 33.811646,4.2166451 c 1.7875,-0.3472064 3.25,-1.0250344 3.25,-1.5062844 0,-0.48125 6.528896,-0.875 14.508659,-0.875 h 14.508659 l 4.241341,3.0670796 c 2.332737,1.6868937 5.478841,4.9046097 6.991341,7.1504807 2.746183,4.077734 2.75,4.108312 2.75,22.031792 0,20.319575 -0.704638,23.118807 -6.875053,27.311713 l -3.589216,2.438935 H 40.229511 10.861646 Z M 189.48161,61.949683 c -5.73219,-3.495485 -6.41996,-6.609228 -6.41996,-29.065111 0,-21.989761 0.27334,-23.302876 5.89081,-28.2992113 l 3.09187,-2.75 h 17.50866 c 9.62976,0 17.50866,0.3452889 17.50866,0.7673087 0,0.4220197 2.64503,1.8179109 5.87784,3.1019803 6.61506,2.6274983 15.60338,9.2729343 19.56209,14.4630623 3.97002,5.204972 6.79673,14.172297 7.32291,23.230893 0.39509,6.801908 0.14178,8.703394 -1.61934,12.155474 -1.14824,2.250727 -3.28594,5.034767 -4.75046,6.186756 -2.5646,2.017316 -3.73601,2.094388 -31.7779,2.090788 -26.72199,-0.0034 -29.36831,-0.158119 -32.19518,-1.88194 z"/>
+      </svg>
+    </a>
+
+    <nav class="nav-links" aria-label="Huvudmeny">
+      <a href="/" data-i18n="nav.smart">Vikarieförslag</a>
+      <a href="/" data-i18n="nav.features">Funktioner</a>
+      <a href="/" data-i18n="nav.analytics">Analys</a>
+      <a href="/" data-i18n="nav.security">Säkerhet</a>
+      <a href="/" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+
+    <div class="nav-actions">
+      <div class="lang" role="group" aria-label="Språk">
+        <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
+        <button data-lang-btn="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="nav-login" data-i18n="nav.login">Gå med nu</button>
+      <button class="nav-toggle" aria-label="Öppna meny" id="navToggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/" data-i18n="nav.smart">Vikarieförslag</a>
+    <a href="/" data-i18n="nav.features">Funktioner</a>
+    <a href="/" data-i18n="nav.security">Säkerhet</a>
+    <a href="/" data-i18n="nav.contact">Kontakt</a>
+
+  </div>
+</header>
+<div class="policy-wrap">
+  <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg><span data-lang="sv" class="active">← Tillbaka till startsidan</span><span data-lang="en">← Back to homepage</span></a>
+  <div data-lang="sv" class="active">
+    <div class="lang-notice">🇸🇪 Detta dokument är på svenska. <a href="#" onclick="setLang('en');return false;">Read in English →</a></div>
+    <h1>Integritetspolicy</h1>
+    <p class="policy-meta">Senast uppdaterad: 2026-05-19 &nbsp;·&nbsp; Version 1.0</p>
+    
+<h2>1. Vem är personuppgiftsansvarig?</h2>
+<p>Frånvarokollen Sverige AB<br>Organisationsnummer: 559585-6450<br>Säte: Stockholm<br>E-post: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
+<p>Frånvarokollen Sverige AB ("Frånvarokollen", "vi", "oss") är personuppgiftsansvarig för behandlingen av personuppgifter som beskrivs i denna policy, om inte annat anges nedan.</p>
+<p>För personuppgifter som behandlas inom våra kunders konton i tjänsten Frånvarokollen är respektive kundskola (eller dess huvudman) personuppgiftsansvarig och Frånvarokollen är personuppgiftsbiträde. Behandlingen regleras då av separat personuppgiftsbiträdesavtal (PUB-avtal).</p>
+
+<h2>2. Vad denna policy täcker</h2>
+<p>Denna policy beskriver hur vi behandlar personuppgifter för tre olika grupper:</p>
+<ul>
+<li><strong>Besökare på franvarokollen.com</strong> — den som besöker vår webbplats</li>
+<li><strong>Potentiella kunder och kontakter</strong> — den som tar kontakt med oss, bokar demo, prenumererar på vårt nyhetsbrev eller på annat sätt interagerar med oss inför ett eventuellt samarbete</li>
+<li><strong>Användare av tjänsten Frånvarokollen</strong> — personal på skolor som använder vårt verktyg</li>
+</ul>
+
+<h2>3. Besökare på franvarokollen.com</h2>
+<h3>3.1 Vilka personuppgifter behandlar vi?</h3>
+<p>När du besöker vår webbplats samlar vi in begränsad, anonymiserad teknisk information via Vercel Web Analytics: sidvisningar, hänvisningskälla, allmän geografisk region (landsnivå), webbläsartyp och enhetstyp.</p>
+<p>Vi använder inte cookies för spårning eller analys. Vercel Web Analytics är cookielöst och anonymiseras vid insamling.</p>
+<h3>3.2 Varför behandlar vi det?</h3>
+<p>För att förstå hur vår webbplats används och hur vi kan förbättra den.</p>
+<h3>3.3 Rättslig grund</h3>
+<p>Berättigat intresse (GDPR artikel 6.1 f).</p>
+<h3>3.4 Hur länge sparar vi det?</h3>
+<p>30 dagar (Vercels standardretention för Web Analytics).</p>
+<h3>3.5 Mottagare</h3>
+<p>Vercel Inc. — vår underleverantör för webbplatshosting och analys, som behandlar data inom EU (Frankfurt). Vercel agerar som personuppgiftsbiträde åt oss.</p>
+
+<h2>4. Potentiella kunder och kontakter</h2>
+<h3>4.1 Vilka personuppgifter behandlar vi?</h3>
+<p>När du tar kontakt med oss behandlar vi: namn, kontaktuppgifter (e-post, telefon, befattning), skolans namn och organisationsform, innehåll i kommunikation och mötesanteckningar, samt information du själv lämnar.</p>
+<h3>4.2 Varför behandlar vi det?</h3>
+<ul><li>För att svara på dina frågor</li><li>För att boka och genomföra demonstrationer</li><li>För att följa upp efter samtal och demos</li><li>För att förstå om vår tjänst passar er skola</li><li>För att hantera potentiella avtalsförhandlingar</li></ul>
+<h3>4.3 Rättslig grund</h3>
+<p>Berättigat intresse (GDPR artikel 6.1 f), förberedelse av avtal (artikel 6.1 b), samt samtycke (artikel 6.1 a) för nyhetsbrev.</p>
+<h3>4.4 Hur länge sparar vi det?</h3>
+<ul><li>Vanliga kontakter: 2 år från senaste kontakt</li><li>Demobokningar och pipeline-anteckningar: 3 år från senaste kontakt</li><li>Om du säger att du inte vill bli kontaktad: omedelbar radering från aktiv lista</li></ul>
+<h3>4.5 Mottagare</h3>
+<p>Interna medarbetare på Frånvarokollen samt Google Ireland Limited (Google Workspace, EU).</p>
+<h3>4.6 Din rätt att invända</h3>
+<p>Du har rätt att när som helst invända mot vår behandling baserad på berättigat intresse. Skicka invändning till: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
+
+<h2>5. Användare av tjänsten Frånvarokollen</h2>
+<h3>5.1 Roller</h3>
+<p>När en skola är vår kund är kundskolan personuppgiftsansvarig och Frånvarokollen är personuppgiftsbiträde. Om du som lärare, vikarie eller skolpersonal har frågor om hur dina personuppgifter behandlas i tjänsten, ska du i första hand vända dig till din arbetsgivare (skolan).</p>
+<h3>5.2 När vi själva är personuppgiftsansvarig</h3>
+<p><strong>Autentisering:</strong> e-postadress för OAuth-inloggning — berättigat intresse — sparas så länge kontot är aktivt + 30 dagar.</p>
+<p><strong>Tekniska loggar:</strong> IP-adress, webbläsartyp, tidsstämplar — berättigat intresse — 90 dagar (Sentry), 30 dagar (Vercel).</p>
+<p><strong>Supportärenden:</strong> namn, e-post, kommunikationsinnehåll — berättigat intresse + avtalsförpliktelse — 2 år.</p>
+<h3>5.3 Frånvaroskäl och känsliga uppgifter</h3>
+<p>Frånvarokollen är uttryckligen designad för att inte behandla känsliga personuppgifter enligt GDPR artikel 9. Frånvaroskäl registreras endast som generiska kategorier: Sjuk, Kompetensutveckling, Föräldraledig, Personlig, Övrigt.</p>
+
+<h2>6. AI och Frånvarokollen</h2>
+<p>Frånvarokollen använder inte AI i tjänsten idag. Beslut baseras på regelbaserad programvara vi själva utvecklat. Vid framtida AI-implementering informeras kunder 30 dagar i förväg, AI-leverantörer läggs till i PUB-avtalet, och er data används aldrig för AI-träning utan separat skriftligt samtycke.</p>
+
+<h2>7. Underleverantörer</h2>
+<table>
+<tr><th>Leverantör</th><th>Tjänst</th><th>Region</th></tr>
+<tr><td>Supabase Inc.</td><td>Databas, autentisering, lagring</td><td>AWS EU (Irland/Tyskland)</td></tr>
+<tr><td>Vercel Inc.</td><td>Webbplatshosting, applikationshosting</td><td>Frankfurt, Tyskland</td></tr>
+<tr><td>Functional Software Inc. (Sentry)</td><td>Felsövervakning</td><td>EU (Frankfurt)</td></tr>
+<tr><td>Google Ireland Limited</td><td>E-post, dokumentlagring, OAuth</td><td>EU</td></tr>
+<tr><td>Microsoft Ireland Operations Ltd</td><td>OAuth-autentisering</td><td>EU</td></tr>
+<tr><td>Cloudflare, Inc.</td><td>DNS, DDoS-skydd</td><td>Globalt edge (DNS only)</td></tr>
+</table>
+
+<h2>8. Överföring utanför EU/EES</h2>
+<p>Vi strävar efter att all behandling sker inom EU/EES. All produktdata behandlas inom EU/EES. Standardavtalsklausuler (SCC) finns på plats där så krävs.</p>
+
+<h2>9. Dina rättigheter enligt GDPR</h2>
+<ul>
+<li>Rätt till information (artikel 13–14)</li>
+<li>Rätt till tillgång (artikel 15)</li>
+<li>Rätt till rättelse (artikel 16)</li>
+<li>Rätt till radering (artikel 17)</li>
+<li>Rätt till begränsning av behandling (artikel 18)</li>
+<li>Rätt till dataportabilitet (artikel 20)</li>
+<li>Rätt att invända (artikel 21)</li>
+<li>Rätt att inte bli föremål för automatiserat beslutsfattande (artikel 22)</li>
+<li>Rätt att återkalla samtycke (artikel 7.3)</li>
+</ul>
+<p>Skicka din begäran till: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a> — vi svarar inom 30 dagar.</p>
+<p>Klagomål kan lämnas till <strong>Integritetsskyddsmyndigheten (IMY)</strong>: <a href="https://imy.se" target="_blank">imy.se</a>, 08-657 61 00.</p>
+
+<h2>10. Cookies</h2>
+<p>Vi använder inga marknadsförings- eller spårningscookies. Se vår <a href="/cookies">Cookiepolicy</a> för fullständig information.</p>
+
+<h2>11. Säkerhet</h2>
+<p>Vi vidtar lämpliga tekniska och organisatoriska åtgärder: kryptering i transit (TLS 1.2+) och i vila (AES-256), tvåfaktorsautentisering, behörighetsstyrning, loggning, 72-timmars anmälningsplikt till IMY vid incidenter, samt pågående arbete mot ISO 27001-certifiering.</p>
+
+<h2>12. Barn</h2>
+<p>Frånvarokollen är inte riktad till barn och behandlar inte uppgifter om elever. Om vi oavsiktligt samlat in uppgifter om en person under 13 år raderas dessa omedelbart.</p>
+
+<h2>13. Ändringar</h2>
+<p>Vi uppdaterar denna policy vid materiella förändringar och granskar den minst var 6:e månad. Datumet "Senast uppdaterad" uppdateras vid varje ändring.</p>
+
+<h2>14. Kontakt</h2>
+<p>Frånvarokollen Sverige AB<br>E-post: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a><br>Org.nr: 559585-6450<br>Säte: Stockholm</p>
+
+  </div>
+  <div data-lang="en">
+    <div class="lang-notice">🇬🇧 This document is in English. <a href="#" onclick="setLang('sv');return false;">Läs på svenska →</a></div>
+    <h1>Privacy Policy</h1>
+    <p class="policy-meta">Senast uppdaterad: 2026-05-19 &nbsp;·&nbsp; Version 1.0</p>
+    
+<h2>1. Who is the data controller?</h2>
+<p>Frånvarokollen Sverige AB<br>Organisation number: 559585-6450<br>Registered seat: Stockholm, Sweden<br>Email: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
+<p>Frånvarokollen Sverige AB ("Frånvarokollen", "we", "us") is the data controller for the processing described in this policy, except where stated otherwise.</p>
+<p>For personal data processed within our customers' accounts, the customer school is the data controller and Frånvarokollen is the data processor, governed by a separate Data Processing Agreement (PUB-avtal).</p>
+
+<h2>2. What this policy covers</h2>
+<ul>
+<li><strong>Visitors to franvarokollen.com</strong></li>
+<li><strong>Prospects and contacts</strong></li>
+<li><strong>Users of the Frånvarokollen service</strong></li>
+</ul>
+
+<h2>3. Visitors to franvarokollen.com</h2>
+<h3>3.1 What personal data do we process?</h3>
+<p>We collect limited, anonymised technical information via Vercel Web Analytics: page views, referral source, general geographic region (country-level), browser type and device type. We do not use cookies for tracking or analytics.</p>
+<h3>3.2 Why?</h3><p>To understand and improve our website.</p>
+<h3>3.3 Legal basis</h3><p>Legitimate interest (GDPR Article 6(1)(f)).</p>
+<h3>3.4 Retention</h3><p>30 days (Vercel's default retention).</p>
+<h3>3.5 Recipients</h3><p>Vercel Inc. — EU (Frankfurt) — acting as data processor.</p>
+
+<h2>4. Prospects and contacts</h2>
+<h3>4.1 What do we process?</h3>
+<p>Name, contact details, school name and type, communication content and meeting notes, information you provide voluntarily.</p>
+<h3>4.2 Why?</h3>
+<ul><li>To respond to enquiries</li><li>To schedule and conduct demonstrations</li><li>To follow up after meetings</li><li>To assess fit for your school</li><li>To facilitate contract negotiations</li></ul>
+<h3>4.3 Legal basis</h3>
+<p>Legitimate interest (Article 6(1)(f)), pre-contractual measures (Article 6(1)(b)), consent (Article 6(1)(a)) for newsletters.</p>
+<h3>4.4 Retention</h3>
+<ul><li>General contacts: 2 years from last contact</li><li>Demo bookings and pipeline notes: 3 years</li><li>Do-not-contact requests: immediate removal from active lists</li></ul>
+<h3>4.5 Recipients</h3>
+<p>Internal team members and Google Ireland Limited (Google Workspace, EU).</p>
+<h3>4.6 Right to object</h3>
+<p>You may object at any time to processing based on legitimate interest. Contact: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
+
+<h2>5. Users of the Frånvarokollen service</h2>
+<h3>5.1 Roles</h3>
+<p>The customer school is the data controller; Frånvarokollen is the data processor. For questions about your data in the service, contact your employer (the school) first.</p>
+<h3>5.2 Where we are the controller</h3>
+<p><strong>Authentication:</strong> email for OAuth — legitimate interest — retained while account active + 30 days.</p>
+<p><strong>Technical logs:</strong> IP, browser type, timestamps — legitimate interest — 90 days (Sentry), 30 days (Vercel).</p>
+<p><strong>Support cases:</strong> name, email, communication content — legitimate interest + contractual obligation — 2 years.</p>
+<h3>5.3 Absence reasons and sensitive data</h3>
+<p>Frånvarokollen is explicitly designed not to process special category data. Absence reasons are generic only: Sick, Professional Development, Parental Leave, Personal, Other.</p>
+
+<h2>6. AI and Frånvarokollen</h2>
+<p>We do not currently use AI in the service. If we add AI features, existing customers will be notified 30 days in advance, AI providers will be added to the PUB-avtal, and your data will never be used to train AI without separate written consent.</p>
+
+<h2>7. Sub-processors</h2>
+<table>
+<tr><th>Provider</th><th>Service</th><th>Region</th></tr>
+<tr><td>Supabase Inc.</td><td>Database, authentication, storage</td><td>AWS EU (Ireland/Germany)</td></tr>
+<tr><td>Vercel Inc.</td><td>Website and application hosting</td><td>Frankfurt, Germany</td></tr>
+<tr><td>Functional Software Inc. (Sentry)</td><td>Error monitoring</td><td>EU (Frankfurt)</td></tr>
+<tr><td>Google Ireland Limited</td><td>Email, document storage, OAuth</td><td>EU</td></tr>
+<tr><td>Microsoft Ireland Operations Ltd</td><td>OAuth authentication</td><td>EU</td></tr>
+<tr><td>Cloudflare, Inc.</td><td>DNS, DDoS protection</td><td>Global edge (DNS only)</td></tr>
+</table>
+
+<h2>8. International transfers</h2>
+<p>All product data is processed within the EU/EEA. Standard Contractual Clauses (SCCs) are in place where applicable.</p>
+
+<h2>9. Your rights under GDPR</h2>
+<ul>
+<li>Right to information (Articles 13–14)</li>
+<li>Right of access (Article 15)</li>
+<li>Right to rectification (Article 16)</li>
+<li>Right to erasure (Article 17)</li>
+<li>Right to restriction (Article 18)</li>
+<li>Right to data portability (Article 20)</li>
+<li>Right to object (Article 21)</li>
+<li>Right not to be subject to automated decision-making (Article 22)</li>
+<li>Right to withdraw consent (Article 7(3))</li>
+</ul>
+<p>Send requests to: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a> — we respond within 30 days.</p>
+<p>Complaints: <strong>Integritetsskyddsmyndigheten (IMY)</strong> — <a href="https://imy.se" target="_blank">imy.se</a>, +46 8 657 61 00.</p>
+
+<h2>10. Cookies</h2>
+<p>We use no marketing or tracking cookies. See our <a href="/cookie-policy">Cookie Policy</a> for full details.</p>
+
+<h2>11. Security</h2>
+<p>TLS 1.2+ encryption in transit, AES-256 at rest, two-factor authentication, least-privilege access control, logging, 72-hour incident notification to IMY, and ongoing ISO 27001 work.</p>
+
+<h2>12. Children</h2>
+<p>Frånvarokollen is not directed at children and does not process student data. Any inadvertent collection from under-13s is deleted immediately.</p>
+
+<h2>13. Changes</h2>
+<p>We update this policy for material changes and review it at least every 6 months.</p>
+
+<h2>14. Contact</h2>
+<p>Frånvarokollen Sverige AB<br>Email: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a><br>Organisation number: 559585-6450<br>Registered seat: Stockholm, Sweden</p>
+
+  </div>
+  <div class="back-bottom"><a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg><span data-lang="sv" class="active">← Tillbaka till startsidan</span><span data-lang="en">← Back to homepage</span></a></div>
+</div>
+<script>
+
+  // lang toggle
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-lang]').forEach(el=>{
+      el.classList.toggle('active', el.getAttribute('data-lang')===lang);
+    });
+    document.querySelectorAll('[data-lang-btn]').forEach(b=>{
+      const isActive = b.getAttribute('data-lang-btn')===lang;
+      b.classList.toggle('active',isActive);
+      b.setAttribute('aria-pressed',isActive);
+    });
+    try{ localStorage.setItem('fk_lang',lang); }catch(e){}
+  }
+  document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
+    btn.addEventListener('click',()=>setLang(btn.getAttribute('data-lang-btn')));
+  });
+  try{
+    const saved = localStorage.getItem('fk_lang');
+    if(saved==='en') setLang('en'); else setLang('sv');
+  }catch(e){ setLang('sv'); }
+  // mobile menu
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if(navToggle){
+    navToggle.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
+    mobileMenu.addEventListener('click',e=>{ if(e.target.tagName==='A') mobileMenu.classList.remove('open'); });
+  }
+
+</script>
+</body>
+</html>
