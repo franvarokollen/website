@@ -1567,11 +1567,13 @@
     var formError   = document.getElementById('formError');
 
     function openModal(){
+      modal.style.display='';
       modal.classList.add('open');
       document.body.style.overflow='hidden';
     }
     function closeModal(){
       modal.classList.remove('open');
+      modal.style.display='none';
       document.body.style.overflow='';
     }
 
@@ -1633,7 +1635,7 @@
 
 
 <!-- ============ WAITLIST MODAL ============ -->
-<div class="modal-backdrop" id="waitlistModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-backdrop" id="waitlistModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display:none">
   <div class="modal">
     <div class="modal-header">
       <p class="eyebrow">VÄNTELISTAN</p>
