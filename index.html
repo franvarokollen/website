@@ -685,16 +685,7 @@
     .no-js .reveal{opacity:1;transform:none}
   }
 
-  /* ===== WAITLIST BANNER ===== */
-  .waitlist-banner{background:var(--red);border-bottom:1px solid rgba(0,0,0,0.15);position:sticky;top:72px;z-index:49;overflow:hidden;cursor:pointer}
-  .waitlist-banner-track{display:flex;width:max-content;animation:fk-marquee 45s linear infinite}
-  .waitlist-banner-track:hover{animation-play-state:paused}
-  .waitlist-banner-inner{display:inline-flex;align-items:center;gap:16px;padding:11px 0;font-size:14px;font-weight:700;color:#fff;white-space:nowrap;flex-shrink:0}
-  .banner-sep{color:rgba(255,255,255,0.35);padding:0 12px}
-  .banner-pill{display:inline-flex;align-items:center;background:#fff;color:var(--red);border-radius:20px;padding:3px 14px;font-size:12px;font-weight:800}
-  .banner-dismiss{position:absolute;right:0;top:0;bottom:0;color:rgba(255,255,255,0.85);font-size:18px;padding:0 16px;cursor:pointer;background:rgba(0,0,0,0.2);border:none;border-left:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;transition:background .15s;z-index:2}
-  .banner-dismiss:hover{background:rgba(0,0,0,0.35);color:#fff}
-  @keyframes fk-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  /* ===== WAITLIST BANNER ===== */to{transform:translateX(-50%)}}
 
   /* ===== MODAL ===== */
   .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(14,27,48,0.65);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px}
@@ -755,7 +746,7 @@
         <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
         <button data-lang-btn="en" aria-pressed="false">EN</button>
       </div>
-      <button class="nav-login banner-cta" data-waitlist data-i18n="nav.login">Gå med nu</button>
+      <button class="nav-login" data-waitlist data-i18n="nav.login">Gå med nu</button>
       <button class="nav-toggle" aria-label="Öppna meny" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -769,29 +760,6 @@
 
   </div>
 </header>
-<!-- ============ WAITLIST BANNER ============ -->
-<div class="waitlist-banner" id="waitlistBanner">
-  <div class="waitlist-banner-track">
-    <div class="waitlist-banner-inner">
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-    </div>
-    <div class="waitlist-banner-inner" aria-hidden="true">
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-      <span>🎉 Anmäl er skola till väntelistan!</span><span class="banner-sep">✦</span><span>Begränsat antal pilotplatser – säkra er plats nu</span><span class="banner-sep">✦</span><span>Frånvarokollen lanserar 2026</span><span class="banner-sep">·····</span><span class="banner-pill">Gå med i väntelistan →</span><span class="banner-sep">·····</span>
-    </div>
-  </div>
-  <button class="banner-dismiss" id="dismissBanner" aria-label="Stäng">×</button>
-</div>
-
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="container hero-inner">
@@ -800,7 +768,7 @@
       <h1 data-i18n="hero.title">Hantera frånvaro, vikarier och bemanning <span class="accent">på ett ställe</span></h1>
       <p class="hero-lead" data-i18n="hero.lead">Slipp hoppa mellan scheman, listor och rapporter. Frånvarokollen samlar dagens bemanning, vikarieförslag och uppföljning i ett tydligt verktyg.</p>
       <div class="hero-ctas">
-        <button class="btn btn-primary banner-cta" data-i18n="hero.cta_primary">Logga in →</button>
+        <button class="btn btn-primary" data-i18n="hero.cta_primary">Logga in →</button>
         <a class="btn btn-red" href="#" data-waitlist data-i18n="hero.cta_secondary">Gå med i väntelistan</a>
       </div>
       <div class="hero-trust">
@@ -1189,7 +1157,7 @@
       <p data-i18n="contact.lead">Vi visar hur Frånvarokollen kan användas utifrån er skolas storlek, system och arbetssätt. Hör av er så bokar vi en kort genomgång.</p>
       <div class="hero-ctas" style="justify-content:center">
         <a class="btn btn-red" href="#" data-waitlist data-i18n="contact.cta_primary">Gå med i väntelistan →</a>
-        <button class="btn btn-secondary banner-cta" data-i18n="contact.cta_secondary">Logga in</button>
+        <button class="btn btn-secondary" data-i18n="contact.cta_secondary">Logga in</button>
       </div>
       <div class="contact-meta">
         <span><strong data-i18n="contact.email_label">E-post:</strong> info@franvarokollen.com</span>
@@ -1592,38 +1560,6 @@
 
   // ===== WAITLIST BANNER + MODAL =====
   document.addEventListener("DOMContentLoaded", function(){
-    var banner      = document.getElementById('waitlistBanner');
-    var modal       = document.getElementById('waitlistModal');
-    var formBody    = document.getElementById('modalFormBody');
-    var successView = document.getElementById('modalSuccess');
-    var formError   = document.getElementById('formError');
-
-    function openModal(){
-      modal.classList.add('open');
-      document.body.style.overflow='hidden';
-      setTimeout(function(){ var el=document.getElementById('f_namn'); if(el) el.focus(); },50);
-    }
-    function closeModal(){
-      modal.classList.remove('open');
-      document.body.style.overflow='';
-    }
-
-    // whole banner clickable except dismiss
-    banner.addEventListener('click', function(e){
-      if(e.target.id!=='dismissBanner') openModal();
-    });
-
-    // all waitlist buttons open modal
-    document.querySelectorAll('[data-waitlist]').forEach(function(btn){
-      btn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
-    });
-
-    document.getElementById('dismissBanner').addEventListener('click', function(e){
-      e.stopPropagation();
-      banner.style.display='none';
-      try{ sessionStorage.setItem('fk_banner_dismissed','1'); }catch(e){}
-    });
-    try{ if(sessionStorage.getItem('fk_banner_dismissed')) banner.style.display='none'; }catch(e){}
 
     document.getElementById('closeModal').addEventListener('click', closeModal);
     document.getElementById('closeSuccess').addEventListener('click', closeModal);
