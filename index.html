@@ -126,19 +126,30 @@
   .nav-login:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(220,38,38,0.38)}
   .nav-demo{
     padding:10px 18px;
-    background:transparent;
-    color:var(--navy);
-    border:1.5px solid var(--navy);
+    background:#16a34a;
+    color:#fff;
+    border:none;
     border-radius:7px;
     font-weight:700;
     font-size:14px;
     text-decoration:none;
     display:inline-flex;
     align-items:center;
-    transition:transform .15s,background .15s,color .15s;
+    box-shadow:0 2px 10px rgba(22,163,74,0.28);
+    transition:transform .15s,box-shadow .15s;
     cursor:pointer;
   }
-  .nav-demo:hover{transform:translateY(-1px);background:var(--navy);color:#fff}
+  .nav-demo:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(22,163,74,0.42)}
+  .demo-cta-wrap{text-align:center;padding:36px 20px}
+  .demo-cta{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:16px 34px;background:#16a34a;color:#fff;border:none;border-radius:11px;
+    font-weight:700;font-size:17px;text-decoration:none;
+    box-shadow:0 4px 18px rgba(22,163,74,0.32);
+    transition:transform .15s,box-shadow .15s;cursor:pointer;
+  }
+  .demo-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(22,163,74,0.44)}
+  .demo-cta-sub{display:block;margin-top:10px;font-size:13px;color:var(--muted)}
   .nav-toggle{display:none;width:40px;height:40px;border-radius:8px;background:var(--cream-deep);align-items:center;justify-content:center}
   .nav-toggle svg{width:20px;height:20px}
 
@@ -1091,6 +1102,10 @@
 </section>
 
 <!-- ============ HOW IT WORKS ============ -->
+<div class="demo-cta-wrap">
+  <a class="demo-cta" href="/demo/" data-i18n="nav.demo" target="_blank" rel="noopener">Prova demon</a>
+  <span class="demo-cta-sub" data-i18n="demo.sub">Ingen inloggning – testa direkt i webbläsaren</span>
+</div>
 <section class="how" id="sa-fungerar-det">
   <div class="container">
     <div class="section-head">
@@ -1183,6 +1198,10 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
+<div class="demo-cta-wrap">
+  <a class="demo-cta" href="/demo/" data-i18n="nav.demo" target="_blank" rel="noopener">Prova demon</a>
+  <span class="demo-cta-sub" data-i18n="demo.sub">Ingen inloggning – testa direkt i webbläsaren</span>
+</div>
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -1230,7 +1249,7 @@
   // ---- i18n ----
   const translations = {
     sv: {
-      'nav.smart':'Vikarieförslag','nav.features':'Funktioner','nav.how':'Så fungerar det','nav.analytics':'Analys','nav.security':'Säkerhet','nav.contact':'Kontakt','nav.login':'Gå med nu','nav.demo':'Prova demon',
+      'nav.smart':'Vikarieförslag','nav.features':'Funktioner','nav.how':'Så fungerar det','nav.analytics':'Analys','nav.security':'Säkerhet','nav.contact':'Kontakt','nav.login':'Gå med nu','nav.demo':'Prova demon','demo.sub':'Ingen inloggning – testa direkt i webbläsaren',
       'hero.eyebrow':'FRÅNVARO & BEMANNING FÖR SKOLOR',
       'hero.title':'Hantera frånvaro, vikarier och bemanning <span class="accent">på ett ställe</span>',
       'hero.lead':'Slipp hoppa mellan scheman, listor och rapporter. Frånvarokollen samlar dagens bemanning, vikarieförslag och uppföljning i ett tydligt verktyg.',
@@ -1302,7 +1321,7 @@
       'footer.org':'Org.nr: 559585-6450','footer.made':'Byggd i Sverige'
     },
     en: {
-      'nav.smart':'Suggestions','nav.features':'Features','nav.how':'How it works','nav.analytics':'Analytics','nav.security':'Security','nav.contact':'Contact','nav.login':'Join now','nav.demo':'Try demo',
+      'nav.smart':'Suggestions','nav.features':'Features','nav.how':'How it works','nav.analytics':'Analytics','nav.security':'Security','nav.contact':'Contact','nav.login':'Join now','nav.demo':'Try demo','demo.sub':'No login – try it right in your browser',
       'hero.eyebrow':'ABSENCE & STAFFING FOR SCHOOLS',
       'hero.title':'Manage absence, substitutes and staffing <span class="accent">in one place</span>',
       'hero.lead':'No more jumping between schedules, lists and reports. Frånvarokollen brings today\'s staffing, substitute suggestions and follow-up together in one clear tool.',
