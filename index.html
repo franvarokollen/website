@@ -124,6 +124,21 @@
     cursor:pointer;
   }
   .nav-login:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(220,38,38,0.38)}
+  .nav-demo{
+    padding:10px 18px;
+    background:transparent;
+    color:var(--navy);
+    border:1.5px solid var(--navy);
+    border-radius:7px;
+    font-weight:700;
+    font-size:14px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    transition:transform .15s,background .15s,color .15s;
+    cursor:pointer;
+  }
+  .nav-demo:hover{transform:translateY(-1px);background:var(--navy);color:#fff}
   .nav-toggle{display:none;width:40px;height:40px;border-radius:8px;background:var(--cream-deep);align-items:center;justify-content:center}
   .nav-toggle svg{width:20px;height:20px}
 
@@ -744,6 +759,7 @@
         <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
         <button data-lang-btn="en" aria-pressed="false">EN</button>
       </div>
+      <a class="nav-demo" href="/demo/" data-i18n="nav.demo" target="_blank" rel="noopener">Prova demon</a>
       <button class="nav-login" data-waitlist data-i18n="nav.login">Gå med nu</button>
       <button class="nav-toggle" aria-label="Öppna meny" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -755,6 +771,7 @@
     <a href="#funktioner" data-i18n="nav.features">Funktioner</a>
     <a href="#sakerhet" data-i18n="nav.security">Säkerhet</a>
     <a href="#kontakt" data-i18n="nav.contact">Kontakt</a>
+    <a href="/demo/" data-i18n="nav.demo" target="_blank" rel="noopener">Prova demon</a>
 
   </div>
 </header>
@@ -1213,7 +1230,7 @@
   // ---- i18n ----
   const translations = {
     sv: {
-      'nav.smart':'Vikarieförslag','nav.features':'Funktioner','nav.how':'Så fungerar det','nav.analytics':'Analys','nav.security':'Säkerhet','nav.contact':'Kontakt','nav.login':'Gå med nu',
+      'nav.smart':'Vikarieförslag','nav.features':'Funktioner','nav.how':'Så fungerar det','nav.analytics':'Analys','nav.security':'Säkerhet','nav.contact':'Kontakt','nav.login':'Gå med nu','nav.demo':'Prova demon',
       'hero.eyebrow':'FRÅNVARO & BEMANNING FÖR SKOLOR',
       'hero.title':'Hantera frånvaro, vikarier och bemanning <span class="accent">på ett ställe</span>',
       'hero.lead':'Slipp hoppa mellan scheman, listor och rapporter. Frånvarokollen samlar dagens bemanning, vikarieförslag och uppföljning i ett tydligt verktyg.',
@@ -1285,7 +1302,7 @@
       'footer.org':'Org.nr: 559585-6450','footer.made':'Byggd i Sverige'
     },
     en: {
-      'nav.smart':'Suggestions','nav.features':'Features','nav.how':'How it works','nav.analytics':'Analytics','nav.security':'Security','nav.contact':'Contact','nav.login':'Join now',
+      'nav.smart':'Suggestions','nav.features':'Features','nav.how':'How it works','nav.analytics':'Analytics','nav.security':'Security','nav.contact':'Contact','nav.login':'Join now','nav.demo':'Try demo',
       'hero.eyebrow':'ABSENCE & STAFFING FOR SCHOOLS',
       'hero.title':'Manage absence, substitutes and staffing <span class="accent">in one place</span>',
       'hero.lead':'No more jumping between schedules, lists and reports. Frånvarokollen brings today\'s staffing, substitute suggestions and follow-up together in one clear tool.',
