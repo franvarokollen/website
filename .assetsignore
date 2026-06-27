@@ -1,0 +1,8 @@
+.git/
+.git
+node_modules/
+.wrangler/
+src/
+style-explorer.html
+style-explorer-2.html
+wrangler.jsonc
