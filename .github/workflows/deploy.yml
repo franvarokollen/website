@@ -1,0 +1,27 @@
+name: Deploy to Cloudflare Pages
+
+# Single source of truth: this GitHub repo's `main` branch.
+# Every push to main (including edits made in the GitHub web UI) deploys
+# the site to the Cloudflare Pages project "franvarokollen" — which serves
+# franvarokollen.com. No more manual uploads, no more local copies drifting.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}      # lets you trigger a deploy manually from the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: "527991851fb365f8037b2c72c846e5e6"
+          command: pages deploy . --project-name=franvarokollen --branch=main
