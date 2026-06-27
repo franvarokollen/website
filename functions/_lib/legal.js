@@ -307,9 +307,47 @@ export function renderLegalPage({
   }
   .policy-bq p{margin:0;color:var(--muted)}
 
+  /* footer (copied from index.html so the legal pages match the homepage) */
+  .footer{
+    background:#060F1C;
+    color:rgba(255,255,255,0.6);
+    padding:56px 0 32px;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    margin-bottom:40px;
+  }
+  .footer h4{
+    font-size:13px;font-weight:700;
+    text-transform:uppercase;letter-spacing:0.08em;
+    color:#fff;margin:0 0 16px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .footer ul{list-style:none;padding:0;margin:0}
+  .footer li{margin-bottom:10px}
+  .footer a{font-size:14px;color:rgba(255,255,255,0.65);transition:color .15s}
+  .footer a:hover{color:#fff}
+  .footer-brand{color:#fff}
+  .footer-brand .brand{margin-bottom:14px}
+  .footer-brand .brand-name{color:#fff}
+  .footer-brand p{font-size:14px;color:rgba(255,255,255,0.6);max-width:300px}
+  .footer .brand-logo-light{height:32px}
+  .footer-bottom{
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px;
+    font-size:13px;color:rgba(255,255,255,0.5);
+  }
+
   @media (max-width:640px){
     .policy-wrap{padding:36px 20px 72px}
     .back-bottom{margin-top:40px;padding-top:28px}
+    .footer-grid{grid-template-columns:1fr;gap:24px}
+    .footer-bottom{flex-direction:column;align-items:flex-start;gap:6px}
   }
 
 </style>
