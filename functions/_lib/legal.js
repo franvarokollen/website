@@ -1,11 +1,130 @@
-<!doctype html>
-<html lang="sv">
+// ============================================================
+// functions/_lib/legal.js
+// Shared helpers for the /anvandarvillkor and /terms Pages Functions.
+// Shell copied verbatim from integritetspolicy.html (head, CSS, nav, body
+// structure) so the rendered pages are chrome-identical to that page.
+// ============================================================
+
+// ── HTML escaping ────────────────────────────────────────────
+export function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// ── Markdown → HTML renderer ─────────────────────────────────
+// Covers: headings (#–####), paragraphs, unordered lists (- / * ),
+// blockquotes (> ), bold (**…**), inline links ([text](https://…|mailto:…)).
+// Source text is HTML-escaped BEFORE any pattern is applied — injection-safe.
+export function renderMarkdown(md) {
+  const lines = md.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+
+  const html = [];
+  let inList = false;
+  let inBlockquote = false;
+
+  const closeList = () => { if (inList)       { html.push("</ul>");         inList = false;       } };
+  const closeBq   = ()  => { if (inBlockquote) { html.push("</blockquote>"); inBlockquote = false; } };
+
+  // Inline formatting — applied after escaping.
+  const inline = (raw) => {
+    let s = escapeHtml(raw);
+    // bold **…**
+    s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    // inline link [text](url) — https:// or mailto: only
+    s = s.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^)]+|mailto:[^)]+)\)/g,
+      '<a href="$2">$1</a>'
+    );
+    return s;
+  };
+
+  for (const line of lines) {
+    if (line.trim() === "") {
+      closeList();
+      closeBq();
+      continue;
+    }
+
+    // Headings (#, ##, ###, ####)
+    const hm = line.match(/^(#{1,4})\s+(.+)$/);
+    if (hm) {
+      closeList(); closeBq();
+      html.push(`<h${hm[1].length}>${inline(hm[2])}</h${hm[1].length}>`);
+      continue;
+    }
+
+    // Unordered list item (- or *)
+    const lm = line.match(/^[-*]\s+(.+)$/);
+    if (lm) {
+      closeBq();
+      if (!inList) { html.push("<ul>"); inList = true; }
+      html.push(`<li>${inline(lm[1])}</li>`);
+      continue;
+    }
+
+    // Blockquote
+    const bm = line.match(/^>\s?(.*)$/);
+    if (bm) {
+      closeList();
+      if (!inBlockquote) { html.push('<blockquote class="policy-bq">'); inBlockquote = true; }
+      html.push(`<p>${inline(bm[1])}</p>`);
+      continue;
+    }
+
+    // Plain paragraph
+    closeList(); closeBq();
+    html.push(`<p>${inline(line)}</p>`);
+  }
+
+  closeList();
+  closeBq();
+  return html.join("\n");
+}
+
+// ── Full page template ───────────────────────────────────────
+// Shell is verbatim from integritetspolicy.html:
+//   - <head>: same charset/viewport/favicon data-URI/font links/inlined <style>
+//   - <body>: same .nav header (sticky, full logo SVG, nav-links, lang switcher,
+//             login btn, mobile menu toggle)
+//   - Content in .policy-wrap > <h1> + .policy-meta + rendered body
+//   - No <footer> element (integritetspolicy.html has none)
+//   - Same <script> for lang-toggle / mobile-menu
+// Note: <meta name="robots" content="noindex"> is intentionally OMITTED here.
+//   integritetspolicy.html carries noindex because it's a duplicate-language page.
+//   The Terms pages (/anvandarvillkor and /terms) are unique canonical pages that
+//   should be discoverable by search engines.
+export function renderLegalPage({
+  lang,           // "sv" | "en"
+  title,          // document title string
+  version,        // version string e.g. "1.0"
+  effectiveDate,  // pre-formatted date string
+  bodyHtml,       // rendered markdown HTML
+  langSwitchHref, // href of the other-language version
+  langSwitchLabel // link text e.g. "Read in English"
+}) {
+  const isSv = lang === "sv";
+
+  const metaLine = isSv
+    ? `Version ${escapeHtml(version)} &middot; Senast uppdaterad ${escapeHtml(effectiveDate)}`
+    : `Version ${escapeHtml(version)} &middot; Last updated ${escapeHtml(effectiveDate)}`;
+
+  const backLabel  = isSv ? "← Tillbaka till startsidan" : "← Back to homepage";
+  const loginLabel = isSv ? "Gå med nu" : "Join now";
+
+  // Favicon inline SVG — identical to integritetspolicy.html line 8
+  const FAVICON = `data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20320%22%3E%3Crect%20width%3D%22320%22%20height%3D%22320%22%20rx%3D%2252%22%20fill%3D%22%23F6F4EF%22%2F%3E%3Cg%20transform%3D%22translate(-72%2C-28)%20scale(1.16)%22%3E%3Cpath%20fill%3D%22%230e70f4%22%20d%3D%22m%20246.56165%2C187.85079%20c%20-1.65%2C-0.42834%20-7.9725%2C-0.83204%20-14.05%2C-0.89712%20-11.41915%2C-0.12226%20-13.45%2C-0.78551%20-13.45%2C-4.39255%200%2C-1.03083%202.41394%2C-4.42833%205.36432%2C-7.55%202.95038%2C-3.12167%205.91762%2C-6.7376%206.59387%2C-8.03541%201.14026%2C-2.1883%200.80318%2C-2.77428%20-4.64182%2C-8.06939%20-10.16508%2C-9.88524%20-28.58112%2C-21.01578%20-41.44129%2C-25.04686%20-11.65675%2C-3.65386%20-14.87508%2C-2.33126%20-14.87508%2C6.11307%200%2C6.1745%20-0.98838%2C6.55752%20-3.00391%2C9.16559%20-0.96208%2C1.24492%20-3.373%2C3.81393%20-4.46371%2C4.7902%20-1.55276%2C1.38986%20-11.58965%2C1.90704%20-36.44806%2C1.90704%20-27.04712%2C0%20-28.12543%2C-0.22334%20-32.555646%2C-6.74298%20l%20-2.528678%2C-3.72129%20V%20116.83536%2088.29963%20l%202.528678%2C-3.721284%20c%204.497186%2C-6.618207%205.162656%2C-6.742985%2035.961506%2C-6.742985%2025.51076%2C0%2027.88153%2C0.148985%2031.46544%2C1.977361%205.81629%2C2.967247%208.2515%2C7.07298%208.99294%2C15.161983%200.45162%2C4.927085%201.19431%2C7.447965%202.61195%2C8.865615%202.00413%2C2.00412%2013.94309%2C7.36065%2024.93949%2C11.18933%2015.22425%2C5.30072%2037.81004%2C19.3314%2049.22028%2C30.5765%205.0202%2C4.94754%205.49144%2C4.86377%2013.63787%2C-2.42444%203.6692%2C-3.28265%205.67176%2C-4.34635%208.18262%2C-4.34635%202.56066%2C0%203.49524%2C0.51694%204.06781%2C2.25%200.87922%2C2.66126%200.70095%2C20.77358%20-0.35678%2C36.25%20l%20-0.7518%2C11%20-11%2C0.14711%20c%20-6.05%2C0.0809%20-12.35%2C-0.20335%20-14%2C-0.63168%20z%22%2F%3E%3Cpath%20fill%3D%22%23e4223d%22%20d%3D%22m%20242.06165%2C246.50414%20c%20-10.34393%2C-4.83591%20-11.48206%2C-8.21984%20-11.49219%2C-34.16878%20l%20-0.008%2C-20%2011%2C0.18362%20c%206.05%2C0.101%2015.28171%2C0.47833%2020.5149%2C0.83852%208.95234%2C0.61618%209.63228%2C0.52537%2011.5%2C-1.53574%201.60399%2C-1.77007%202.08645%2C-4.10122%202.51299%2C-12.14223%200.38364%2C-7.23223%200.93016%2C-10.20599%202%2C-10.88257%200.80966%2C-0.51204%205.81607%2C-0.93787%2011.12536%2C-0.94629%20l%209.65326%2C0.92272%205.96916%2C1.68494%204.48395%2C5.90604%20-0.0884%2C8.56367%20c%20-0.0599%2C5.80074%20-0.0427%2C50.75817%20-1.74588%2C54.05172%20-1.70678%2C3.30055%20-6.51421%2C6.85561%20-9.27068%2C6.85561%20-1.12014%2C0%20-2.31473%2C0.45%20-2.65465%2C1%20-0.91311%2C1.47744%20-50.28511%2C1.17178%20-53.5%2C-0.33122%20z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E`;
+
+  return `<!doctype html>
+<html lang="${lang}">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Integritetspolicy — Frånvarokollen</title>
-<meta name="robots" content="noindex"/>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20320%20320%22%3E%3Crect%20width%3D%22320%22%20height%3D%22320%22%20rx%3D%2252%22%20fill%3D%22%23F6F4EF%22%2F%3E%3Cg%20transform%3D%22translate(-72%2C-28)%20scale(1.16)%22%3E%3Cpath%20fill%3D%22%230e70f4%22%20d%3D%22m%20246.56165%2C187.85079%20c%20-1.65%2C-0.42834%20-7.9725%2C-0.83204%20-14.05%2C-0.89712%20-11.41915%2C-0.12226%20-13.45%2C-0.78551%20-13.45%2C-4.39255%200%2C-1.03083%202.41394%2C-4.42833%205.36432%2C-7.55%202.95038%2C-3.12167%205.91762%2C-6.7376%206.59387%2C-8.03541%201.14026%2C-2.1883%200.80318%2C-2.77428%20-4.64182%2C-8.06939%20-10.16508%2C-9.88524%20-28.58112%2C-21.01578%20-41.44129%2C-25.04686%20-11.65675%2C-3.65386%20-14.87508%2C-2.33126%20-14.87508%2C6.11307%200%2C6.1745%20-0.98838%2C6.55752%20-3.00391%2C9.16559%20-0.96208%2C1.24492%20-3.373%2C3.81393%20-4.46371%2C4.7902%20-1.55276%2C1.38986%20-11.58965%2C1.90704%20-36.44806%2C1.90704%20-27.04712%2C0%20-28.12543%2C-0.22334%20-32.555646%2C-6.74298%20l%20-2.528678%2C-3.72129%20V%20116.83536%2088.29963%20l%202.528678%2C-3.721284%20c%204.497186%2C-6.618207%205.162656%2C-6.742985%2035.961506%2C-6.742985%2025.51076%2C0%2027.88153%2C0.148985%2031.46544%2C1.977361%205.81629%2C2.967247%208.2515%2C7.07298%208.99294%2C15.161983%200.45162%2C4.927085%201.19431%2C7.447965%202.61195%2C8.865615%202.00413%2C2.00412%2013.94309%2C7.36065%2024.93949%2C11.18933%2015.22425%2C5.30072%2037.81004%2C19.3314%2049.22028%2C30.5765%205.0202%2C4.94754%205.49144%2C4.86377%2013.63787%2C-2.42444%203.6692%2C-3.28265%205.67176%2C-4.34635%208.18262%2C-4.34635%202.56066%2C0%203.49524%2C0.51694%204.06781%2C2.25%200.87922%2C2.66126%200.70095%2C20.77358%20-0.35678%2C36.25%20l%20-0.7518%2C11%20-11%2C0.14711%20c%20-6.05%2C0.0809%20-12.35%2C-0.20335%20-14%2C-0.63168%20z%22%2F%3E%3Cpath%20fill%3D%22%23e4223d%22%20d%3D%22m%20242.06165%2C246.50414%20c%20-10.34393%2C-4.83591%20-11.48206%2C-8.21984%20-11.49219%2C-34.16878%20l%20-0.008%2C-20%2011%2C0.18362%20c%206.05%2C0.101%2015.28171%2C0.47833%2020.5149%2C0.83852%208.95234%2C0.61618%209.63228%2C0.52537%2011.5%2C-1.53574%201.60399%2C-1.77007%202.08645%2C-4.10122%202.51299%2C-12.14223%200.38364%2C-7.23223%200.93016%2C-10.20599%202%2C-10.88257%200.80966%2C-0.51204%205.81607%2C-0.93787%2011.12536%2C-0.94629%20l%209.65326%2C0.92272%205.96916%2C1.68494%204.48395%2C5.90604%20-0.0884%2C8.56367%20c%20-0.0599%2C5.80074%20-0.0427%2C50.75817%20-1.74588%2C54.05172%20-1.70678%2C3.30055%20-6.51421%2C6.85561%20-9.27068%2C6.85561%20-1.12014%2C0%20-2.31473%2C0.45%20-2.65465%2C1%20-0.91311%2C1.47744%20-50.28511%2C1.17178%20-53.5%2C-0.33122%20z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+<title>${escapeHtml(title)} — Frånvarokollen</title>
+<link rel="icon" type="image/svg+xml" href="${FAVICON}" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 
@@ -125,536 +244,11 @@
   .nav-toggle{display:none;width:40px;height:40px;border-radius:8px;background:var(--cream-deep);align-items:center;justify-content:center}
   .nav-toggle svg{width:20px;height:20px}
 
-  /* ---------- hero ---------- */
-  .hero{
-    background:linear-gradient(160deg,#10243F 0%,#0D1E36 55%,#0A1828 100%);
-    color:#fff;
-    position:relative;
-    overflow:hidden;
-    border-bottom:1px solid rgba(255,255,255,0.06);
-  }
-  .hero::before{
-    content:"";
-    position:absolute;inset:0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
-      linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
-    background-size:56px 56px;
-    pointer-events:none;
-  }
-  .hero-inner{
-    display:grid;grid-template-columns:1fr 1fr;gap:64px;
-    align-items:center;
-    padding:72px 0 96px;
-    position:relative;
-  }
-  .hero h1{
-    font-size:clamp(36px,4.6vw,58px);
-    color:#fff;
-    margin-bottom:20px;
-  }
-  .hero h1 .accent{color:var(--blue)}
-  .hero-lead{
-    font-size:18px;
-    color:rgba(255,255,255,0.78);
-    max-width:520px;
-    margin-bottom:32px;
-  }
-  .hero-eyebrow{color:#7FB6FF;margin-bottom:18px}
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
-  .hero-trust{
-    display:flex;gap:24px;flex-wrap:wrap;
-    padding-top:24px;
-    border-top:1px solid rgba(255,255,255,0.12);
-  }
-  .hero-trust-item{
-    display:flex;align-items:center;gap:8px;
-    font-size:13px;font-weight:600;
-    color:rgba(255,255,255,0.7);
-  }
-  .hero-trust-item .dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
-  .hero-trust-item:nth-child(2) .dot{background:#43C77F}
-  .hero-trust-item:nth-child(3) .dot{background:var(--red)}
-
-  .hero-visual{position:relative;display:flex;justify-content:center}
-
-  /* ---------- sections ---------- */
-  section{padding:96px 0}
-  .section-head{max-width:680px;margin:0 auto 56px;text-align:center}
-  .section-head .eyebrow{justify-content:center}
-  .section-head p{margin-top:14px;color:var(--muted);font-size:17px}
-
-  /* features */
-  .features{background:var(--cream)}
-  .feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-  }
-  .feature{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:28px;
-    box-shadow:var(--shadow-sm);
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .feature:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(15,23,42,0.1)}
-  .feature-icon{
-    width:48px;height:48px;
-    border-radius:10px;
-    background:var(--cream-deep);
-    border:2px solid var(--ink);
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:18px;
-  }
-  .feature:nth-child(1) .feature-icon{background:#DCEAFF}
-  .feature:nth-child(2) .feature-icon{background:#E5F7EC}
-  .feature:nth-child(3) .feature-icon{background:#FFE5E7}
-  .feature:nth-child(4) .feature-icon{background:#FFF1D6}
-  .feature:nth-child(5) .feature-icon{background:#E8E2FB}
-  .feature:nth-child(6) .feature-icon{background:#DCEAFF}
-  .feature h3{margin-bottom:8px}
-  .feature p{color:var(--muted);font-size:15px}
-
-  /* how it works */
-  .how{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .steps{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-    counter-reset:step;
-  }
-  .step{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:32px 28px;
-    box-shadow:var(--shadow-sm);
-    position:relative;
-  }
-  .step-num{
-    font-family:'JetBrains Mono',monospace;
-    font-weight:600;
-    font-size:13px;
-    color:var(--blue);
-    margin-bottom:14px;
-  }
-  .step h3{margin-bottom:8px}
-  .step p{color:var(--muted);font-size:15px}
-
-  /* security */
-  .security{background:linear-gradient(160deg,#10243F 0%,#0D1E36 100%);color:#fff;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
-  .security .section-head h2{color:#fff}
-  .security .section-head p{color:rgba(255,255,255,0.72)}
-  .security .section-head .eyebrow{color:#7FB6FF}
-  .security-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-  }
-  .sec-card{
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.09);
-    border-radius:var(--radius);
-    padding:28px;
-    backdrop-filter:blur(8px);
-  }
-  .sec-card h3{color:#fff;margin-bottom:8px;font-size:18px}
-  .sec-card p{color:rgba(255,255,255,0.7);font-size:14px}
-  .sec-icon{
-    width:40px;height:40px;border-radius:8px;
-    background:rgba(30,123,255,0.18);
-    color:#7FB6FF;
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:16px;
-  }
-
-  /* contact */
-  .contact{background:var(--cream)}
-  .contact-card{
-    max-width:780px;
-    margin:0 auto;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:48px;
-    box-shadow:0 8px 40px rgba(15,23,42,0.1),0 2px 8px rgba(15,23,42,0.05);
-    text-align:center;
-  }
-  .contact-card h2{margin-bottom:14px}
-  .contact-card p{color:var(--muted);margin-bottom:28px;font-size:17px}
-  .contact-meta{
-    display:flex;justify-content:center;gap:32px;flex-wrap:wrap;
-    margin-top:28px;padding-top:24px;
-    border-top:1px solid var(--line);
-    font-size:14px;color:var(--muted);
-  }
-  .contact-meta strong{color:var(--ink);font-weight:700}
-
-  /* footer */
-  .footer{
-    background:#060F1C;
-    color:rgba(255,255,255,0.6);
-    padding:56px 0 32px;
-    border-top:1px solid rgba(255,255,255,0.06);
-  }
-  .footer-grid{
-    display:grid;
-    grid-template-columns:1.4fr 1fr 1fr 1fr;
-    gap:40px;
-    margin-bottom:40px;
-  }
-  .footer h4{
-    font-size:13px;font-weight:700;
-    text-transform:uppercase;letter-spacing:0.08em;
-    color:#fff;margin:0 0 16px;
-    font-family:'JetBrains Mono',monospace;
-  }
-  .footer ul{list-style:none;padding:0;margin:0}
-  .footer li{margin-bottom:10px}
-  .footer a{font-size:14px;color:rgba(255,255,255,0.65);transition:color .15s}
-  .footer a:hover{color:#fff}
-  .footer-brand{color:#fff}
-  .footer-brand .brand{margin-bottom:14px}
-  .footer-brand .brand-name{color:#fff}
-  .footer-brand p{font-size:14px;color:rgba(255,255,255,0.6);max-width:300px}
-  .footer-bottom{
-    padding-top:24px;
-    border-top:1px solid rgba(255,255,255,0.1);
-    display:flex;justify-content:space-between;align-items:center;
-    flex-wrap:wrap;gap:16px;
-    font-size:13px;color:rgba(255,255,255,0.5);
-  }
-
-  /* mockup styles */
-  .mockup{
-    width:100%;max-width:520px;
-    filter:drop-shadow(8px 8px 0 rgba(0,0,0,0.4));
-  }
-
-  /* ---------- smart suggestions ---------- */
-  .smart{background:#fff;border-bottom:1px solid var(--line)}
-  .smart-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
-  }
-  .smart-copy h2{margin-bottom:18px}
-  .smart-copy>p{color:var(--muted);font-size:17px;margin-bottom:28px}
-  .smart-criteria{
-    display:flex;flex-direction:column;gap:18px;
-    margin-bottom:20px;
-  }
-  .smart-criterion{
-    display:flex;gap:14px;align-items:flex-start;
-  }
-  .smart-criterion-icon{
-    flex:none;width:36px;height:36px;border-radius:8px;
-    background:#DCEAFF;
-    border:1.5px solid var(--ink);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--blue);
-  }
-  .smart-criterion strong{display:block;font-size:15px;color:var(--navy);margin-bottom:2px}
-  .smart-criterion span{font-size:14px;color:var(--muted);line-height:1.5}
-
-  .smart-visual{position:relative}
-  .candidates{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    box-shadow:0 8px 32px rgba(15,23,42,0.1),0 2px 6px rgba(15,23,42,0.05);
-    padding:22px;
-  }
-  .candidates-head{
-    display:flex;justify-content:space-between;align-items:center;
-    margin-bottom:4px;padding-bottom:14px;
-    border-bottom:1px solid var(--line);
-  }
-  .candidates-title{font-weight:800;font-size:14px;color:var(--navy)}
-  .candidates-context{
-    font-family:'JetBrains Mono',monospace;font-size:11px;
-    color:var(--muted);
-  }
-
-  /* the suggest button — visual centerpiece */
-  .suggest-btn{
-    display:inline-flex;align-items:center;gap:10px;
-    padding:13px 22px;
-    background:var(--blue);color:#fff;
-    border:2px solid var(--ink);
-    border-radius:10px;
-    box-shadow:4px 4px 0 var(--ink);
-    font-weight:700;font-size:14px;
-    position:relative;
-  }
-  .suggest-btn::after{
-    content:"";
-    position:absolute;
-    inset:-6px;
-    border-radius:14px;
-    border:2px dashed var(--blue);
-    opacity:0.4;
-    animation:pulse 2s ease-in-out infinite;
-    pointer-events:none;
-  }
-  @keyframes pulse{
-    0%,100%{transform:scale(1);opacity:0.4}
-    50%{transform:scale(1.04);opacity:0.15}
-  }
-
-  .candidate{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:14px;
-    border:1.5px solid var(--line);
-    border-radius:10px;
-    margin-bottom:8px;
-    background:#fff;
-  }
-  .candidate.soft{background:#F4F8FF;border-color:#D6E5FF}
-  .candidate-info strong{display:block;font-size:14px;color:var(--navy);font-weight:700;margin-bottom:2px}
-  .candidate-info .meta{font-size:12px;color:var(--muted);font-weight:600}
-  .candidate-pick{
-    font-family:'Nunito',sans-serif;
-    font-size:12px;font-weight:700;
-    color:var(--blue);
-    padding:6px 12px;
-    border:1.5px solid var(--blue);
-    border-radius:6px;
-    background:#fff;
-  }
-
-  /* ---------- analytics ---------- */
-  .analytics{background:var(--cream);border-top:1px solid var(--line)}
-  .analytics-grid{
-    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
-  }
-  .insight{
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:24px;
-    box-shadow:var(--shadow-sm);
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .insight:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(15,23,42,0.1)}
-  .insight-head{
-    display:flex;justify-content:space-between;align-items:flex-start;
-    margin-bottom:16px;
-  }
-  .insight-label{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;font-weight:600;
-    color:var(--blue);
-    text-transform:uppercase;letter-spacing:0.08em;
-  }
-  .insight-pill{
-    font-family:'JetBrains Mono',monospace;
-    font-size:10px;font-weight:600;
-    background:#E5F7EC;color:#3F8B5C;
-    padding:3px 8px;border-radius:5px;
-  }
-  .insight-pill.warn{background:#FFE5E7;color:var(--red)}
-  .insight-pill.amber{background:#FFF1D6;color:#A8731A}
-  .insight h3{font-size:18px;margin-bottom:6px}
-  .insight p{color:var(--muted);font-size:13px;margin-bottom:16px;line-height:1.5}
-  .insight-viz{
-    background:var(--cream);
-    border-radius:8px;
-    padding:14px;
-    border:1px solid var(--line);
-  }
-
-  /* mini chart bars */
-  .bars{display:flex;align-items:flex-end;gap:6px;height:80px}
-  .bar{
-    flex:1;
-    background:var(--blue);
-    background-image:linear-gradient(180deg, #4A95FF, var(--blue));
-    border-radius:3px 3px 0 0;
-    position:relative;
-    transition:height 1.6s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.2);
-  }
-  .bar.ext{
-    background:var(--red);
-    background-image:linear-gradient(180deg, #FF5563, var(--red));
-  }
-  .bar::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
-    background-size:100% 200%;
-    animation:shimmerV 2.6s linear infinite;
-    border-radius:3px 3px 0 0;
-  }
-  @keyframes shimmerV{
-    0%{background-position:0 -200%}
-    100%{background-position:0 200%}
-  }
-  .bar-day{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);font-weight:600}
-
-  /* workload distribution rings */
-  .workload{display:flex;flex-direction:column;gap:10px}
-  .workload-row{display:flex;align-items:center;gap:10px;font-size:12px}
-  .workload-row .name{flex:none;width:130px;font-weight:700;color:var(--navy);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .workload-row .track{flex:1;height:12px;background:#E8E2D4;border-radius:6px;overflow:hidden;position:relative;box-shadow:inset 0 1px 2px rgba(14,27,48,0.08)}
-  .workload-row .fill{
-    display:block;
-    height:100%;
-    background:var(--blue);
-    border-radius:6px;
-    transition:width 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    position:relative;
-    background-image:linear-gradient(90deg, var(--blue), #4A95FF);
-  }
-  .workload-row .fill.warn{
-    background:var(--red);
-    background-image:linear-gradient(90deg, #C81E2C, var(--red));
-  }
-  .workload-row .fill::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
-    background-size:200% 100%;
-    animation:shimmer 2.4s linear infinite;
-    border-radius:6px;
-  }
-  @keyframes shimmer{
-    0%{background-position:200% 0}
-    100%{background-position:-200% 0}
-  }
-  .workload-row .pct{flex:none;width:38px;text-align:right;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--navy);font-size:11px}
-
-  /* heatmap */
-  .heatmap{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}
-  .heatmap .hm-cell{
-    aspect-ratio:1;border-radius:3px;
-    opacity:0;transform:scale(0.4);
-    transition:opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), filter 1.4s ease;
-  }
-  .heatmap .hm-cell.in{opacity:1;transform:scale(1)}
-  .heatmap .hm-cell.pulse{filter:brightness(1.35) saturate(1.2)}
-  .heatmap .hm-label{font-size:9px;color:var(--muted);font-weight:600;display:flex;align-items:center;justify-content:center}
-
-  @media (prefers-reduced-motion:reduce){
-    .bar,.workload-row .fill,.heatmap .hm-cell{transition:none}
-    .heatmap .hm-cell{opacity:1;transform:none}
-    .bar::after,.workload-row .fill::after{animation:none;display:none}
-  }
-
-  /* cost breakdown */
-  .cost-stack{display:flex;flex-direction:column;gap:10px}
-  .cost-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--cream);border-radius:6px;font-size:12px}
-  .cost-row strong{font-family:'JetBrains Mono',monospace;color:var(--navy);font-weight:700}
-  .cost-row.total{background:var(--navy);color:#fff}
-  .cost-row.total strong{color:#fff}
-
   /* ---------- responsive ---------- */
-  @media (max-width:960px){
-    .hero-inner{grid-template-columns:1fr;gap:40px;padding:48px 0 64px}
-    .hero-visual{order:-1}
-    .mockup{max-width:420px}
-    .feature-grid,.steps,.security-grid{grid-template-columns:repeat(2,1fr)}
-    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-    .smart-grid{grid-template-columns:1fr;gap:48px}
-    .smart-criteria{grid-template-columns:1fr 1fr}
-    section{padding:72px 0}
-  }
   @media (max-width:640px){
     .nav-links{display:none}
     .nav-toggle{display:flex}
-    .feature-grid,.steps,.security-grid{grid-template-columns:1fr}
-    .analytics-grid{grid-template-columns:1fr}
-    .smart-criteria{grid-template-columns:1fr}
-    .footer-grid{grid-template-columns:1fr}
-    .contact-card{padding:32px 24px}
-    .hero-ctas{flex-direction:column;align-items:stretch}
-    .hero-ctas .btn{justify-content:center}
     .container{padding:0 20px}
-  }
-
-  /* ============ MOBILE CUT-DOWN ============ */
-  /* Aggressive content reduction for screens ≤640px.
-     Mobile users are mostly returning customers heading to login
-     or principals quickly evaluating — they don't need the full
-     marketing showcase. */
-
-  .mobile-only{display:none}
-
-  .mobile-trust{
-    background:rgba(255,255,255,0.04);
-    border:1px solid rgba(255,255,255,0.12);
-    border-radius:var(--radius);
-    padding:24px;
-    text-align:center;
-  }
-  .mobile-trust h3{color:#fff;font-size:18px;margin-bottom:10px}
-  .mobile-trust p{color:rgba(255,255,255,0.72);font-size:14px;margin-bottom:14px;line-height:1.6}
-  .mobile-trust .badges{
-    display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
-  }
-  .mobile-trust .badge{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;font-weight:600;
-    color:#7FB6FF;
-    padding:5px 10px;
-    background:rgba(30,123,255,0.12);
-    border:1px solid rgba(127,182,255,0.25);
-    border-radius:6px;
-  }
-
-  @media (max-width:640px){
-    /* hide elements that don't earn their place on small screens */
-    .hero-visual{display:none}
-    .smart-visual{display:none}
-    .feature.mobile-hide{display:none}
-    .how{display:none}
-    .analytics{display:none}
-    .security .section-head{display:none}
-    .security-grid{display:none}
-    .footer-grid > div:nth-child(3),
-    .footer-grid > div:nth-child(4){display:none}
-
-    /* surface the mobile-only trust strip */
-    .mobile-only{display:block}
-    .security{padding:40px 0}
-
-    /* tighten section padding on mobile */
-    section{padding:56px 0}
-    .hero-inner{padding:36px 0 48px;gap:0}
-
-    /* hero copy: tighter */
-    .hero h1{font-size:34px;margin-bottom:14px}
-    .hero-lead{font-size:16px;margin-bottom:24px}
-    .hero-trust{gap:14px;padding-top:18px}
-    .hero-eyebrow{margin-bottom:14px;font-size:11px}
-
-    /* smart section: copy only */
-    .smart-grid{gap:0}
-    .smart-copy h2{font-size:26px;margin-bottom:14px}
-    .smart-copy>p{font-size:15px;margin-bottom:22px}
-    .smart-criterion-icon{width:32px;height:32px}
-    .smart-criterion strong{font-size:14px}
-    .smart-criterion span{font-size:13px}
-
-    /* features tighter */
-    .feature{padding:22px}
-    .feature h3{font-size:18px}
-    .section-head{margin-bottom:36px}
-    .section-head h2{font-size:26px}
-    .section-head p{font-size:15px}
-
-    /* contact tighter */
-    .contact-card h2{font-size:24px}
-    .contact-card p{font-size:15px;margin-bottom:22px}
-    .contact-meta{flex-direction:column;gap:10px;text-align:left;align-items:flex-start}
-
-    /* footer slim */
-    .footer{padding:36px 0 24px}
-    .footer-grid{gap:24px;margin-bottom:24px}
-    .footer-bottom{flex-direction:column;align-items:flex-start;gap:6px;font-size:12px}
   }
 
   /* mobile menu */
@@ -675,59 +269,17 @@
   /* hidden lang content */
   [data-lang]:not(.active){display:none}
 
-  /* small reveal */
-  @media (prefers-reduced-motion:no-preference){
-    .reveal{opacity:1;transform:none}
-    /* Safety fallback — if JS fails, reveals are still visible */
-    @media (prefers-reduced-motion: no-preference) {}
-    .no-js .reveal{opacity:1;transform:none}
-  }
-
-  /* ===== WAITLIST BANNER ===== */to{transform:translateX(-50%)}}
-
-  /* ===== MODAL ===== */
-  .modal-backdrop{display:none!important;position:fixed;inset:0;background:rgba(14,27,48,0.65);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px}
-  .modal-backdrop.open{display:flex!important}
-  .modal{background:var(--cream);border:2px solid var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative}
-  .modal-header{background:var(--cream-deep);border-bottom:2px solid var(--ink);padding:22px 28px 18px;border-radius:calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0}
-  .modal-header .eyebrow{color:var(--blue)}
-  .modal-header h3{color:var(--navy);font-size:22px}
-  .modal-header p{color:var(--muted);font-size:14px;margin-top:6px}
-  .modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:8px;background:rgba(0,0,0,0.06);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;border:1px solid var(--line);transition:background .15s}
-  .modal-close:hover{background:rgba(0,0,0,0.12)}
-  .modal-body{padding:28px;background:#fff;border-radius:0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px)}
-  .form-error{display:none;background:#FFE5E7;border:1.5px solid var(--red);border-radius:8px;padding:12px 14px;font-size:14px;color:#8B0010;font-weight:600;margin-bottom:18px}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .form-field{margin-bottom:18px}
-  .form-field label{display:block;font-weight:700;font-size:14px;color:var(--navy);margin-bottom:6px}
-  .form-field label .req{color:var(--red)}
-  .form-field input,.form-field textarea{width:100%;padding:11px 14px;border:2px solid var(--line);border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:15px;color:var(--ink);background:#fff;outline:none;transition:border-color .15s,box-shadow .15s}
-  .form-field input:focus,.form-field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(30,123,255,0.12)}
-  .form-field textarea{resize:vertical;min-height:90px}
-  .form-submit{width:100%;padding:14px;background:var(--navy);color:#fff;border:2px solid var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-sm);font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;cursor:pointer;transition:transform .12s,box-shadow .12s;margin-top:4px}
-  .form-submit:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
-  .form-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:var(--shadow-sm)}
-  .form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
-  .modal-success{display:none;flex-direction:column;align-items:center;padding:48px 28px;text-align:center;background:#fff;border-radius:0 0 calc(var(--radius) - 2px) calc(var(--radius) - 2px)}
-  .modal-success.show{display:flex}
-  .success-icon{width:64px;height:64px;background:#E5F7EC;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:20px;box-shadow:var(--shadow-sm)}
-  .modal-success h3{margin-bottom:10px}
-  .modal-success p{color:var(--muted);font-size:15px;max-width:340px}
-  .modal-success .btn{margin-top:24px}
-  @media(max-width:640px){.form-row{grid-template-columns:1fr}}
-
-
-
-  /* policy pages */
+  /* policy pages — exact classes from integritetspolicy.html */
   .policy-wrap{max-width:780px;margin:0 auto;padding:60px 24px 100px}
   .back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:700;font-size:14px;text-decoration:none;padding:10px 0;margin-bottom:32px}
   .back-btn:hover{color:var(--navy)}
   .back-btn svg{width:16px;height:16px}
   .policy-wrap h1{font-size:clamp(28px,5vw,42px);color:var(--navy);margin-bottom:8px;line-height:1.15}
-  .policy-meta{font-size:13px;color:var(--muted);margin-bottom:48px}
+  .policy-meta{font-size:13px;color:var(--muted);margin-bottom:20px}
   .policy-wrap h2{font-size:20px;color:var(--navy);margin:40px 0 12px;padding-top:40px;border-top:1px solid var(--line)}
   .policy-wrap h2:first-of-type{border-top:none;padding-top:0}
   .policy-wrap h3{font-size:16px;color:var(--navy);margin:24px 0 8px;font-weight:700}
+  .policy-wrap h4{font-size:14px;color:var(--navy);margin:18px 0 6px;font-weight:700}
   .policy-wrap p{color:var(--ink);line-height:1.75;margin-bottom:16px}
   .policy-wrap ul,.policy-wrap ol{color:var(--ink);line-height:1.75;margin:0 0 16px 24px}
   .policy-wrap li{margin-bottom:6px}
@@ -738,14 +290,34 @@
   .policy-wrap a{color:var(--blue);text-decoration:underline}
   .policy-wrap strong{font-weight:700;color:var(--navy)}
   .back-bottom{margin-top:60px;padding-top:40px;border-top:1px solid var(--line)}
-  .lang-notice{background:var(--cream-deep);border:1px solid var(--line);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--muted);margin-bottom:32px}
+  .lang-switch{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;font-weight:600;
+    color:var(--blue);
+    margin-bottom:32px;
+    text-decoration:none;
+  }
+  .lang-switch:hover{text-decoration:underline}
+  .policy-bq{
+    margin:0 0 16px;padding:14px 18px;
+    border-left:3px solid var(--blue);
+    background:var(--cream-deep);
+    border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    color:var(--muted);
+  }
+  .policy-bq p{margin:0;color:var(--muted)}
+
+  @media (max-width:640px){
+    .policy-wrap{padding:36px 20px 72px}
+    .back-bottom{margin-top:40px;padding-top:28px}
+  }
 
 </style>
 </head>
 <body>
 <header class="nav">
   <div class="container nav-inner">
-    <a href="#" class="brand" aria-label="FrånvaroKollen">
+    <a href="/" class="brand" aria-label="FrånvaroKollen">
       <svg class="brand-logo" viewBox="0 0 784 248" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path style="fill:#0e70f4" d="m 246.56165,187.85079 c -1.65,-0.42834 -7.9725,-0.83204 -14.05,-0.89712 -11.41915,-0.12226 -13.45,-0.78551 -13.45,-4.39255 0,-1.03083 2.41394,-4.42833 5.36432,-7.55 2.95038,-3.12167 5.91762,-6.7376 6.59387,-8.03541 1.14026,-2.1883 0.80318,-2.77428 -4.64182,-8.06939 -10.16508,-9.88524 -28.58112,-21.01578 -41.44129,-25.04686 -11.65675,-3.65386 -14.87508,-2.33126 -14.87508,6.11307 0,6.1745 -0.98838,6.55752 -3.00391,9.16559 -0.96208,1.24492 -3.373,3.81393 -4.46371,4.7902 -1.55276,1.38986 -11.58965,1.90704 -36.44806,1.90704 -27.04712,0 -28.12543,-0.22334 -32.555646,-6.74298 l -2.528678,-3.72129 V 116.83536 88.29963 l 2.528678,-3.721284 c 4.497186,-6.618207 5.162656,-6.742985 35.961506,-6.742985 25.51076,0 27.88153,0.148985 31.46544,1.977361 5.81629,2.967247 8.2515,7.07298 8.99294,15.161983 0.45162,4.927085 1.19431,7.447965 2.61195,8.865615 2.00413,2.00412 13.94309,7.36065 24.93949,11.18933 15.22425,5.30072 37.81004,19.3314 49.22028,30.5765 5.0202,4.94754 5.49144,4.86377 13.63787,-2.42444 3.6692,-3.28265 5.67176,-4.34635 8.18262,-4.34635 2.56066,0 3.49524,0.51694 4.06781,2.25 0.87922,2.66126 0.70095,20.77358 -0.35678,36.25 l -0.7518,11 -11,0.14711 c -6.05,0.0809 -12.35,-0.20335 -14,-0.63168 z"/>
         <path style="fill:#e4223d" d="m 242.06165,246.50414 c -10.34393,-4.83591 -11.48206,-8.21984 -11.49219,-34.16878 l -0.008,-20 11,0.18362 c 6.05,0.101 15.28171,0.47833 20.5149,0.83852 8.95234,0.61618 9.63228,0.52537 11.5,-1.53574 1.60399,-1.77007 2.08645,-4.10122 2.51299,-12.14223 0.38364,-7.23223 0.93016,-10.20599 2,-10.88257 0.80966,-0.51204 5.81607,-0.93787 11.12536,-0.94629 l 9.65326,0.92272 5.96916,1.68494 4.48395,5.90604 -0.0884,8.56367 c -0.0599,5.80074 -0.0427,50.75817 -1.74588,54.05172 -1.70678,3.30055 -6.51421,6.85561 -9.27068,6.85561 -1.12014,0 -2.31473,0.45 -2.65465,1 -0.91311,1.47744 -50.28511,1.17178 -53.5,-0.33122 z"/>
@@ -754,235 +326,45 @@
     </a>
 
     <nav class="nav-links" aria-label="Huvudmeny">
-      <a href="/" data-i18n="nav.smart">Vikarieförslag</a>
-      <a href="/" data-i18n="nav.features">Funktioner</a>
-      <a href="/" data-i18n="nav.analytics">Analys</a>
-      <a href="/" data-i18n="nav.security">Säkerhet</a>
-      <a href="/" data-i18n="nav.contact">Kontakt</a>
+      <a href="/">Vikarieförslag</a>
+      <a href="/">Funktioner</a>
+      <a href="/">Analys</a>
+      <a href="/">Säkerhet</a>
+      <a href="/">Kontakt</a>
     </nav>
 
     <div class="nav-actions">
       <div class="lang" role="group" aria-label="Språk">
-        <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
-        <button data-lang-btn="en" aria-pressed="false">EN</button>
+        <button class="${isSv ? "active" : ""}" data-lang-btn="sv" aria-pressed="${isSv}">SV</button>
+        <button class="${!isSv ? "active" : ""}" data-lang-btn="en" aria-pressed="${!isSv}">EN</button>
       </div>
-      <button class="nav-login" data-i18n="nav.login">Gå med nu</button>
+      <button class="nav-login">${loginLabel}</button>
       <button class="nav-toggle" aria-label="Öppna meny" id="navToggle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="/" data-i18n="nav.smart">Vikarieförslag</a>
-    <a href="/" data-i18n="nav.features">Funktioner</a>
-    <a href="/" data-i18n="nav.security">Säkerhet</a>
-    <a href="/" data-i18n="nav.contact">Kontakt</a>
-
+    <a href="/">Vikarieförslag</a>
+    <a href="/">Funktioner</a>
+    <a href="/">Säkerhet</a>
+    <a href="/">Kontakt</a>
   </div>
 </header>
 <div class="policy-wrap">
-  <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg><span data-lang="sv" class="active">← Tillbaka till startsidan</span><span data-lang="en">← Back to homepage</span></a>
-  <div data-lang="sv" class="active">
-    <div class="lang-notice">🇸🇪 Detta dokument är på svenska. <a href="#" onclick="setLang('en');return false;">Read in English →</a></div>
-    <h1>Integritetspolicy</h1>
-    <p class="policy-meta">Senast uppdaterad: 2026-05-19 &nbsp;·&nbsp; Version 1.0</p>
-    
-<h2>1. Vem är personuppgiftsansvarig?</h2>
-<p>Frånvarokollen Sverige AB<br>Organisationsnummer: 559585-6450<br>Säte: Stockholm<br>E-post: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
-<p>Frånvarokollen Sverige AB ("Frånvarokollen", "vi", "oss") är personuppgiftsansvarig för behandlingen av personuppgifter som beskrivs i denna policy, om inte annat anges nedan.</p>
-<p>För personuppgifter som behandlas inom våra kunders konton i tjänsten Frånvarokollen är respektive kundskola (eller dess huvudman) personuppgiftsansvarig och Frånvarokollen är personuppgiftsbiträde. Behandlingen regleras då av separat personuppgiftsbiträdesavtal (PUB-avtal).</p>
-
-<h2>2. Vad denna policy täcker</h2>
-<p>Denna policy beskriver hur vi behandlar personuppgifter för tre olika grupper:</p>
-<ul>
-<li><strong>Besökare på franvarokollen.com</strong> — den som besöker vår webbplats</li>
-<li><strong>Potentiella kunder och kontakter</strong> — den som tar kontakt med oss, bokar demo, prenumererar på vårt nyhetsbrev eller på annat sätt interagerar med oss inför ett eventuellt samarbete</li>
-<li><strong>Användare av tjänsten Frånvarokollen</strong> — personal på skolor som använder vårt verktyg</li>
-</ul>
-
-<h2>3. Besökare på franvarokollen.com</h2>
-<h3>3.1 Vilka personuppgifter behandlar vi?</h3>
-<p>När du besöker vår webbplats samlar vi in begränsad, anonymiserad teknisk information via Vercel Web Analytics: sidvisningar, hänvisningskälla, allmän geografisk region (landsnivå), webbläsartyp och enhetstyp.</p>
-<p>Vi använder inte cookies för spårning eller analys. Vercel Web Analytics är cookielöst och anonymiseras vid insamling.</p>
-<h3>3.2 Varför behandlar vi det?</h3>
-<p>För att förstå hur vår webbplats används och hur vi kan förbättra den.</p>
-<h3>3.3 Rättslig grund</h3>
-<p>Berättigat intresse (GDPR artikel 6.1 f).</p>
-<h3>3.4 Hur länge sparar vi det?</h3>
-<p>30 dagar (Vercels standardretention för Web Analytics).</p>
-<h3>3.5 Mottagare</h3>
-<p>Vercel Inc. — vår underleverantör för webbplatshosting och analys, som behandlar data inom EU (Frankfurt). Vercel agerar som personuppgiftsbiträde åt oss.</p>
-
-<h2>4. Potentiella kunder och kontakter</h2>
-<h3>4.1 Vilka personuppgifter behandlar vi?</h3>
-<p>När du tar kontakt med oss behandlar vi: namn, kontaktuppgifter (e-post, telefon, befattning), skolans namn och organisationsform, innehåll i kommunikation och mötesanteckningar, samt information du själv lämnar.</p>
-<h3>4.2 Varför behandlar vi det?</h3>
-<ul><li>För att svara på dina frågor</li><li>För att boka och genomföra demonstrationer</li><li>För att följa upp efter samtal och demos</li><li>För att förstå om vår tjänst passar er skola</li><li>För att hantera potentiella avtalsförhandlingar</li></ul>
-<h3>4.3 Rättslig grund</h3>
-<p>Berättigat intresse (GDPR artikel 6.1 f), förberedelse av avtal (artikel 6.1 b), samt samtycke (artikel 6.1 a) för nyhetsbrev.</p>
-<h3>4.4 Hur länge sparar vi det?</h3>
-<ul><li>Vanliga kontakter: 2 år från senaste kontakt</li><li>Demobokningar och pipeline-anteckningar: 3 år från senaste kontakt</li><li>Om du säger att du inte vill bli kontaktad: omedelbar radering från aktiv lista</li></ul>
-<h3>4.5 Mottagare</h3>
-<p>Interna medarbetare på Frånvarokollen samt Google Ireland Limited (Google Workspace, EU).</p>
-<h3>4.6 Din rätt att invända</h3>
-<p>Du har rätt att när som helst invända mot vår behandling baserad på berättigat intresse. Skicka invändning till: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
-
-<h2>5. Användare av tjänsten Frånvarokollen</h2>
-<h3>5.1 Roller</h3>
-<p>När en skola är vår kund är kundskolan personuppgiftsansvarig och Frånvarokollen är personuppgiftsbiträde. Om du som lärare, vikarie eller skolpersonal har frågor om hur dina personuppgifter behandlas i tjänsten, ska du i första hand vända dig till din arbetsgivare (skolan).</p>
-<h3>5.2 När vi själva är personuppgiftsansvarig</h3>
-<p><strong>Autentisering:</strong> e-postadress för OAuth-inloggning — berättigat intresse — sparas så länge kontot är aktivt + 30 dagar.</p>
-<p><strong>Tekniska loggar:</strong> IP-adress, webbläsartyp, tidsstämplar — berättigat intresse — 90 dagar (Sentry), 30 dagar (Vercel).</p>
-<p><strong>Supportärenden:</strong> namn, e-post, kommunikationsinnehåll — berättigat intresse + avtalsförpliktelse — 2 år.</p>
-<h3>5.3 Frånvaroskäl och känsliga uppgifter</h3>
-<p>Frånvarokollen är uttryckligen designad för att inte behandla känsliga personuppgifter enligt GDPR artikel 9. Frånvaroskäl registreras endast som generiska kategorier: Sjuk, Kompetensutveckling, Föräldraledig, Personlig, Övrigt.</p>
-
-<h2>6. AI och Frånvarokollen</h2>
-<p>Frånvarokollen använder inte AI i tjänsten idag. Beslut baseras på regelbaserad programvara vi själva utvecklat. Vid framtida AI-implementering informeras kunder 30 dagar i förväg, AI-leverantörer läggs till i PUB-avtalet, och er data används aldrig för AI-träning utan separat skriftligt samtycke.</p>
-
-<h2>7. Underleverantörer</h2>
-<table>
-<tr><th>Leverantör</th><th>Tjänst</th><th>Region</th></tr>
-<tr><td>Supabase Inc.</td><td>Databas, autentisering, lagring</td><td>AWS EU (Irland/Tyskland)</td></tr>
-<tr><td>Vercel Inc.</td><td>Webbplatshosting, applikationshosting</td><td>Frankfurt, Tyskland</td></tr>
-<tr><td>Functional Software Inc. (Sentry)</td><td>Felsövervakning</td><td>EU (Frankfurt)</td></tr>
-<tr><td>Google Ireland Limited</td><td>E-post, dokumentlagring, OAuth</td><td>EU</td></tr>
-<tr><td>Microsoft Ireland Operations Ltd</td><td>OAuth-autentisering</td><td>EU</td></tr>
-<tr><td>Cloudflare, Inc.</td><td>DNS, DDoS-skydd</td><td>Globalt edge (DNS only)</td></tr>
-</table>
-
-<h2>8. Överföring utanför EU/EES</h2>
-<p>Vi strävar efter att all behandling sker inom EU/EES. All produktdata behandlas inom EU/EES. Standardavtalsklausuler (SCC) finns på plats där så krävs.</p>
-
-<h2>9. Dina rättigheter enligt GDPR</h2>
-<ul>
-<li>Rätt till information (artikel 13–14)</li>
-<li>Rätt till tillgång (artikel 15)</li>
-<li>Rätt till rättelse (artikel 16)</li>
-<li>Rätt till radering (artikel 17)</li>
-<li>Rätt till begränsning av behandling (artikel 18)</li>
-<li>Rätt till dataportabilitet (artikel 20)</li>
-<li>Rätt att invända (artikel 21)</li>
-<li>Rätt att inte bli föremål för automatiserat beslutsfattande (artikel 22)</li>
-<li>Rätt att återkalla samtycke (artikel 7.3)</li>
-</ul>
-<p>Skicka din begäran till: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a> — vi svarar inom 30 dagar.</p>
-<p>Klagomål kan lämnas till <strong>Integritetsskyddsmyndigheten (IMY)</strong>: <a href="https://imy.se" target="_blank">imy.se</a>, 08-657 61 00.</p>
-
-<h2>10. Cookies</h2>
-<p>Vi använder inga marknadsförings- eller spårningscookies. Se vår <a href="/cookies">Cookiepolicy</a> för fullständig information.</p>
-
-<h2>11. Säkerhet</h2>
-<p>Vi vidtar lämpliga tekniska och organisatoriska åtgärder: kryptering i transit (TLS 1.2+) och i vila (AES-256), tvåfaktorsautentisering, behörighetsstyrning, loggning, 72-timmars anmälningsplikt till IMY vid incidenter, samt pågående arbete mot ISO 27001-certifiering.</p>
-
-<h2>12. Barn</h2>
-<p>Frånvarokollen är inte riktad till barn och behandlar inte uppgifter om elever. Om vi oavsiktligt samlat in uppgifter om en person under 13 år raderas dessa omedelbart.</p>
-
-<h2>13. Ändringar</h2>
-<p>Vi uppdaterar denna policy vid materiella förändringar och granskar den minst var 6:e månad. Datumet "Senast uppdaterad" uppdateras vid varje ändring.</p>
-
-<h2>14. Kontakt</h2>
-<p>Frånvarokollen Sverige AB<br>E-post: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a><br>Org.nr: 559585-6450<br>Säte: Stockholm</p>
-
+  <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>${backLabel}</a>
+  <h1>${escapeHtml(title)}</h1>
+  <p class="policy-meta">${metaLine}</p>
+  <a href="${escapeHtml(langSwitchHref)}" class="lang-switch">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="8" cy="8" r="6"/><path d="M8 2a9 9 0 0 1 0 12M8 2a9 9 0 0 0 0 12M2 8h12"/></svg>
+    ${escapeHtml(langSwitchLabel)}
+  </a>
+  <div class="policy-body">
+    ${bodyHtml}
   </div>
-  <div data-lang="en">
-    <div class="lang-notice">🇬🇧 This document is in English. <a href="#" onclick="setLang('sv');return false;">Läs på svenska →</a></div>
-    <h1>Privacy Policy</h1>
-    <p class="policy-meta">Senast uppdaterad: 2026-05-19 &nbsp;·&nbsp; Version 1.0</p>
-    
-<h2>1. Who is the data controller?</h2>
-<p>Frånvarokollen Sverige AB<br>Organisation number: 559585-6450<br>Registered seat: Stockholm, Sweden<br>Email: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
-<p>Frånvarokollen Sverige AB ("Frånvarokollen", "we", "us") is the data controller for the processing described in this policy, except where stated otherwise.</p>
-<p>For personal data processed within our customers' accounts, the customer school is the data controller and Frånvarokollen is the data processor, governed by a separate Data Processing Agreement (PUB-avtal).</p>
-
-<h2>2. What this policy covers</h2>
-<ul>
-<li><strong>Visitors to franvarokollen.com</strong></li>
-<li><strong>Prospects and contacts</strong></li>
-<li><strong>Users of the Frånvarokollen service</strong></li>
-</ul>
-
-<h2>3. Visitors to franvarokollen.com</h2>
-<h3>3.1 What personal data do we process?</h3>
-<p>We collect limited, anonymised technical information via Vercel Web Analytics: page views, referral source, general geographic region (country-level), browser type and device type. We do not use cookies for tracking or analytics.</p>
-<h3>3.2 Why?</h3><p>To understand and improve our website.</p>
-<h3>3.3 Legal basis</h3><p>Legitimate interest (GDPR Article 6(1)(f)).</p>
-<h3>3.4 Retention</h3><p>30 days (Vercel's default retention).</p>
-<h3>3.5 Recipients</h3><p>Vercel Inc. — EU (Frankfurt) — acting as data processor.</p>
-
-<h2>4. Prospects and contacts</h2>
-<h3>4.1 What do we process?</h3>
-<p>Name, contact details, school name and type, communication content and meeting notes, information you provide voluntarily.</p>
-<h3>4.2 Why?</h3>
-<ul><li>To respond to enquiries</li><li>To schedule and conduct demonstrations</li><li>To follow up after meetings</li><li>To assess fit for your school</li><li>To facilitate contract negotiations</li></ul>
-<h3>4.3 Legal basis</h3>
-<p>Legitimate interest (Article 6(1)(f)), pre-contractual measures (Article 6(1)(b)), consent (Article 6(1)(a)) for newsletters.</p>
-<h3>4.4 Retention</h3>
-<ul><li>General contacts: 2 years from last contact</li><li>Demo bookings and pipeline notes: 3 years</li><li>Do-not-contact requests: immediate removal from active lists</li></ul>
-<h3>4.5 Recipients</h3>
-<p>Internal team members and Google Ireland Limited (Google Workspace, EU).</p>
-<h3>4.6 Right to object</h3>
-<p>You may object at any time to processing based on legitimate interest. Contact: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
-
-<h2>5. Users of the Frånvarokollen service</h2>
-<h3>5.1 Roles</h3>
-<p>The customer school is the data controller; Frånvarokollen is the data processor. For questions about your data in the service, contact your employer (the school) first.</p>
-<h3>5.2 Where we are the controller</h3>
-<p><strong>Authentication:</strong> email for OAuth — legitimate interest — retained while account active + 30 days.</p>
-<p><strong>Technical logs:</strong> IP, browser type, timestamps — legitimate interest — 90 days (Sentry), 30 days (Vercel).</p>
-<p><strong>Support cases:</strong> name, email, communication content — legitimate interest + contractual obligation — 2 years.</p>
-<h3>5.3 Absence reasons and sensitive data</h3>
-<p>Frånvarokollen is explicitly designed not to process special category data. Absence reasons are generic only: Sick, Professional Development, Parental Leave, Personal, Other.</p>
-
-<h2>6. AI and Frånvarokollen</h2>
-<p>We do not currently use AI in the service. If we add AI features, existing customers will be notified 30 days in advance, AI providers will be added to the PUB-avtal, and your data will never be used to train AI without separate written consent.</p>
-
-<h2>7. Sub-processors</h2>
-<table>
-<tr><th>Provider</th><th>Service</th><th>Region</th></tr>
-<tr><td>Supabase Inc.</td><td>Database, authentication, storage</td><td>AWS EU (Ireland/Germany)</td></tr>
-<tr><td>Vercel Inc.</td><td>Website and application hosting</td><td>Frankfurt, Germany</td></tr>
-<tr><td>Functional Software Inc. (Sentry)</td><td>Error monitoring</td><td>EU (Frankfurt)</td></tr>
-<tr><td>Google Ireland Limited</td><td>Email, document storage, OAuth</td><td>EU</td></tr>
-<tr><td>Microsoft Ireland Operations Ltd</td><td>OAuth authentication</td><td>EU</td></tr>
-<tr><td>Cloudflare, Inc.</td><td>DNS, DDoS protection</td><td>Global edge (DNS only)</td></tr>
-</table>
-
-<h2>8. International transfers</h2>
-<p>All product data is processed within the EU/EEA. Standard Contractual Clauses (SCCs) are in place where applicable.</p>
-
-<h2>9. Your rights under GDPR</h2>
-<ul>
-<li>Right to information (Articles 13–14)</li>
-<li>Right of access (Article 15)</li>
-<li>Right to rectification (Article 16)</li>
-<li>Right to erasure (Article 17)</li>
-<li>Right to restriction (Article 18)</li>
-<li>Right to data portability (Article 20)</li>
-<li>Right to object (Article 21)</li>
-<li>Right not to be subject to automated decision-making (Article 22)</li>
-<li>Right to withdraw consent (Article 7(3))</li>
-</ul>
-<p>Send requests to: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a> — we respond within 30 days.</p>
-<p>Complaints: <strong>Integritetsskyddsmyndigheten (IMY)</strong> — <a href="https://imy.se" target="_blank">imy.se</a>, +46 8 657 61 00.</p>
-
-<h2>10. Cookies</h2>
-<p>We use no marketing or tracking cookies. See our <a href="/cookie-policy">Cookie Policy</a> for full details.</p>
-
-<h2>11. Security</h2>
-<p>TLS 1.2+ encryption in transit, AES-256 at rest, two-factor authentication, least-privilege access control, logging, 72-hour incident notification to IMY, and ongoing ISO 27001 work.</p>
-
-<h2>12. Children</h2>
-<p>Frånvarokollen is not directed at children and does not process student data. Any inadvertent collection from under-13s is deleted immediately.</p>
-
-<h2>13. Changes</h2>
-<p>We update this policy for material changes and review it at least every 6 months.</p>
-
-<h2>14. Contact</h2>
-<p>Frånvarokollen Sverige AB<br>Email: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a><br>Organisation number: 559585-6450<br>Registered seat: Stockholm, Sweden</p>
-
+  <div class="back-bottom">
+    <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>${backLabel}</a>
   </div>
-  <div class="back-bottom"><a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg><span data-lang="sv" class="active">← Tillbaka till startsidan</span><span data-lang="en">← Back to homepage</span></a></div>
 </div>
 <footer class="footer">
   <div class="container">
@@ -1016,7 +398,7 @@
         <h4 data-i18n="footer.legal">Juridik</h4>
         <ul>
           <li><a href="/anvandarvillkor" data-i18n="footer.terms">Användarvillkor</a></li>
-          <li><a href="/integritetspolicy" data-i18n="footer.privacy" aria-current="page">Integritetspolicy</a></li>
+          <li><a href="/integritetspolicy" data-i18n="footer.privacy">Integritetspolicy</a></li>
           <li><a href="/cookies" data-i18n="footer.cookies">Cookiepolicy</a></li>
         </ul>
       </div>
@@ -1028,35 +410,49 @@
   </div>
 </footer>
 <script>
-
-  // lang toggle
-  function setLang(lang){
-    document.documentElement.lang = lang;
-    document.querySelectorAll('[data-lang]').forEach(el=>{
-      el.classList.toggle('active', el.getAttribute('data-lang')===lang);
-    });
-    document.querySelectorAll('[data-lang-btn]').forEach(b=>{
-      const isActive = b.getAttribute('data-lang-btn')===lang;
-      b.classList.toggle('active',isActive);
-      b.setAttribute('aria-pressed',isActive);
-    });
-    try{ localStorage.setItem('fk_lang',lang); }catch(e){}
-  }
-  document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
-    btn.addEventListener('click',()=>setLang(btn.getAttribute('data-lang-btn')));
-  });
-  try{
-    const saved = localStorage.getItem('fk_lang');
-    if(saved==='en') setLang('en'); else setLang('sv');
-  }catch(e){ setLang('sv'); }
-  // mobile menu
+  // mobile menu toggle
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');
-  if(navToggle){
-    navToggle.addEventListener('click',()=>mobileMenu.classList.toggle('open'));
-    mobileMenu.addEventListener('click',e=>{ if(e.target.tagName==='A') mobileMenu.classList.remove('open'); });
+  if (navToggle) {
+    navToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.addEventListener('click', e => { if (e.target.tagName === 'A') mobileMenu.classList.remove('open'); });
   }
-
 </script>
 </body>
-</html>
+</html>`;
+}
+
+// ── Fallback page ────────────────────────────────────────────
+// On-brand minimal page returned (HTTP 200) when upstream fetch fails.
+// Never returns a blank 404 — legal pages must always resolve.
+export function fallbackPage(lang) {
+  const isSv = lang === "sv";
+  const title    = isSv ? "Användarvillkor" : "Terms of Service";
+  const heading  = isSv ? "Användarvillkor" : "Terms of Service";
+  const body     = isSv
+    ? "Dokumentet är tillfälligt otillgängligt. Försök igen om en stund."
+    : "This document is temporarily unavailable. Please try again shortly.";
+  const backLink = isSv ? "Till startsidan" : "Back to home";
+
+  return `<!doctype html>
+<html lang="${lang}">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>${escapeHtml(title)} — Frånvarokollen</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:640px;margin:80px auto;padding:0 24px;color:#0F172A;line-height:1.6}
+  h1{font-size:28px;font-weight:800;color:#0D1E36;margin:0 0 16px;letter-spacing:-0.02em}
+  p{color:#64748B;font-size:16px;margin:0 0 24px}
+  a{color:#2563EB;font-weight:600}
+  .brand{font-size:13px;font-weight:700;color:#0D1E36;margin-bottom:40px;display:block}
+</style>
+</head>
+<body>
+<a href="/" class="brand">Frånvarokollen</a>
+<h1>${escapeHtml(heading)}</h1>
+<p>${escapeHtml(body)}</p>
+<p><a href="/">← ${escapeHtml(backLink)}</a></p>
+</body>
+</html>`;
+}
