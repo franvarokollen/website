@@ -362,6 +362,31 @@
   }
 
   /* ---------- smart suggestions ---------- */
+  /* partners */
+  .partners{background:var(--cream);border-bottom:1px solid var(--line);padding:42px 0}
+  .partners-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;font-weight:600;
+    letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--muted);text-align:center;
+    margin:0 0 30px;
+  }
+  .partners-logos{
+    display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+    gap:28px 64px;
+  }
+  .partners-logos img{
+    height:52px;width:auto;max-width:190px;object-fit:contain;
+    filter:grayscale(1);opacity:0.55;
+    transition:filter .25s ease,opacity .25s ease;
+  }
+  .partners-logos img:hover{filter:none;opacity:1}
+  @media(max-width:640px){
+    .partners{padding:32px 0}
+    .partners-logos{gap:20px 36px}
+    .partners-logos img{height:40px;max-width:140px}
+  }
+
   .smart{background:#fff;border-bottom:1px solid var(--line)}
   .smart-grid{
     display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
@@ -820,6 +845,18 @@
   </div>
 </section>
 
+<!-- ============ PARTNERS ============ -->
+<section class="partners" aria-label="Pilotskolor">
+  <div class="container">
+    <p class="partners-label" data-i18n="partners.label">Stolta över att arbeta med skolor och kommuner runt om i Sverige</p>
+    <div class="partners-logos">
+      <img src="assets/partners/raoul-wallenbergskolan.svg" alt="Raoul Wallenbergskolan" loading="lazy">
+      <img src="assets/partners/sigtuna-kommun.svg" alt="Sigtuna kommun" loading="lazy">
+      <img src="assets/partners/stenungsunds-kommun.svg" alt="Stenungsunds kommun" loading="lazy">
+    </div>
+  </div>
+</section>
+
 <!-- ============ SMART SUGGESTIONS ============ -->
 <section class="smart" id="smart">
   <div class="container">
@@ -1256,6 +1293,7 @@
       'hero.lead':'Slipp hoppa mellan scheman, listor och rapporter. Frånvarokollen samlar dagens bemanning, vikarieförslag och uppföljning i ett tydligt verktyg.',
       'hero.cta_primary':'Logga in →','hero.cta_secondary':'Gå med i väntelistan',
       'hero.trust_1':'All data lagras inom EU','hero.trust_2':'Anpassat för GDPR','hero.trust_3':'Inloggning via Google & Microsoft',
+      'partners.label':'Stolta över att arbeta med skolor och kommuner runt om i Sverige',
 
       'smart.eyebrow':'FÖRESLÅ VIKARIER',
       'smart.title':'Ett klick ifrån rätt vikarie',
@@ -1328,6 +1366,7 @@
       'hero.lead':'No more jumping between schedules, lists and reports. Frånvarokollen brings today\'s staffing, substitute suggestions and follow-up together in one clear tool.',
       'hero.cta_primary':'Log in →','hero.cta_secondary':'Join the waitlist',
       'hero.trust_1':'All data stored within the EU','hero.trust_2':'GDPR-aligned','hero.trust_3':'Sign in with Google & Microsoft',
+      'partners.label':'Proud to work with schools and municipalities across Sweden',
 
       'smart.eyebrow':'SUGGEST SUBSTITUTES',
       'smart.title':'One click to the right substitute',
