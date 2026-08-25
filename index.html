@@ -872,8 +872,8 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
             </div>
             <div>
-              <strong data-i18n="smart.c1.title">Visar vem som är ledig</strong>
-              <span data-i18n="smart.c1.body">De som är lediga under lektionen visas först.</span>
+              <strong data-i18n="smart.c1.title">Visar vem som kan täcka</strong>
+              <span data-i18n="smart.c1.body">De som inte har egen lektion under passet visas först.</span>
             </div>
           </div>
           <div class="smart-criterion">
@@ -920,7 +920,7 @@
           <div class="candidate soft">
             <div class="candidate-info">
               <strong>Sara Sjöberg</strong>
-              <div class="meta" data-i18n="smart.viz.r1_meta">Ledig · senior</div>
+              <div class="meta" data-i18n="smart.viz.r1_meta">Ingen lektion · senior</div>
             </div>
             <div class="candidate-pick" data-i18n="smart.viz.pick">Välj</div>
           </div>
@@ -928,7 +928,7 @@
           <div class="candidate soft">
             <div class="candidate-info">
               <strong>Erik Nyström</strong>
-              <div class="meta" data-i18n="smart.viz.r2_meta">Ledig · senior</div>
+              <div class="meta" data-i18n="smart.viz.r2_meta">Ingen lektion · senior</div>
             </div>
             <div class="candidate-pick" data-i18n="smart.viz.pick">Välj</div>
           </div>
@@ -936,7 +936,7 @@
           <div class="candidate soft">
             <div class="candidate-info">
               <strong>Johan Bergström</strong>
-              <div class="meta" data-i18n="smart.viz.r3_meta">Ledig · junior</div>
+              <div class="meta" data-i18n="smart.viz.r3_meta">Ingen lektion · junior</div>
             </div>
             <div class="candidate-pick" data-i18n="smart.viz.pick">Välj</div>
           </div>
@@ -961,7 +961,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12325A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
         </div>
         <h3 data-i18n="f1.title">Dagens bemanning</h3>
-        <p data-i18n="f1.body">Se direkt vilka som är på plats, vilka som är lediga och vilka lektioner som pågår. Markera frånvaro med ett klick.</p>
+        <p data-i18n="f1.body">Se direkt vilka som är på plats, vilka som är undervisningsfria och vilka lektioner som pågår. Markera frånvaro med ett klick.</p>
       </article>
 
       <article class="feature reveal mobile-hide">
@@ -1298,21 +1298,21 @@
       'smart.eyebrow':'FÖRESLÅ VIKARIER',
       'smart.title':'Ett klick ifrån rätt vikarie',
       'smart.lead':'När en lärare är frånvarande visar Frånvarokollen vilka som kan täcka lektionen. Systemet föreslår personer utifrån schema, belastning och sammanhang, så att du slipper leta runt i schemat.',
-      'smart.c1.title':'Visar vem som är ledig','smart.c1.body':'De som är lediga under lektionen visas först.',
+      'smart.c1.title':'Visar vem som kan täcka','smart.c1.body':'De som inte har egen lektion under passet visas först.',
       'smart.c2.title':'Tar hänsyn till arbetsbelastning','smart.c2.body':'Den som redan täckt många lektioner föreslås längre ner.',
       'smart.c3.title':'Matchar ämne och klass','smart.c3.body':'Till exempel ämne, klass och tidigare erfarenhet när det är relevant.',
       'smart.note':'Systemet föreslår. Du bestämmer.',
       'smart.cta':'Gå med i väntelistan →',
       'smart.viz.title':'Behöver täckas','smart.viz.context':'7B · 09:30–10:15',
       'smart.viz.btn':'Föreslå vikarier','smart.viz.pick':'Välj',
-      'smart.viz.r1_meta':'Ledig · senior',
-      'smart.viz.r2_meta':'Ledig · senior',
-      'smart.viz.r3_meta':'Ledig · junior',
+      'smart.viz.r1_meta':'Ingen lektion · senior',
+      'smart.viz.r2_meta':'Ingen lektion · senior',
+      'smart.viz.r3_meta':'Ingen lektion · junior',
 
       'features.eyebrow':'FUNKTIONER',
       'features.title':'Allt en vikariesamordnare behöver. Inget onödigt.',
       'features.lead':'Utvecklat tillsammans med skolpersonal, för skolpersonal. Inga onödiga funktioner, bara det som behövs när morgonen är som mest intensiv.',
-      'f1.title':'Dagens bemanning','f1.body':'Se direkt vilka som är på plats, vilka som är lediga och vilka lektioner som pågår. Markera frånvaro med ett klick.',
+      'f1.title':'Dagens bemanning','f1.body':'Se direkt vilka som är på plats, vilka som är undervisningsfria och vilka lektioner som pågår. Markera frånvaro med ett klick.',
       'f2.title':'Lektion och klass','f2.body':'Se klass, sal och tid för varje lektion som behöver vikarie. Inget letande i schemat.',
       'f3.title':'Bemanningsöversikt','f3.body':'Följ hur vikariaten fördelas och se om någon får ta för mycket. En tydlig översikt för rektor, administration och HR.',
       'f4.title':'Externa vikarier och kostnader','f4.body':'Lägg in externa vikarier och följ kostnaderna löpande. Enklare budgetuppföljning utan extra manuellt arbete.',
@@ -1371,21 +1371,21 @@
       'smart.eyebrow':'SUGGEST SUBSTITUTES',
       'smart.title':'One click to the right substitute',
       'smart.lead':'When someone is absent, Frånvarokollen shows who can take the lesson. The system suggests people based on schedule, workload and context, so you don\'t have to dig through the timetable.',
-      'smart.c1.title':'Shows who is free','smart.c1.body':'Those free during the lesson appear first.',
+      'smart.c1.title':'Shows who can cover','smart.c1.body':'Staff without a lesson of their own during the period are listed first.',
       'smart.c2.title':'Considers workload','smart.c2.body':'Anyone who has already taken many shifts is suggested further down.',
       'smart.c3.title':'Matches subject and class','smart.c3.body':'Things like subject, class and prior experience when relevant.',
       'smart.note':'The system suggests. You decide.',
       'smart.cta':'Join the waitlist →',
       'smart.viz.title':'Needs cover','smart.viz.context':'7B · 09:30–10:15',
       'smart.viz.btn':'Suggest substitutes','smart.viz.pick':'Pick',
-      'smart.viz.r1_meta':'Free · senior',
-      'smart.viz.r2_meta':'Free · senior',
-      'smart.viz.r3_meta':'Free · junior',
+      'smart.viz.r1_meta':'No lesson · senior',
+      'smart.viz.r2_meta':'No lesson · senior',
+      'smart.viz.r3_meta':'No lesson · junior',
 
       'features.eyebrow':'FEATURES',
       'features.title':'Everything a substitute coordinator needs. Nothing extra.',
       'features.lead':'Developed together with school staff, for school staff. No unnecessary features — only what you need when the morning is at its most intense.',
-      'f1.title':'Today\'s staffing','f1.body':'See straight away who is in, who is free and which lessons are running. Mark absence with one click.',
+      'f1.title':'Today\'s staffing','f1.body':'See straight away who is on site, who is non-teaching right now, and which lessons are in progress. Mark absence with one click.',
       'f2.title':'Lesson and class','f2.body':'See class, room and time for every lesson that needs cover. No hunting through the schedule.',
       'f3.title':'Staffing overview','f3.body':'Track how cover is distributed and see if anyone is taking on too much. A clear overview for principals, admin and HR.',
       'f4.title':'External substitutes and costs','f4.body':'Add external substitutes and track their costs as you go. Easier budget follow-up without extra manual work.',
