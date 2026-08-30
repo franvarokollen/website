@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Static file — nothing regenerates this. Maintain by hand:
-    - bump <lastmod> when this page's content changes
-    - add a <url> block when a new indexable page ships
-    - /cookies and /integritetspolicy stay OUT of this file — they carry
-      <meta name="robots" content="noindex"> and should not be listed
+  franvarokollen.com sitemap. Static on purpose.
+
+  Rules for whoever maintains this file:
+  - lastmod is the date the page CONTENT last changed, in YYYY-MM-DD. Do not generate it
+    at build or request time: a lastmod that is always "today" is ignored by Google.
+    Set it by hand when the copy, sections, or structure of the page change.
+  - One <url> per indexable page. /cookies and /integritetspolicy carry noindex, so they
+    are deliberately NOT listed. Add a <url> when a new indexable page ships (pricing,
+    blog, etc.), with its own lastmod.
+  - /anvandarvillkor and /terms are server-rendered from the portal's Terms of Service
+    document. Their lastmod is the date that document last changed in the portal —
+    bump both entries when a new Terms version is published.
+  - changefreq and priority are omitted: Google ignores both.
+  - The app (app.franvarokollen.com) is never listed here. It is a staff tool behind auth
+    and carries noindex.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://franvarokollen.com/</loc>
     <lastmod>2026-08-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://franvarokollen.com/anvandarvillkor</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://franvarokollen.com/terms</loc>
+    <lastmod>2026-08-02</lastmod>
   </url>
 </urlset>
