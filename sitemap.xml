@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Static file — nothing regenerates this. Maintain by hand:
+    - bump <lastmod> when this page's content changes
+    - add a <url> block when a new indexable page ships
+    - /cookies and /integritetspolicy stay OUT of this file — they carry
+      <meta name="robots" content="noindex"> and should not be listed
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://franvarokollen.com/</loc>
