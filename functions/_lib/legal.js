@@ -363,11 +363,11 @@ export function renderLegalPage({
     </a>
 
     <nav class="nav-links" aria-label="Huvudmeny">
-      <a href="/">Vikarieförslag</a>
-      <a href="/">Funktioner</a>
-      <a href="/">Analys</a>
-      <a href="/">Säkerhet</a>
-      <a href="/">Kontakt</a>
+      <a href="/#smart">Vikarieförslag</a>
+      <a href="/#funktioner">Funktioner</a>
+      <a href="/#analys">Analys</a>
+      <a href="/#sakerhet">Säkerhet</a>
+      <a href="/#kontakt">Kontakt</a>
     </nav>
 
     <div class="nav-actions">
@@ -382,10 +382,10 @@ export function renderLegalPage({
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="/">Vikarieförslag</a>
-    <a href="/">Funktioner</a>
-    <a href="/">Säkerhet</a>
-    <a href="/">Kontakt</a>
+    <a href="/#smart">Vikarieförslag</a>
+    <a href="/#funktioner">Funktioner</a>
+    <a href="/#sakerhet">Säkerhet</a>
+    <a href="/#kontakt">Kontakt</a>
   </div>
 </header>
 <div class="policy-wrap">
@@ -419,16 +419,16 @@ export function renderLegalPage({
       <div>
         <h4 data-i18n="footer.product">Produkt</h4>
         <ul>
-          <li><a href="#funktioner" data-i18n="nav.features">Funktioner</a></li>
-          <li><a href="#sa-fungerar-det" data-i18n="nav.how">Så fungerar det</a></li>
-          <li><a href="#sakerhet" data-i18n="nav.security">Säkerhet</a></li>
+          <li><a href="/#funktioner" data-i18n="nav.features">Funktioner</a></li>
+          <li><a href="/#sa-fungerar-det" data-i18n="nav.how">Så fungerar det</a></li>
+          <li><a href="/#sakerhet" data-i18n="nav.security">Säkerhet</a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="footer.company">Företag</h4>
         <ul>
           <li><a href="#" data-i18n="footer.about">Om oss</a></li>
-          <li><a href="#kontakt" data-i18n="nav.contact">Kontakt</a></li>
+          <li><a href="/#kontakt" data-i18n="nav.contact">Kontakt</a></li>
         </ul>
       </div>
       <div>
