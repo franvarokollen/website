@@ -685,8 +685,6 @@
     .no-js .reveal{opacity:1;transform:none}
   }
 
-  /* ===== WAITLIST BANNER ===== */to{transform:translateX(-50%)}}
-
   /* ===== MODAL ===== */
   .modal-backdrop{display:none!important;position:fixed;inset:0;background:rgba(14,27,48,0.65);backdrop-filter:blur(4px);z-index:200;align-items:center;justify-content:center;padding:20px}
   .modal-backdrop.open{display:flex!important}
@@ -968,7 +966,7 @@
         </div>
         <div class="drivkraft-card vd-cta-card">
           <h3>Vill ni veta mer?</h3>
-          <a class="btn btn-red" href="/#kontakt">Anmäl intresse för din skola →</a>
+          <a class="btn btn-red" href="#" data-waitlist>Anmäl intresse för din skola →</a>
         </div>
       </div>
       <div class="vd-signature vd-sig">
@@ -1017,7 +1015,7 @@
         </div>
         <div class="drivkraft-card vd-cta-card">
           <h3>Want to know more?</h3>
-          <a class="btn btn-red" href="/#kontakt">Register interest for your school →</a>
+          <a class="btn btn-red" href="#" data-waitlist>Register interest for your school →</a>
         </div>
       </div>
       <div class="vd-signature vd-sig">
@@ -1100,6 +1098,112 @@
     mobileMenu.addEventListener('click',e=>{ if(e.target.tagName==='A') mobileMenu.classList.remove('open'); });
   }
 
+  // ===== MODAL =====
+  document.addEventListener("DOMContentLoaded", function(){
+
+    var modal       = document.getElementById('waitlistModal');
+    var formBody    = document.getElementById('modalFormBody');
+    var successView = document.getElementById('modalSuccess');
+    var formError   = document.getElementById('formError');
+
+    function openModal(){
+      modal.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      document.body.style.overflow='';
+    }
+
+    document.querySelectorAll('[data-waitlist]').forEach(function(btn){
+      btn.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+    });
+
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('closeSuccess').addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e){ if(e.target===modal) closeModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+    document.getElementById('formSubmit').addEventListener('click', async function(){
+      formError.style.display='none';
+      var namn  = document.getElementById('f_namn').value.trim();
+      var skola = document.getElementById('f_skola').value.trim();
+      var epost = document.getElementById('f_epost').value.trim();
+      if(!namn||!skola||!epost){
+        formError.textContent='Fyll i namn, skola och e-postadress.';
+        formError.style.display='block'; return;
+      }
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(epost)){
+        formError.textContent='Ange en giltig e-postadress.';
+        formError.style.display='block'; return;
+      }
+      this.disabled=true; this.textContent='Skickar…';
+      var FORM='1FAIpQLSc4H2Lfo2gGYckgB37qVxcP1mqAqLNM7yfTvXqBX9KrASjnDw';
+      var body=new URLSearchParams({
+        'entry.1366650426':namn,'entry.208385686':skola,'entry.3578072':epost,
+        'entry.541496665':document.getElementById('f_kommentarer').value.trim()
+      });
+      try{
+        await fetch('https://docs.google.com/forms/d/e/'+FORM+'/formResponse',{
+          method:'POST',mode:'no-cors',
+          headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:body.toString()
+        });
+        formBody.style.display='none';
+        successView.classList.add('show');
+      }catch(err){
+        formError.textContent='Något gick fel. Mejla oss på info@franvarokollen.com.';
+        formError.style.display='block';
+        this.disabled=false;
+        this.textContent='Anmäl intresse →';
+      }
+    });
+  });
+
 </script>
+
+<!-- ============ WAITLIST MODAL ============ -->
+<div class="modal-backdrop" id="waitlistModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display:none">
+  <div class="modal">
+    <div class="modal-header">
+      <p class="eyebrow">ANMÄL INTRESSE</p>
+      <h3 id="modalTitle">Anmäl intresse för er skola</h3>
+      <p>Fyll i formuläret så kontaktar vi er för att komma igång.</p>
+      <button class="modal-close" id="closeModal" aria-label="Stäng">×</button>
+    </div>
+    <div class="modal-body" id="modalFormBody">
+      <div class="form-error" id="formError"></div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="f_namn">Namn <span class="req">*</span></label>
+          <input type="text" id="f_namn" autocomplete="name" placeholder="För- och efternamn" required>
+        </div>
+        <div class="form-field">
+          <label for="f_skola">Skola <span class="req">*</span></label>
+          <input type="text" id="f_skola" placeholder="Skolans namn" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="f_epost">E-postadress <span class="req">*</span></label>
+          <input type="email" id="f_epost" autocomplete="email" placeholder="namn@skola.se" required>
+        </div>
+
+      </div>
+      <div class="form-field">
+        <label for="f_kommentarer">Kommentarer</label>
+        <textarea id="f_kommentarer" placeholder="Berätta gärna om er skola, antal elever, nuvarande system…"></textarea>
+      </div>
+      <button class="form-submit" id="formSubmit">Anmäl intresse →</button>
+      <p class="form-note">Dina uppgifter används enbart för att kontakta er om er intresseanmälan.</p>
+    </div>
+    <div class="modal-success" id="modalSuccess">
+      <div class="success-icon">🎉</div>
+      <h3>Tack för er intresseanmälan!</h3>
+      <p>Vi hör av oss inom kort för att boka en genomgång anpassad för er skola.</p>
+      <button class="btn btn-primary" id="closeSuccess">Stäng</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
