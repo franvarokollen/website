@@ -766,7 +766,7 @@
   .vd-p2{grid-area:p2}
   .vd-quoterow{grid-area:quoterow}
   .vd-p4{grid-area:p4}
-  .vd-drivkraft{grid-area:drivkraft}
+  .vd-drivkraft{grid-area:drivkraft;display:flex;flex-direction:column;gap:20px;margin-top:24px}
   .vd-sig{grid-area:sig}
 
   .vd-portrait img{
@@ -803,7 +803,6 @@
     border:1px solid #D6E4F5;
     border-radius:var(--radius);
     padding:28px;
-    margin-top:24px;
   }
   .drivkraft-icon{
     width:44px;height:44px;border-radius:50%;
@@ -819,6 +818,13 @@
   }
   .drivkraft-card h3{margin-bottom:10px}
   .drivkraft-card p{color:var(--ink);font-size:15px;line-height:1.65;margin:0}
+
+  .vd-facts-list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+
+  .vd-cta-card{text-align:center}
+  .vd-cta-card h3{margin-bottom:14px}
+  .vd-cta-card .btn{margin-bottom:14px}
+  .drivkraft-card p.vd-cta-note{color:var(--muted);font-size:14px}
 
   .vd-signature{margin-top:8px}
   .vd-signature .vd-sig-name{font-weight:800;color:var(--navy);font-size:16px}
@@ -843,7 +849,8 @@
     .vd-portrait img{max-width:320px;margin:0 auto;border-radius:16px}
     .vd-quoterow{grid-template-columns:1fr;gap:0}
     .vd-pullquote{margin-bottom:16px}
-    .drivkraft-card{margin-top:8px;margin-bottom:32px}
+    .vd-side-quote{margin-bottom:0}
+    .vd-drivkraft{margin-top:8px;margin-bottom:32px}
   }
 
   /* ---------- desktop-only newspaper/tabloid touches ---------- */
@@ -932,20 +939,37 @@
         <p class="vd-p3">Det är därför vi byggde Frånvarokollen. Inte för att tala om för skolor hur de ska bemanna sin verksamhet, utan för att ge dem bättre förutsättningar att göra det de redan gör varje dag. Vi vill göra det enklare att se vilka resurser som faktiskt finns, vad som behöver täckas och hur skolan kan använda den egna organisationen smartare innan man behöver leta efter externa lösningar. För oss handlar det inte om att fylla en tom ruta i ett schema. Det handlar om att rätt vuxen ska kunna vara på rätt plats vid rätt tid – och att eleverna ska märka så lite som möjligt av att någon blev sjuk den morgonen.</p>
       </div>
       <p class="vd-p4 vd-cols">Men vi vill också flytta frågan om korttidsfrånvaro från brandsläckning till förståelse. Hur ofta täcker samma personer upp? Hur mycket undervisningsfri arbetstid försvinner till akuta lösningar? Vilka elevgrupper påverkas oftast? Var byggs belastningen upp över tid? Och vad kostar frånvaron egentligen i kontinuitet, arbetsmiljö och kvalitet? Det som inte syns är svårt att förbättra. Därför bygger vi Frånvarokollen nära skolorna och människorna som använder det – rektorer, administratörer, lärare, vikariesamordnare och skolledningar. Ambitionen är inte att bli ännu ett system som skolan ska logga in i. Ambitionen är att förändra hur korttidsfrånvaro hanteras, så att mindre kraft går åt till att lösa morgonens kaos och mer kan läggas där den gör verklig skillnad: hos eleverna.</p>
-      <div class="drivkraft-card vd-drivkraft">
-        <div class="drivkraft-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="7" r="2.6"/>
-            <circle cx="5" cy="9" r="2.1"/>
-            <circle cx="19" cy="9" r="2.1"/>
-            <path d="M12 12c-3 0-5.2 1.7-5.2 4.5V19h10.4v-2.5C17.2 13.7 15 12 12 12z"/>
-            <path d="M5 11.2c-2 .4-3.4 1.8-3.4 3.9V17h3.6"/>
-            <path d="M19 11.2c2 .4 3.4 1.8 3.4 3.9V17h-3.6"/>
-          </svg>
+      <div class="vd-drivkraft">
+        <div class="drivkraft-card">
+          <div class="drivkraft-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="7" r="2.6"/>
+              <circle cx="5" cy="9" r="2.1"/>
+              <circle cx="19" cy="9" r="2.1"/>
+              <path d="M12 12c-3 0-5.2 1.7-5.2 4.5V19h10.4v-2.5C17.2 13.7 15 12 12 12z"/>
+              <path d="M5 11.2c-2 .4-3.4 1.8-3.4 3.9V17h3.6"/>
+              <path d="M19 11.2c2 .4 3.4 1.8 3.4 3.9V17h-3.6"/>
+            </svg>
+          </div>
+          <div class="drivkraft-label">Allt börjar med eleverna</div>
+          <h3>Vår drivkraft</h3>
+          <p>Varje beslut vi tar utgår från hur det påverkar elevernas skoldag – idag och i längden.</p>
         </div>
-        <div class="drivkraft-label">Allt börjar med eleverna</div>
-        <h3>Vår drivkraft</h3>
-        <p>Varje beslut vi tar utgår från hur det påverkar elevernas skoldag – idag och i längden.</p>
+        <div class="vd-pullquote vd-side-quote"><blockquote>”Rätt vuxen på rätt plats vid rätt tid.”</blockquote></div>
+        <div class="drivkraft-card">
+          <div class="drivkraft-label">Frånvarokollen i korthet</div>
+          <div class="vd-facts-list">
+            <p>Stockholm, Sverige</p>
+            <p>EU-lagrad data, anpassat för GDPR</p>
+            <p>Byggd nära svenska skolor</p>
+            <p>Inloggning med skolkonto</p>
+          </div>
+        </div>
+        <div class="drivkraft-card vd-cta-card">
+          <h3>Vill ni veta mer?</h3>
+          <a class="btn btn-red" href="/#kontakt">Anmäl intresse för din skola →</a>
+          <p class="vd-cta-note">eller <a href="/demo/" target="_blank" rel="noopener">prova demon</a> direkt i webbläsaren</p>
+        </div>
       </div>
       <div class="vd-signature vd-sig">
         <div class="vd-sig-name">Ibrahim Amdaouech</div>
@@ -965,20 +989,37 @@
         <p class="vd-p3">That is why we built Frånvarokollen. Not to tell schools how to staff their organisation, but to give them better conditions to do what they already do every day. We want to make it easier to see which resources actually exist, what needs to be covered, and how the school can use its own organisation more intelligently before looking for external solutions. For us it is not about filling an empty slot in a schedule. It is about the right adult being in the right place at the right time — and about pupils noticing as little as possible that someone called in sick that morning.</p>
       </div>
       <p class="vd-p4 vd-cols">But we also want to move the question of short-term absence from firefighting to understanding. How often do the same people cover? How much non-teaching time disappears into acute fixes? Which groups of pupils are affected most often? Where does the load build up over time? And what does absence really cost in continuity, working environment and quality? What cannot be seen is hard to improve. That is why we build Frånvarokollen close to the schools and the people who use it — principals, administrators, teachers, substitute coordinators and school leaders. The ambition is not to become yet another system for schools to log into. The ambition is to change how short-term absence is handled, so that less energy goes into solving the morning's chaos and more can go where it makes a real difference: to the pupils.</p>
-      <div class="drivkraft-card vd-drivkraft">
-        <div class="drivkraft-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="7" r="2.6"/>
-            <circle cx="5" cy="9" r="2.1"/>
-            <circle cx="19" cy="9" r="2.1"/>
-            <path d="M12 12c-3 0-5.2 1.7-5.2 4.5V19h10.4v-2.5C17.2 13.7 15 12 12 12z"/>
-            <path d="M5 11.2c-2 .4-3.4 1.8-3.4 3.9V17h3.6"/>
-            <path d="M19 11.2c2 .4 3.4 1.8 3.4 3.9V17h-3.6"/>
-          </svg>
+      <div class="vd-drivkraft">
+        <div class="drivkraft-card">
+          <div class="drivkraft-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="7" r="2.6"/>
+              <circle cx="5" cy="9" r="2.1"/>
+              <circle cx="19" cy="9" r="2.1"/>
+              <path d="M12 12c-3 0-5.2 1.7-5.2 4.5V19h10.4v-2.5C17.2 13.7 15 12 12 12z"/>
+              <path d="M5 11.2c-2 .4-3.4 1.8-3.4 3.9V17h3.6"/>
+              <path d="M19 11.2c2 .4 3.4 1.8 3.4 3.9V17h-3.6"/>
+            </svg>
+          </div>
+          <div class="drivkraft-label">It all starts with the pupils</div>
+          <h3>What drives us</h3>
+          <p>Every decision we make starts from how it affects pupils' school days — today and over time.</p>
         </div>
-        <div class="drivkraft-label">It all starts with the pupils</div>
-        <h3>What drives us</h3>
-        <p>Every decision we make starts from how it affects pupils' school days — today and over time.</p>
+        <div class="vd-pullquote vd-side-quote"><blockquote>“The right adult in the right place at the right time.”</blockquote></div>
+        <div class="drivkraft-card">
+          <div class="drivkraft-label">Frånvarokollen at a glance</div>
+          <div class="vd-facts-list">
+            <p>Stockholm, Sweden</p>
+            <p>Data stored in the EU, built for GDPR</p>
+            <p>Built close to Swedish schools</p>
+            <p>School-account sign-in</p>
+          </div>
+        </div>
+        <div class="drivkraft-card vd-cta-card">
+          <h3>Want to know more?</h3>
+          <a class="btn btn-red" href="/#kontakt">Register interest for your school →</a>
+          <p class="vd-cta-note">or <a href="/demo/" target="_blank" rel="noopener">try the demo</a> right in your browser</p>
+        </div>
       </div>
       <div class="vd-signature vd-sig">
         <div class="vd-sig-name">Ibrahim Amdaouech</div>
