@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Om oss — Frånvarokollen</title>
-<meta name="description" content="Om teamet bakom Frånvarokollen."/>
+<meta name="description" content="VD har ordet — om varför vi byggde Frånvarokollen."/>
 <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -742,28 +742,108 @@
   .back-bottom{margin-top:60px;padding-top:40px;border-top:1px solid var(--line)}
   .lang-notice{background:var(--cream-deep);border:1px solid var(--line);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--muted);margin-bottom:32px}
 
-  /* ---------- about page ---------- */
-  .about-intro{font-size:17px;margin-bottom:40px}
-  .team-grid{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px}
-  .team-card{display:flex;gap:22px;align-items:flex-start}
-  .avatar-circle{
-    flex:none;width:180px;height:180px;border-radius:50%;overflow:hidden;
-    border:1px solid var(--line);box-shadow:var(--shadow-sm);background:var(--navy-deep);
+  /* ---------- VD har ordet (about / CEO letter) ---------- */
+  .vd-wrap{max-width:1100px}
+
+  .vd-grid{
+    display:grid;
+    grid-template-columns:1.55fr 1fr;
+    gap:8px 56px;
+    align-items:start;
+    grid-template-areas:
+      "eyebrow  portrait"
+      "headline portrait"
+      "p1       portrait"
+      "p2       drivkraft"
+      "quoterow drivkraft"
+      "p4       drivkraft"
+      "sig      drivkraft";
   }
-  .avatar-circle img{width:100%;height:100%;object-fit:cover;transform:scale(1.2)}
-  .team-info{padding-top:10px}
-  .team-info .team-name{font-size:19px;font-weight:800;color:var(--navy);margin-bottom:4px}
-  .team-info .team-role{font-size:14px;color:var(--muted);font-weight:600}
-  .meeting-photo{margin-top:36px}
-  .meeting-photo img{border-radius:12px;max-width:420px;width:100%;box-shadow:var(--shadow-sm)}
-  .coming-soon{
-    background:var(--cream-deep);border:1px solid var(--line);border-radius:8px;
-    padding:16px 20px;font-size:14px;color:var(--muted);margin-top:44px;
+  .vd-eyebrow{grid-area:eyebrow;justify-content:flex-start}
+  .vd-headline{grid-area:headline}
+  .vd-portrait{grid-area:portrait}
+  .vd-p1{grid-area:p1}
+  .vd-p2{grid-area:p2}
+  .vd-quoterow{grid-area:quoterow}
+  .vd-p4{grid-area:p4}
+  .vd-drivkraft{grid-area:drivkraft}
+  .vd-sig{grid-area:sig}
+
+  .vd-portrait img{
+    width:100%;display:block;border-radius:16px;
+    box-shadow:0 8px 32px rgba(15,23,42,0.14),0 2px 8px rgba(15,23,42,0.06);
   }
-  @media (max-width:640px){
-    .team-card{flex-direction:column;align-items:center;text-align:center}
-    .avatar-circle{width:150px;height:150px}
-    .meeting-photo{display:flex;justify-content:center}
+
+  .vd-quoterow{display:grid;grid-template-columns:2fr 3fr;gap:28px;align-items:start}
+
+  .vd-pullquote{
+    background:var(--cream-deep);
+    border:1px solid var(--line);
+    border-left:4px solid var(--blue);
+    border-radius:var(--radius);
+    padding:30px 26px 26px;
+    position:relative;
+    overflow:hidden;
+  }
+  .vd-pullquote::before{
+    content:"\201C";
+    position:absolute;top:-6px;left:16px;
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:76px;line-height:1;
+    color:var(--blue);opacity:0.18;
+  }
+  .vd-pullquote blockquote{
+    margin:0;position:relative;
+    font-size:19px;font-weight:800;color:var(--navy);
+    line-height:1.4;letter-spacing:-0.01em;
+  }
+
+  .drivkraft-card{
+    background:var(--cream-deep);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    margin-top:24px;
+  }
+  .drivkraft-icon{
+    width:44px;height:44px;border-radius:50%;
+    background:#DCEAFF;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:16px;
+  }
+  .drivkraft-icon svg{width:22px;height:22px}
+  .drivkraft-label{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);
+    margin-bottom:8px;
+  }
+  .drivkraft-card h3{margin-bottom:10px}
+  .drivkraft-card p{color:var(--ink);font-size:15px;line-height:1.65;margin:0}
+
+  .vd-signature{margin-top:8px}
+  .vd-signature .vd-sig-name{font-weight:800;color:var(--navy);font-size:16px}
+  .vd-signature .vd-sig-role{color:var(--muted);font-size:14px;margin-top:2px}
+
+  @media (max-width:860px){
+    .vd-grid{
+      grid-template-columns:1fr;
+      gap:0;
+      grid-template-areas:
+        "eyebrow"
+        "headline"
+        "portrait"
+        "p1"
+        "p2"
+        "quoterow"
+        "p4"
+        "drivkraft"
+        "sig";
+    }
+    .vd-portrait{margin:20px 0 28px}
+    .vd-portrait img{max-width:320px;margin:0 auto;border-radius:16px}
+    .vd-quoterow{grid-template-columns:1fr;gap:0}
+    .vd-pullquote{margin-bottom:16px}
+    .drivkraft-card{margin-top:8px;margin-bottom:32px}
   }
 
 </style>
@@ -806,41 +886,73 @@
 
   </div>
 </header>
-<div class="policy-wrap">
+<div class="policy-wrap vd-wrap">
   <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg><span data-lang="sv" class="active">← Tillbaka till startsidan</span><span data-lang="en">← Back to homepage</span></a>
   <div data-lang="sv" class="active">
-    <h1>Om oss</h1>
-    <p class="about-intro">Frånvarokollen byggs av ett litet team med ett enkelt mål: att göra frånvarohantering och bemanning enkelt för svenska skolor.</p>
-
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="avatar-circle"><img src="/assets/about/ibrahim.png" alt="Ibrahim"></div>
-        <div class="team-info">
-          <div class="team-name">Ibrahim</div>
-          <div class="team-role">Medgrundare &amp; försäljningsansvarig</div>
+    <div class="vd-grid">
+      <div class="eyebrow vd-eyebrow">VD HAR ORDET</div>
+      <h1 class="vd-headline">Bakom varje lucka i schemat finns en elevs skoldag</h1>
+      <div class="vd-portrait"><img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech"></div>
+      <p class="vd-p1">Det kan börja 06.43. En lärare sjukanmäler sig. Någon öppnar schemat, någon börjar ringa, en kollega flyttas från sin planering och en resurs som egentligen behövs någon annanstans täcker en lektion. Klockan är fortfarande inte åtta, men dagens första stora pussel är redan igång. Och mitt i allt detta finns eleverna. Elever som förväntar sig att skoldagen ska fungera, att rätt vuxna ska finnas på plats och att undervisningen ska hålla ihop även när verkligheten förändras med kort varsel.</p>
+      <p class="vd-p2">Jag har själv arbetat i skolan och sett hur mycket kompetens, tid och energi som varje dag läggs på att lösa just de situationerna. Skolor är otroligt bra på att få det att fungera, ofta genom erfarenhet, snabba beslut och ett stort ansvarstagande från personalen. Men alldeles för ofta sker det med verktyg som inte är byggda för uppgiften. Excelark, telefonsamtal, sms-trådar, scheman i olika system och kunskap som sitter i huvudet på en eller två personer. Det är inte bara ett administrativt problem. När rätt resurs hamnar på fel plats, när samma lärare gång på gång behöver täcka upp eller när en elevgrupp möter ännu en tillfällig lösning, då påverkas också kontinuiteten, arbetsron och i förlängningen elevernas skoldag.</p>
+      <div class="vd-quoterow">
+        <div class="vd-pullquote"><blockquote>Det handlar inte om att fylla en tom ruta i ett schema.</blockquote></div>
+        <p>Det är därför vi byggde Frånvarokollen. Inte för att tala om för skolor hur de ska bemanna sin verksamhet, utan för att ge dem bättre förutsättningar att göra det de redan gör varje dag. Vi vill göra det enklare att se vilka resurser som faktiskt finns, vad som behöver täckas och hur skolan kan använda den egna organisationen smartare innan man behöver leta efter externa lösningar. För oss handlar det inte om att fylla en tom ruta i ett schema. Det handlar om att rätt vuxen ska kunna vara på rätt plats vid rätt tid – och att eleverna ska märka så lite som möjligt av att någon blev sjuk den morgonen.</p>
+      </div>
+      <p class="vd-p4">Men vi vill också flytta frågan om korttidsfrånvaro från brandsläckning till förståelse. Hur ofta täcker samma personer upp? Hur mycket undervisningsfri arbetstid försvinner till akuta lösningar? Vilka elevgrupper påverkas oftast? Var byggs belastningen upp över tid? Och vad kostar frånvaron egentligen i kontinuitet, arbetsmiljö och kvalitet? Det som inte syns är svårt att förbättra. Därför bygger vi Frånvarokollen nära skolorna och människorna som använder det – rektorer, administratörer, lärare, vikariesamordnare och skolledningar. Ambitionen är inte att bli ännu ett system som skolan ska logga in i. Ambitionen är att förändra hur korttidsfrånvaro hanteras, så att mindre kraft går åt till att lösa morgonens kaos och mer kan läggas där den gör verklig skillnad: hos eleverna.</p>
+      <div class="drivkraft-card vd-drivkraft">
+        <div class="drivkraft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="7" r="2.6"/>
+            <circle cx="5" cy="9" r="2.1"/>
+            <circle cx="19" cy="9" r="2.1"/>
+            <path d="M12 12c-3 0-5.2 1.7-5.2 4.5V19h10.4v-2.5C17.2 13.7 15 12 12 12z"/>
+            <path d="M5 11.2c-2 .4-3.4 1.8-3.4 3.9V17h3.6"/>
+            <path d="M19 11.2c2 .4 3.4 1.8 3.4 3.9V17h-3.6"/>
+          </svg>
         </div>
+        <div class="drivkraft-label">Allt börjar med eleverna</div>
+        <h3>Vår drivkraft</h3>
+        <p>Varje beslut vi tar utgår från hur det påverkar elevernas skoldag – idag och i längden.</p>
+      </div>
+      <div class="vd-signature vd-sig">
+        <div class="vd-sig-name">Ibrahim Amdaouech</div>
+        <div class="vd-sig-role">VD &amp; medgrundare, Frånvarokollen</div>
       </div>
     </div>
-    <div class="meeting-photo"><img src="/assets/about/ibrahim-meeting.png" alt=""></div>
-
-    <div class="coming-soon">Mer information kommer snart.</div>
   </div>
   <div data-lang="en">
-    <h1>About us</h1>
-    <p class="about-intro">Frånvarokollen is built by a small team with a simple goal: making absence management and staffing easy for Swedish schools.</p>
-
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="avatar-circle"><img src="/assets/about/ibrahim.png" alt="Ibrahim"></div>
-        <div class="team-info">
-          <div class="team-name">Ibrahim</div>
-          <div class="team-role">Co-founder &amp; Head of Sales</div>
+    <div class="vd-grid">
+      <div class="eyebrow vd-eyebrow">A WORD FROM OUR CEO</div>
+      <h1 class="vd-headline">Behind every gap in the schedule is a pupil's school day</h1>
+      <div class="vd-portrait"><img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech"></div>
+      <p class="vd-p1">It can start at 06:43. A teacher calls in sick. Someone opens the schedule, someone starts ringing round, a colleague is pulled from their planning time, and a resource who is really needed elsewhere covers a lesson. It is not yet eight o'clock, but the day's first big puzzle is already under way. And in the middle of it all are the pupils. Pupils who expect the school day to work, the right adults to be in place, and teaching to hold together even when reality changes at short notice.</p>
+      <p class="vd-p2">I have worked in schools myself and seen how much skill, time and energy goes into solving exactly these situations every day. Schools are remarkably good at making things work — often through experience, quick decisions and staff who take great responsibility. But far too often it happens with tools that were never built for the job. Spreadsheets, phone calls, text threads, schedules in different systems, and knowledge that lives in the heads of one or two people. That is not just an administrative problem. When the right resource ends up in the wrong place, when the same teacher has to cover time and again, or when a group of pupils meets yet another temporary fix, it also affects continuity, calm in the classroom and, ultimately, the pupils' school day.</p>
+      <div class="vd-quoterow">
+        <div class="vd-pullquote"><blockquote>It is not about filling an empty slot in a schedule.</blockquote></div>
+        <p>That is why we built Frånvarokollen. Not to tell schools how to staff their organisation, but to give them better conditions to do what they already do every day. We want to make it easier to see which resources actually exist, what needs to be covered, and how the school can use its own organisation more intelligently before looking for external solutions. For us it is not about filling an empty slot in a schedule. It is about the right adult being in the right place at the right time — and about pupils noticing as little as possible that someone called in sick that morning.</p>
+      </div>
+      <p class="vd-p4">But we also want to move the question of short-term absence from firefighting to understanding. How often do the same people cover? How much non-teaching time disappears into acute fixes? Which groups of pupils are affected most often? Where does the load build up over time? And what does absence really cost in continuity, working environment and quality? What cannot be seen is hard to improve. That is why we build Frånvarokollen close to the schools and the people who use it — principals, administrators, teachers, substitute coordinators and school leaders. The ambition is not to become yet another system for schools to log into. The ambition is to change how short-term absence is handled, so that less energy goes into solving the morning's chaos and more can go where it makes a real difference: to the pupils.</p>
+      <div class="drivkraft-card vd-drivkraft">
+        <div class="drivkraft-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="7" r="2.6"/>
+            <circle cx="5" cy="9" r="2.1"/>
+            <circle cx="19" cy="9" r="2.1"/>
+            <path d="M12 12c-3 0-5.2 1.7-5.2 4.5V19h10.4v-2.5C17.2 13.7 15 12 12 12z"/>
+            <path d="M5 11.2c-2 .4-3.4 1.8-3.4 3.9V17h3.6"/>
+            <path d="M19 11.2c2 .4 3.4 1.8 3.4 3.9V17h-3.6"/>
+          </svg>
         </div>
+        <div class="drivkraft-label">It all starts with the pupils</div>
+        <h3>What drives us</h3>
+        <p>Every decision we make starts from how it affects pupils' school days — today and over time.</p>
+      </div>
+      <div class="vd-signature vd-sig">
+        <div class="vd-sig-name">Ibrahim Amdaouech</div>
+        <div class="vd-sig-role">CEO &amp; co-founder, Frånvarokollen</div>
       </div>
     </div>
-    <div class="meeting-photo"><img src="/assets/about/ibrahim-meeting.png" alt=""></div>
-
-    <div class="coming-soon">More details coming soon.</div>
   </div>
   <div class="back-bottom"><a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg><span data-lang="sv" class="active">← Tillbaka till startsidan</span><span data-lang="en">← Back to homepage</span></a></div>
 </div>
