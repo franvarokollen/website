@@ -427,7 +427,7 @@ export function renderLegalPage({
       <div>
         <h4 data-i18n="footer.company">Företag</h4>
         <ul>
-          <li><a href="#" data-i18n="footer.about">Om oss</a></li>
+          <li><a href="/" data-i18n="footer.about">Om oss</a></li>
           <li><a href="/#kontakt" data-i18n="nav.contact">Kontakt</a></li>
         </ul>
       </div>
