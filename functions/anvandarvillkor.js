@@ -10,7 +10,7 @@ import { renderMarkdown, renderLegalPage, fallbackPage } from "./_lib/legal.js";
 
 const LEGAL_API  = "https://www.skolkollen.com/api/legal?slug=terms-of-service";
 const CACHE_TTL  = 3600; // 1 hour
-const CACHE_KEY  = new Request("https://legal-cache.internal/sv/5", { method: "GET" }); // bump the path segment to invalidate the edge cache on deploy
+const CACHE_KEY  = new Request("https://legal-cache.internal/sv/6", { method: "GET" }); // bump the path segment to invalidate the edge cache on deploy
 
 export async function onRequestGet(context) {
   const cfCache = caches.default;

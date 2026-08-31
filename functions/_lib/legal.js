@@ -362,30 +362,13 @@ export function renderLegalPage({
       </svg>
     </a>
 
-    <nav class="nav-links" aria-label="Huvudmeny">
-      <a href="/#smart">Vikarieförslag</a>
-      <a href="/#funktioner">Funktioner</a>
-      <a href="/#analys">Analys</a>
-      <a href="/#sakerhet">Säkerhet</a>
-      <a href="/#kontakt">Kontakt</a>
-    </nav>
-
     <div class="nav-actions">
       <div class="lang" role="group" aria-label="Språk">
         <button class="${isSv ? "active" : ""}" data-lang-btn="sv" aria-pressed="${isSv}">SV</button>
         <button class="${!isSv ? "active" : ""}" data-lang-btn="en" aria-pressed="${!isSv}">EN</button>
       </div>
       <button class="nav-login">${loginLabel}</button>
-      <button class="nav-toggle" aria-label="Öppna meny" id="navToggle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
     </div>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="/#smart">Vikarieförslag</a>
-    <a href="/#funktioner">Funktioner</a>
-    <a href="/#sakerhet">Säkerhet</a>
-    <a href="/#kontakt">Kontakt</a>
   </div>
 </header>
 <div class="policy-wrap">

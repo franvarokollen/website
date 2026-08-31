@@ -846,6 +846,56 @@
     .drivkraft-card{margin-top:8px;margin-bottom:32px}
   }
 
+  /* ---------- desktop-only newspaper/tabloid touches ---------- */
+  @media (min-width:861px){
+    .vd-eyebrow{
+      border-top:3px solid var(--navy);
+      padding-top:16px;
+      margin-top:4px;
+    }
+    .vd-headline{
+      border-bottom:1px solid var(--line);
+      padding-bottom:22px;
+      margin-bottom:4px;
+    }
+
+    .vd-p1, .vd-p2, .vd-p3, .vd-p4{
+      text-align:justify;
+      hyphens:auto;
+      -webkit-hyphens:auto;
+      -ms-hyphens:auto;
+    }
+
+    .vd-lead::first-letter{
+      float:left;
+      font-family:'Plus Jakarta Sans',sans-serif;
+      font-weight:800;
+      color:var(--navy);
+      font-size:54px;
+      line-height:0.85;
+      padding-right:8px;
+      padding-top:2px;
+    }
+
+    .vd-cols{
+      column-count:2;
+      column-gap:32px;
+      column-rule:1px solid var(--line);
+    }
+
+    .vd-pullquote{
+      background:none;
+      border:none;
+      border-radius:0;
+      border-top:2px solid var(--navy);
+      border-bottom:2px solid var(--navy);
+      padding:22px 4px;
+    }
+    .vd-pullquote::before{
+      display:none;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -859,31 +909,13 @@
       </svg>
     </a>
 
-    <nav class="nav-links" aria-label="Huvudmeny">
-      <a href="/#smart" data-i18n="nav.smart">Vikarieförslag</a>
-      <a href="/#funktioner" data-i18n="nav.features">Funktioner</a>
-      <a href="/#analys" data-i18n="nav.analytics">Analys</a>
-      <a href="/#sakerhet" data-i18n="nav.security">Säkerhet</a>
-      <a href="/#kontakt" data-i18n="nav.contact">Kontakt</a>
-    </nav>
-
     <div class="nav-actions">
       <div class="lang" role="group" aria-label="Språk">
         <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
         <button data-lang-btn="en" aria-pressed="false">EN</button>
       </div>
       <button class="nav-login" data-i18n="nav.login">Gå med nu</button>
-      <button class="nav-toggle" aria-label="Öppna meny" id="navToggle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
     </div>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="/#smart" data-i18n="nav.smart">Vikarieförslag</a>
-    <a href="/#funktioner" data-i18n="nav.features">Funktioner</a>
-    <a href="/#sakerhet" data-i18n="nav.security">Säkerhet</a>
-    <a href="/#kontakt" data-i18n="nav.contact">Kontakt</a>
-
   </div>
 </header>
 <div class="policy-wrap vd-wrap">
@@ -893,13 +925,13 @@
       <div class="eyebrow vd-eyebrow">VD HAR ORDET</div>
       <h1 class="vd-headline">Bakom varje lucka i schemat finns en elevs skoldag</h1>
       <div class="vd-portrait"><img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech"></div>
-      <p class="vd-p1">Det kan börja 06.43. En lärare sjukanmäler sig. Någon öppnar schemat, någon börjar ringa, en kollega flyttas från sin planering och en resurs som egentligen behövs någon annanstans täcker en lektion. Klockan är fortfarande inte åtta, men dagens första stora pussel är redan igång. Och mitt i allt detta finns eleverna. Elever som förväntar sig att skoldagen ska fungera, att rätt vuxna ska finnas på plats och att undervisningen ska hålla ihop även när verkligheten förändras med kort varsel.</p>
-      <p class="vd-p2">Jag har själv arbetat i skolan och sett hur mycket kompetens, tid och energi som varje dag läggs på att lösa just de situationerna. Skolor är otroligt bra på att få det att fungera, ofta genom erfarenhet, snabba beslut och ett stort ansvarstagande från personalen. Men alldeles för ofta sker det med verktyg som inte är byggda för uppgiften. Excelark, telefonsamtal, sms-trådar, scheman i olika system och kunskap som sitter i huvudet på en eller två personer. Det är inte bara ett administrativt problem. När rätt resurs hamnar på fel plats, när samma lärare gång på gång behöver täcka upp eller när en elevgrupp möter ännu en tillfällig lösning, då påverkas också kontinuiteten, arbetsron och i förlängningen elevernas skoldag.</p>
+      <p class="vd-p1 vd-lead">Det kan börja 06.43. En lärare sjukanmäler sig. Någon öppnar schemat, någon börjar ringa, en kollega flyttas från sin planering och en resurs som egentligen behövs någon annanstans täcker en lektion. Klockan är fortfarande inte åtta, men dagens första stora pussel är redan igång. Och mitt i allt detta finns eleverna. Elever som förväntar sig att skoldagen ska fungera, att rätt vuxna ska finnas på plats och att undervisningen ska hålla ihop även när verkligheten förändras med kort varsel.</p>
+      <p class="vd-p2 vd-cols">Jag har själv arbetat i skolan och sett hur mycket kompetens, tid och energi som varje dag läggs på att lösa just de situationerna. Skolor är otroligt bra på att få det att fungera, ofta genom erfarenhet, snabba beslut och ett stort ansvarstagande från personalen. Men alldeles för ofta sker det med verktyg som inte är byggda för uppgiften. Excelark, telefonsamtal, sms-trådar, scheman i olika system och kunskap som sitter i huvudet på en eller två personer. Det är inte bara ett administrativt problem. När rätt resurs hamnar på fel plats, när samma lärare gång på gång behöver täcka upp eller när en elevgrupp möter ännu en tillfällig lösning, då påverkas också kontinuiteten, arbetsron och i förlängningen elevernas skoldag.</p>
       <div class="vd-quoterow">
         <div class="vd-pullquote"><blockquote>Det handlar inte om att fylla en tom ruta i ett schema.</blockquote></div>
-        <p>Det är därför vi byggde Frånvarokollen. Inte för att tala om för skolor hur de ska bemanna sin verksamhet, utan för att ge dem bättre förutsättningar att göra det de redan gör varje dag. Vi vill göra det enklare att se vilka resurser som faktiskt finns, vad som behöver täckas och hur skolan kan använda den egna organisationen smartare innan man behöver leta efter externa lösningar. För oss handlar det inte om att fylla en tom ruta i ett schema. Det handlar om att rätt vuxen ska kunna vara på rätt plats vid rätt tid – och att eleverna ska märka så lite som möjligt av att någon blev sjuk den morgonen.</p>
+        <p class="vd-p3">Det är därför vi byggde Frånvarokollen. Inte för att tala om för skolor hur de ska bemanna sin verksamhet, utan för att ge dem bättre förutsättningar att göra det de redan gör varje dag. Vi vill göra det enklare att se vilka resurser som faktiskt finns, vad som behöver täckas och hur skolan kan använda den egna organisationen smartare innan man behöver leta efter externa lösningar. För oss handlar det inte om att fylla en tom ruta i ett schema. Det handlar om att rätt vuxen ska kunna vara på rätt plats vid rätt tid – och att eleverna ska märka så lite som möjligt av att någon blev sjuk den morgonen.</p>
       </div>
-      <p class="vd-p4">Men vi vill också flytta frågan om korttidsfrånvaro från brandsläckning till förståelse. Hur ofta täcker samma personer upp? Hur mycket undervisningsfri arbetstid försvinner till akuta lösningar? Vilka elevgrupper påverkas oftast? Var byggs belastningen upp över tid? Och vad kostar frånvaron egentligen i kontinuitet, arbetsmiljö och kvalitet? Det som inte syns är svårt att förbättra. Därför bygger vi Frånvarokollen nära skolorna och människorna som använder det – rektorer, administratörer, lärare, vikariesamordnare och skolledningar. Ambitionen är inte att bli ännu ett system som skolan ska logga in i. Ambitionen är att förändra hur korttidsfrånvaro hanteras, så att mindre kraft går åt till att lösa morgonens kaos och mer kan läggas där den gör verklig skillnad: hos eleverna.</p>
+      <p class="vd-p4 vd-cols">Men vi vill också flytta frågan om korttidsfrånvaro från brandsläckning till förståelse. Hur ofta täcker samma personer upp? Hur mycket undervisningsfri arbetstid försvinner till akuta lösningar? Vilka elevgrupper påverkas oftast? Var byggs belastningen upp över tid? Och vad kostar frånvaron egentligen i kontinuitet, arbetsmiljö och kvalitet? Det som inte syns är svårt att förbättra. Därför bygger vi Frånvarokollen nära skolorna och människorna som använder det – rektorer, administratörer, lärare, vikariesamordnare och skolledningar. Ambitionen är inte att bli ännu ett system som skolan ska logga in i. Ambitionen är att förändra hur korttidsfrånvaro hanteras, så att mindre kraft går åt till att lösa morgonens kaos och mer kan läggas där den gör verklig skillnad: hos eleverna.</p>
       <div class="drivkraft-card vd-drivkraft">
         <div class="drivkraft-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -926,13 +958,13 @@
       <div class="eyebrow vd-eyebrow">A WORD FROM OUR CEO</div>
       <h1 class="vd-headline">Behind every gap in the schedule is a pupil's school day</h1>
       <div class="vd-portrait"><img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech"></div>
-      <p class="vd-p1">It can start at 06:43. A teacher calls in sick. Someone opens the schedule, someone starts ringing round, a colleague is pulled from their planning time, and a resource who is really needed elsewhere covers a lesson. It is not yet eight o'clock, but the day's first big puzzle is already under way. And in the middle of it all are the pupils. Pupils who expect the school day to work, the right adults to be in place, and teaching to hold together even when reality changes at short notice.</p>
-      <p class="vd-p2">I have worked in schools myself and seen how much skill, time and energy goes into solving exactly these situations every day. Schools are remarkably good at making things work — often through experience, quick decisions and staff who take great responsibility. But far too often it happens with tools that were never built for the job. Spreadsheets, phone calls, text threads, schedules in different systems, and knowledge that lives in the heads of one or two people. That is not just an administrative problem. When the right resource ends up in the wrong place, when the same teacher has to cover time and again, or when a group of pupils meets yet another temporary fix, it also affects continuity, calm in the classroom and, ultimately, the pupils' school day.</p>
+      <p class="vd-p1 vd-lead">It can start at 06:43. A teacher calls in sick. Someone opens the schedule, someone starts ringing round, a colleague is pulled from their planning time, and a resource who is really needed elsewhere covers a lesson. It is not yet eight o'clock, but the day's first big puzzle is already under way. And in the middle of it all are the pupils. Pupils who expect the school day to work, the right adults to be in place, and teaching to hold together even when reality changes at short notice.</p>
+      <p class="vd-p2 vd-cols">I have worked in schools myself and seen how much skill, time and energy goes into solving exactly these situations every day. Schools are remarkably good at making things work — often through experience, quick decisions and staff who take great responsibility. But far too often it happens with tools that were never built for the job. Spreadsheets, phone calls, text threads, schedules in different systems, and knowledge that lives in the heads of one or two people. That is not just an administrative problem. When the right resource ends up in the wrong place, when the same teacher has to cover time and again, or when a group of pupils meets yet another temporary fix, it also affects continuity, calm in the classroom and, ultimately, the pupils' school day.</p>
       <div class="vd-quoterow">
         <div class="vd-pullquote"><blockquote>It is not about filling an empty slot in a schedule.</blockquote></div>
-        <p>That is why we built Frånvarokollen. Not to tell schools how to staff their organisation, but to give them better conditions to do what they already do every day. We want to make it easier to see which resources actually exist, what needs to be covered, and how the school can use its own organisation more intelligently before looking for external solutions. For us it is not about filling an empty slot in a schedule. It is about the right adult being in the right place at the right time — and about pupils noticing as little as possible that someone called in sick that morning.</p>
+        <p class="vd-p3">That is why we built Frånvarokollen. Not to tell schools how to staff their organisation, but to give them better conditions to do what they already do every day. We want to make it easier to see which resources actually exist, what needs to be covered, and how the school can use its own organisation more intelligently before looking for external solutions. For us it is not about filling an empty slot in a schedule. It is about the right adult being in the right place at the right time — and about pupils noticing as little as possible that someone called in sick that morning.</p>
       </div>
-      <p class="vd-p4">But we also want to move the question of short-term absence from firefighting to understanding. How often do the same people cover? How much non-teaching time disappears into acute fixes? Which groups of pupils are affected most often? Where does the load build up over time? And what does absence really cost in continuity, working environment and quality? What cannot be seen is hard to improve. That is why we build Frånvarokollen close to the schools and the people who use it — principals, administrators, teachers, substitute coordinators and school leaders. The ambition is not to become yet another system for schools to log into. The ambition is to change how short-term absence is handled, so that less energy goes into solving the morning's chaos and more can go where it makes a real difference: to the pupils.</p>
+      <p class="vd-p4 vd-cols">But we also want to move the question of short-term absence from firefighting to understanding. How often do the same people cover? How much non-teaching time disappears into acute fixes? Which groups of pupils are affected most often? Where does the load build up over time? And what does absence really cost in continuity, working environment and quality? What cannot be seen is hard to improve. That is why we build Frånvarokollen close to the schools and the people who use it — principals, administrators, teachers, substitute coordinators and school leaders. The ambition is not to become yet another system for schools to log into. The ambition is to change how short-term absence is handled, so that less energy goes into solving the morning's chaos and more can go where it makes a real difference: to the pupils.</p>
       <div class="drivkraft-card vd-drivkraft">
         <div class="drivkraft-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
