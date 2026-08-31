@@ -403,7 +403,6 @@ export function renderLegalPage({
         <h4 data-i18n="footer.product">Produkt</h4>
         <ul>
           <li><a href="/#funktioner" data-i18n="nav.features">Funktioner</a></li>
-          <li><a href="/#sa-fungerar-det" data-i18n="nav.how">Så fungerar det</a></li>
           <li><a href="/#sakerhet" data-i18n="nav.security">Säkerhet</a></li>
         </ul>
       </div>
