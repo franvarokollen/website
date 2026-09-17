@@ -6,6 +6,9 @@
 <title>Om oss – Frånvarokollen | Varför vi byggde ett vikariesystem för skolor</title>
 <meta name="description" content="Frånvarokollen Sverige AB grundades av personer som själva arbetat i skolan. Läs VD Ibrahim Amdaouech om varför vi byggde ett system för frånvaro, vikarier och bemanning."/>
 <link rel="canonical" href="https://franvarokollen.com/om-oss" />
+<link rel="alternate" hreflang="sv" href="https://franvarokollen.com/om-oss" />
+<link rel="alternate" hreflang="en" href="https://franvarokollen.com/en/about" />
+<link rel="alternate" hreflang="x-default" href="https://franvarokollen.com/om-oss" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Frånvarokollen" />
 <meta property="og:locale" content="sv_SE" />
@@ -343,7 +346,7 @@
     gap:40px;
     margin-bottom:40px;
   }
-  .footer h4{
+  .footer h3{
     font-size:13px;font-weight:700;
     text-transform:uppercase;letter-spacing:0.08em;
     color:#fff;margin:0 0 16px;
@@ -357,6 +360,9 @@
   .footer-brand .brand{margin-bottom:14px}
   .footer-brand .brand-name{color:#fff}
   .footer-brand p{font-size:14px;color:rgba(255,255,255,0.6);max-width:300px}
+  .footer-social{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;color:rgba(255,255,255,0.72);border:1px solid rgba(255,255,255,0.14);transition:color .15s,border-color .15s,background .15s;margin-left:14px;vertical-align:middle}
+  .footer-social:hover{color:#fff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.06)}
+  .footer-made{display:inline-flex;align-items:center}
   .footer-bottom{
     padding-top:24px;
     border-top:1px solid rgba(255,255,255,0.1);
@@ -954,7 +960,7 @@
     <div class="nav-actions">
       <div class="lang" role="group" aria-label="Språk">
         <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
-        <button data-lang-btn="en" aria-pressed="false">EN</button>
+        <button data-lang-btn="en" data-lang-href="/en/about" aria-pressed="false">EN</button>
       </div>
       <button class="nav-login" data-i18n="nav.login">Gå med nu</button>
     </div>
@@ -966,7 +972,7 @@
     <div class="vd-grid">
       <div class="eyebrow vd-eyebrow">VD HAR ORDET</div>
       <h1 class="vd-headline">Bakom varje lucka i schemat finns en elevs skoldag</h1>
-      <div class="vd-portrait"><img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech"></div>
+      <div class="vd-portrait"><img src="/assets/about/ibrahim.webp" alt="Ibrahim Amdaouech" width="400" height="400"></div>
       <p class="vd-p1 vd-lead">Det kan börja 06.43. En lärare sjukanmäler sig. Någon öppnar schemat, någon börjar ringa, en kollega flyttas från sin planering och en resurs som egentligen behövs någon annanstans täcker en lektion. Klockan är fortfarande inte åtta, men dagens första stora pussel är redan igång. Och mitt i allt detta finns eleverna. Elever som förväntar sig att skoldagen ska fungera, att rätt vuxna ska finnas på plats och att undervisningen ska hålla ihop även när verkligheten förändras med kort varsel.</p>
       <p class="vd-p2 vd-cols">Jag har själv arbetat i skolan och sett hur mycket kompetens, tid och energi som varje dag läggs på att lösa just de situationerna. Skolor är otroligt bra på att få det att fungera, ofta genom erfarenhet, snabba beslut och ett stort ansvarstagande från personalen. Men alldeles för ofta sker det med verktyg som inte är byggda för uppgiften. Excelark, telefonsamtal, sms-trådar, scheman i olika system och kunskap som sitter i huvudet på en eller två personer. Det är inte bara ett administrativt problem. När rätt resurs hamnar på fel plats, när samma lärare gång på gång behöver täcka upp eller när en elevgrupp möter ännu en tillfällig lösning, då påverkas också kontinuiteten, arbetsron och i förlängningen elevernas skoldag.</p>
       <div class="vd-quoterow">
@@ -1015,7 +1021,7 @@
     <div class="vd-grid">
       <div class="eyebrow vd-eyebrow">A WORD FROM OUR CEO</div>
       <h2 class="vd-headline">Behind every gap in the schedule is a pupil's school day</h2>
-      <div class="vd-portrait"><img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech"></div>
+      <div class="vd-portrait"><img src="/assets/about/ibrahim.webp" alt="Ibrahim Amdaouech" width="400" height="400"></div>
       <p class="vd-p1 vd-lead">It can start at 06:43. A teacher calls in sick. Someone opens the schedule, someone starts ringing round, a colleague is pulled from their planning time, and a resource who is really needed elsewhere covers a lesson. It is not yet eight o'clock, but the day's first big puzzle is already under way. And in the middle of it all are the pupils. Pupils who expect the school day to work, the right adults to be in place, and teaching to hold together even when reality changes at short notice.</p>
       <p class="vd-p2 vd-cols">I have worked in schools myself and seen how much skill, time and energy goes into solving exactly these situations every day. Schools are remarkably good at making things work — often through experience, quick decisions and staff who take great responsibility. But far too often it happens with tools that were never built for the job. Spreadsheets, phone calls, text threads, schedules in different systems, and knowledge that lives in the heads of one or two people. That is not just an administrative problem. When the right resource ends up in the wrong place, when the same teacher has to cover time and again, or when a group of pupils meets yet another temporary fix, it also affects continuity, calm in the classroom and, ultimately, the pupils' school day.</p>
       <div class="vd-quoterow">
@@ -1076,21 +1082,23 @@
         <p data-i18n="footer.tagline">Frånvaro och bemanning gjort enkelt — för svenska skolor.</p>
       </div>
       <div>
-        <h4 data-i18n="footer.product">Produkt</h4>
+        <h3 data-i18n="footer.product">Produkt</h3>
         <ul>
           <li><a href="/#funktioner" data-i18n="nav.features">Funktioner</a></li>
           <li><a href="/#sakerhet" data-i18n="nav.security">Säkerhet</a></li>
+          <li><a href="/vanliga-fragor" data-i18n="nav.faq">Vanliga frågor</a></li>
         </ul>
       </div>
       <div>
-        <h4 data-i18n="footer.company">Företag</h4>
+        <h3 data-i18n="footer.company">Företag</h3>
         <ul>
           <li><a href="/om-oss" data-i18n="footer.about" aria-current="page">Om oss</a></li>
+          <li><a href="/guider/" data-i18n="footer.guides">Guider</a></li>
           <li><a href="/#kontakt" data-i18n="nav.contact">Kontakt</a></li>
         </ul>
       </div>
       <div>
-        <h4 data-i18n="footer.legal">Juridik</h4>
+        <h3 data-i18n="footer.legal">Juridik</h3>
         <ul>
           <li><a href="/anvandarvillkor" data-i18n="footer.terms">Användarvillkor</a></li>
           <li><a href="/integritetspolicy" data-i18n="footer.privacy">Integritetspolicy</a></li>
@@ -1100,7 +1108,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 <span translate=no class=notranslate>Frånvarokollen</span> Sverige AB · <span data-i18n="footer.org">Org.nr: 559585-6450</span></span>
-      <span data-i18n="footer.made">Byggd i Sverige</span>
+      <span class="footer-made"><span data-i18n="footer.made">Byggd i Sverige</span><a class="footer-social" href="https://www.linkedin.com/company/franvarokollen" target="_blank" rel="noopener" aria-label="Frånvarokollen on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></span>
     </div>
   </div>
 </footer>
@@ -1120,12 +1128,15 @@
     try{ localStorage.setItem('fk_lang',lang); }catch(e){}
   }
   document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
-    btn.addEventListener('click',()=>setLang(btn.getAttribute('data-lang-btn')));
+    btn.addEventListener('click', ()=>{
+      const lang = btn.getAttribute('data-lang-btn');
+      try{ localStorage.setItem('fk_lang', lang); }catch(e){}
+      const href = btn.getAttribute('data-lang-href');
+      if(href){ location.href = href + location.hash; return; }
+      setLang(lang);
+    });
   });
-  try{
-    const saved = localStorage.getItem('fk_lang');
-    if(saved==='en') setLang('en'); else setLang('sv');
-  }catch(e){ setLang('sv'); }
+  setLang(document.documentElement.lang === 'en' ? 'en' : 'sv');
   // mobile menu
   const navToggle = document.getElementById('navToggle');
   const mobileMenu = document.getElementById('mobileMenu');

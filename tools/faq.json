@@ -1,0 +1,62 @@
+{
+ "sv": [
+  [
+   "Vad är Frånvarokollen?",
+   "<span translate=no class=notranslate>Frånvarokollen</span> är ett webbaserat system för svenska skolor som samlar frånvaroregistrering för personal, vikarieförslag och bemanningsanalys på ett ställe. Vikariesamordnaren ser dagens luckor, får förslag på vem som kan täcka och rektor får uppföljning på belastning och kostnader."
+  ],
+  [
+   "Fattar systemet beslut om vem som ska vikariera?",
+   "Nej. <span translate=no class=notranslate>Frånvarokollen</span> föreslår vikarier rankade efter schema, behörighet och belastning, men det är alltid samordnaren som bestämmer. Systemet gör underlaget tydligt, inte beslutet automatiskt."
+  ],
+  [
+   "Var lagras våra data och är det GDPR-anpassat?",
+   "All data lagras på servrar inom EU. <span translate=no class=notranslate>Frånvarokollen</span> är byggt för svensk skola med GDPR som utgångspunkt: minimering av personuppgifter, tydlig åtkomststyrning och personuppgiftsbiträdesavtal för skolor och huvudmän."
+  ],
+  [
+   "Hur loggar personalen in?",
+   "Med skolans befintliga konton via Google Workspace eller Microsoft 365 (SSO). Inga nya lösenord att hålla reda på och behörigheter följer skolans katalog."
+  ],
+  [
+   "Behöver vi byta schemasystem?",
+   "Nej. <span translate=no class=notranslate>Frånvarokollen</span> är ett fristående verktyg som kompletterar det ni redan har. Ni fortsätter lägga schema där ni gör det i dag och använder <span translate=no class=notranslate>Frånvarokollen</span> för frånvaro, vikarier och uppföljning."
+  ],
+  [
+   "Vilka skolor passar Frånvarokollen för?",
+   "Grundskolor och gymnasieskolor, kommunala såväl som fristående, med en eller flera personer som samordnar vikarier. Systemet fungerar lika bra för en skola som för en huvudman med flera enheter."
+  ],
+  [
+   "Hur kommer vi igång?",
+   "Enklast är att <a href=\"/bli-partnerskola\">ansöka om en partnerplats</a> eller mejla <a href=\"mailto:info@franvarokollen.com\">info@franvarokollen.com</a> så bokar vi en kort genomgång utifrån er skolas storlek och arbetssätt."
+  ]
+ ],
+ "en": [
+  [
+   "What is Frånvarokollen?",
+   "<span translate=no class=notranslate>Frånvarokollen</span> is a web-based system for Swedish schools that brings staff absence registration, substitute suggestions and staffing analytics together in one place. The cover coordinator sees today's gaps, gets suggestions for who can cover, and the principal gets follow-up on workload and costs."
+  ],
+  [
+   "Does the system decide who covers a lesson?",
+   "No. <span translate=no class=notranslate>Frånvarokollen</span> suggests substitutes ranked by schedule, qualifications and workload, but the coordinator always decides. The system makes the picture clear; it does not automate the decision."
+  ],
+  [
+   "Where is our data stored, and is it GDPR-compliant?",
+   "All data is stored on servers within the EU. <span translate=no class=notranslate>Frånvarokollen</span> is built for Swedish schools with GDPR as the starting point: data minimisation, clear access control and data processing agreements for schools and school organisers."
+  ],
+  [
+   "How do staff log in?",
+   "With the school's existing accounts via Google Workspace or Microsoft 365 (SSO). No new passwords to keep track of, and permissions follow the school's directory."
+  ],
+  [
+   "Do we need to change our timetabling system?",
+   "No. <span translate=no class=notranslate>Frånvarokollen</span> is a standalone tool that complements what you already have. You keep building timetables where you do today and use <span translate=no class=notranslate>Frånvarokollen</span> for absence, cover and follow-up."
+  ],
+  [
+   "Which schools is Frånvarokollen for?",
+   "Primary and secondary schools, municipal as well as independent, with one or more people coordinating cover. It works equally well for a single school or an organiser with several units."
+  ],
+  [
+   "How do we get started?",
+   "The easiest way is to <a href=\"/bli-partnerskola\">apply for a partner place</a> or email <a href=\"mailto:info@franvarokollen.com\">info@franvarokollen.com</a> and we'll book a short walkthrough based on your school's size and way of working."
+  ]
+ ]
+}

@@ -6,6 +6,9 @@
 <title>Partnerplatsen | Frånvarokollen</title>
 <meta name="description" content="Vi bjuder in 15 skolor att bygga Frånvarokollen vidare tillsammans med oss, som partnerskolor, inte bara kunder. Öppet för skolor i hela landet." />
 <link rel="canonical" href="https://franvarokollen.com/bli-partnerskola" />
+<link rel="alternate" hreflang="sv" href="https://franvarokollen.com/bli-partnerskola" />
+<link rel="alternate" hreflang="en" href="https://franvarokollen.com/en/partner-schools" />
+<link rel="alternate" hreflang="x-default" href="https://franvarokollen.com/bli-partnerskola" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Partnerplatsen | Frånvarokollen" />
 <meta property="og:description" content="15 platser. Öppet för skolor i hela landet. Forma Frånvarokollen från insidan." />
@@ -382,7 +385,7 @@
     gap:40px;
     margin-bottom:40px;
   }
-  .footer h4{
+  .footer h3{
     font-size:13px;font-weight:700;
     text-transform:uppercase;letter-spacing:0.08em;
     color:#fff;margin:0 0 16px;
@@ -396,6 +399,9 @@
   .footer-brand .brand{margin-bottom:14px}
   .footer-brand .brand-name{color:#fff}
   .footer-brand p{font-size:14px;color:rgba(255,255,255,0.6);max-width:300px}
+  .footer-social{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;color:rgba(255,255,255,0.72);border:1px solid rgba(255,255,255,0.14);transition:color .15s,border-color .15s,background .15s;margin-left:14px;vertical-align:middle}
+  .footer-social:hover{color:#fff;border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.06)}
+  .footer-made{display:inline-flex;align-items:center}
   .footer-bottom{
     padding-top:24px;
     border-top:1px solid rgba(255,255,255,0.1);
@@ -937,7 +943,7 @@
     <div class="nav-actions">
       <div class="lang" role="group" aria-label="Språk">
         <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
-        <button data-lang-btn="en" aria-pressed="false">EN</button>
+        <button data-lang-btn="en" data-lang-href="/en/partner-schools" aria-pressed="false">EN</button>
       </div>
       <a class="nav-demo" href="/demo/" data-i18n="nav.demo" target="_blank" rel="noopener">Prova demon</a>
       <a class="nav-login" href="#ansok" data-i18n="pk.nav_cta">Bli partnerskola</a>
@@ -979,7 +985,7 @@
             <a href="/om-oss" class="pk-quote-read">Läs hela texten →</a>
           </div>
           <div class="pk-quote-row">
-            <img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech" class="pk-quote-portrait">
+            <img src="/assets/about/ibrahim-200.webp" width="96" height="96" loading="lazy" alt="Ibrahim Amdaouech" class="pk-quote-portrait">
             <div>
               <p class="eyebrow">VD HAR ORDET</p>
               <p class="pk-quote-text">”Rätt vuxen på rätt plats vid rätt tid.”</p>
@@ -1174,7 +1180,7 @@
             <a href="/om-oss" class="pk-quote-read">Read the full text →</a>
           </div>
           <div class="pk-quote-row">
-            <img src="/assets/about/ibrahim.png" alt="Ibrahim Amdaouech" class="pk-quote-portrait">
+            <img src="/assets/about/ibrahim-200.webp" width="96" height="96" loading="lazy" alt="Ibrahim Amdaouech" class="pk-quote-portrait">
             <div>
               <p class="eyebrow">A WORD FROM OUR CEO</p>
               <p class="pk-quote-text">“The right adult in the right place at the right time.”</p>
@@ -1356,22 +1362,24 @@
         <p data-i18n="footer.tagline">Frånvaro och bemanning gjort enkelt, för svenska skolor.</p>
       </div>
       <div>
-        <h4 data-i18n="footer.product">Produkt</h4>
+        <h3 data-i18n="footer.product">Produkt</h3>
         <ul>
           <li><a href="/#funktioner" data-i18n="nav.features">Funktioner</a></li>
           <li><a href="/#sakerhet" data-i18n="nav.security">Säkerhet</a></li>
+          <li><a href="/vanliga-fragor" data-i18n="nav.faq">Vanliga frågor</a></li>
         </ul>
       </div>
       <div>
-        <h4 data-i18n="footer.company">Företag</h4>
+        <h3 data-i18n="footer.company">Företag</h3>
         <ul>
           <li><a href="/om-oss" data-i18n="footer.about">Om oss</a></li>
+          <li><a href="/guider/" data-i18n="footer.guides">Guider</a></li>
           <li><a href="/bli-partnerskola" data-i18n="footer.partner" aria-current="page">Bli partnerskola</a></li>
           <li><a href="/#kontakt" data-i18n="nav.contact">Kontakt</a></li>
         </ul>
       </div>
       <div>
-        <h4 data-i18n="footer.legal">Juridik</h4>
+        <h3 data-i18n="footer.legal">Juridik</h3>
         <ul>
           <li><a href="/anvandarvillkor" data-i18n="footer.terms">Användarvillkor</a></li>
           <li><a href="/integritetspolicy" data-i18n="footer.privacy">Integritetspolicy</a></li>
@@ -1381,7 +1389,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 <span translate=no class=notranslate>Frånvarokollen</span> Sverige AB · <span data-i18n="footer.org">Org.nr: 559585-6450</span></span>
-      <span data-i18n="footer.made">Byggd i Sverige</span>
+      <span class="footer-made"><span data-i18n="footer.made">Byggd i Sverige</span><a class="footer-social" href="https://www.linkedin.com/company/franvarokollen" target="_blank" rel="noopener" aria-label="Frånvarokollen on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></span>
     </div>
   </div>
 </footer>
@@ -1390,7 +1398,7 @@
   // ===== i18n for nav/footer (subset of homepage dictionary) + data-lang page blocks =====
   const translations = {
     sv:{
-      'nav.smart':'Vikarieförslag',
+      'nav.faq':'Vanliga frågor','nav.smart':'Vikarieförslag',
       'nav.features':'Funktioner',
       'nav.how':'Så fungerar det',
       'nav.analytics':'Analys',
@@ -1403,7 +1411,7 @@
       'footer.product':'Produkt',
       'footer.company':'Företag',
       'footer.legal':'Juridik',
-      'footer.about':'Om oss',
+      'footer.guides':'Guider','footer.about':'Om oss',
       'footer.partner':'Bli partnerskola',
       'footer.terms':'Användarvillkor',
       'footer.privacy':'Integritetspolicy',
@@ -1414,7 +1422,7 @@
       'pk.footer_link':'Bli partnerskola',
     },
     en:{
-      'nav.smart':'Suggestions',
+      'nav.faq':'FAQ','nav.smart':'Suggestions',
       'nav.features':'Features',
       'nav.how':'How it works',
       'nav.analytics':'Analytics',
@@ -1427,7 +1435,7 @@
       'footer.product':'Product',
       'footer.company':'Company',
       'footer.legal':'Legal',
-      'footer.about':'About',
+      'footer.guides':'Guides (in Swedish)','footer.about':'About',
       'footer.partner':'Become a partner school',
       'footer.terms':'Terms of Service',
       'footer.privacy':'Privacy Policy',
@@ -1456,9 +1464,15 @@
     try{ localStorage.setItem('fk_lang', lang); }catch(e){}
   }
   document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
-    btn.addEventListener('click', ()=>setLang(btn.getAttribute('data-lang-btn')));
+    btn.addEventListener('click', ()=>{
+      const lang = btn.getAttribute('data-lang-btn');
+      try{ localStorage.setItem('fk_lang', lang); }catch(e){}
+      const href = btn.getAttribute('data-lang-href');
+      if(href){ location.href = href + location.hash; return; }
+      setLang(lang);
+    });
   });
-  try{ setLang(localStorage.getItem('fk_lang')==='en' ? 'en' : 'sv'); }catch(e){ setLang('sv'); }
+  setLang(document.documentElement.lang === 'en' ? 'en' : 'sv');
 
   // mobile menu
   const navToggle = document.getElementById('navToggle');
