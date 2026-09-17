@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects — https://developers.cloudflare.com/pages/configuration/redirects/
+# Legacy / duplicate URLs → canonical, so Google sees one copy of each page.
+/cookie-policy   /cookies            301
+/cookiepolicy    /cookies            301
+/privacy         /integritetspolicy  301
