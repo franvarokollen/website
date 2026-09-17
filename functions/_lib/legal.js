@@ -121,6 +121,12 @@ export function renderLegalPage({
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>${escapeHtml(title)} — Frånvarokollen</title>
+<link rel="canonical" href="https://franvarokollen.com/${isSv ? "anvandarvillkor" : "terms"}" />
+<link rel="alternate" hreflang="sv" href="https://franvarokollen.com/anvandarvillkor" />
+<link rel="alternate" hreflang="en" href="https://franvarokollen.com/terms" />
+<meta property="og:title" content="${escapeHtml(title)} — Frånvarokollen" />
+<meta property="og:url" content="https://franvarokollen.com/${isSv ? "anvandarvillkor" : "terms"}" />
+<meta property="og:site_name" content="Frånvarokollen" />
 <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
