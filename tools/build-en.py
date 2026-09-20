@@ -52,6 +52,13 @@ PAGES = {
         "title": "Partnerplatsen – become a partner school | Frånvarokollen",
         "description": "We are inviting 15 schools to build Frånvarokollen together with us – as partner schools, not just customers. Open to schools across Sweden.",
         "og_description": "15 places. Open to schools across Sweden. Shape Frånvarokollen from the inside.",
+        # JSON-LD strings that are Swedish in the source and need English wording here
+        "ld_swaps": {
+            '"name": "Ilda på Hallernaskolan om Frånvarokollen"':
+                '"name": "Ilda at Hallernaskolan on Frånvarokollen"',
+            '"description": "Ilda, som arbetar på Hallernaskolan 7–9 i Stenungsund, berättar hur Frånvarokollen ger bättre överblick, sparar tid och minskar stressen på morgonen."':
+                '"description": "Ilda, who works at Hallernaskolan 7–9 in Stenungsund, explains how Frånvarokollen gives a better overview, saves time and reduces morning stress. The film is in Swedish."',
+        },
     },
 }
 
@@ -160,8 +167,12 @@ def build_en(src_name, cfg, src):
         s = s.replace('"about": { "@id": "https://franvarokollen.com/#software" },\n      "inLanguage": "sv-SE"',
                       '"about": { "@id": "https://franvarokollen.com/#software" },\n      "inLanguage": "en"')
     else:
-        s = s.replace(f'"@id": "{SITE}{cfg["sv_url"]}#webpage",\n      "url": "{SITE}{cfg["sv_url"]}",',
-                      f'"@id": "{SITE}{cfg["en_url"]}#webpage",\n      "url": "{SITE}{cfg["en_url"]}",')
+        # every node id/url anchored on this page's SV URL moves to the EN URL
+        # (#webpage, #video, …). Safe here because sv_url is never bare "/".
+        s = s.replace(f'"{SITE}{cfg["sv_url"]}#', f'"{SITE}{cfg["en_url"]}#')
+        s = s.replace(f'"url": "{SITE}{cfg["sv_url"]}"', f'"url": "{SITE}{cfg["en_url"]}"')
+        for a, bb in cfg.get("ld_swaps", {}).items():
+            s = s.replace(a, bb)
         s = re.sub(r'("name": ")[^"]*(",\n      "inLanguage": ")sv-SE(")', rf'\g<1>{cfg["title"]}\2en\3', s, count=1)
         s = s.replace('"name": "Start", "item": "https://franvarokollen.com/"', '"name": "Home", "item": "https://franvarokollen.com/en/"')
         s = s.replace('"name": "Om oss", "item": "https://franvarokollen.com/om-oss"', '"name": "About us", "item": "https://franvarokollen.com/en/about"')

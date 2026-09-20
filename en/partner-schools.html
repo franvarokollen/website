@@ -37,6 +37,26 @@
       "about": { "@id": "https://franvarokollen.com/#software" }
     },
     {
+      "@type": "VideoObject",
+      "@id": "https://franvarokollen.com/en/partner-schools#video",
+      "name": "Ilda at Hallernaskolan on Frånvarokollen",
+      "description": "Ilda, who works at Hallernaskolan 7–9 in Stenungsund, explains how Frånvarokollen gives a better overview, saves time and reduces morning stress. The film is in Swedish.",
+      "inLanguage": "sv-SE",
+      "uploadDate": "2026-09-20",
+      "duration": "PT29S",
+      "thumbnailUrl": [
+        "https://franvarokollen.com/assets/partner/partnerskola-poster.jpg"
+      ],
+      "contentUrl": "https://franvarokollen.com/assets/partner/partnerskola.mp4",
+      "transcript": "Hej, Ilda heter jag. Jag jobbar på Hallernaskolan 7 till 9 i Stenungsund. Jag har börjat jobba med Frånvarokollen för nästan en månad sedan. Jag är väldigt nöjd med systemet för att jag får bättre överblick. Jag sparar mycket tid för att den sköter det administrativa själv. Och jag får mycket mindre stress på morgonen när jag ska skicka ut mejl med schema då. Så jag rekommenderar varmt att ni använder er av Frånvarokollen. Tack!",
+      "isPartOf": {
+        "@id": "https://franvarokollen.com/en/partner-schools#webpage"
+      },
+      "publisher": {
+        "@id": "https://franvarokollen.com/#organization"
+      }
+    },
+    {
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://franvarokollen.com/en/" },
@@ -859,15 +879,20 @@
   .pk-quote-body{font-size:15px;line-height:1.6;color:#475569;margin:0;border-top:1px solid var(--line);padding-top:20px}
 
   .pk-video-section{background:#0A1828;padding:8px 0 88px;margin-top:-1px}
-  .pk-video-lead{color:rgba(255,255,255,0.8);font-size:17px;font-weight:600;text-align:center;margin:0 0 22px}
-  .pk-video{position:relative;width:100%;max-width:880px;margin:0 auto;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.14);background:#081526;box-shadow:0 24px 60px -20px rgba(0,0,0,0.6)}
-  .pk-video video{width:100%;height:100%;object-fit:cover;display:block}
-  .pk-video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;background:linear-gradient(135deg,#0F2A4A 0%,#0A1828 100%)}
-  .pk-video-placeholder::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:32px 32px}
-  .pk-play{position:relative;width:68px;height:68px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(220,38,38,0.5)}
-  .pk-play svg{width:28px;height:28px;margin-left:4px}
-  .pk-video-placeholder p{position:relative;margin:0;font-size:15px;font-weight:600;color:rgba(255,255,255,0.85)}
-  .pk-video-placeholder .mono{position:relative;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.12em;text-transform:uppercase}
+  .pk-video-lead{color:rgba(255,255,255,0.8);font-size:17px;font-weight:600;text-align:center;margin:0 0 34px}
+  .pk-video-grid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:52px;align-items:center;max-width:860px;margin:0 auto}
+  .pk-video{position:relative;width:100%;aspect-ratio:480/854;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.14);background:#081526;box-shadow:0 24px 60px -20px rgba(0,0,0,0.6)}
+  .pk-video video{width:100%;height:100%;object-fit:cover;display:block;background:#081526}
+  .pk-video-quote{margin:0;color:#fff}
+  .pk-video-quote blockquote{margin:0 0 26px;font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(21px,2.3vw,27px);line-height:1.38;font-weight:800;letter-spacing:-0.02em}
+  .pk-video-quote figcaption{display:flex;flex-direction:column;gap:3px;font-size:15px;color:rgba(255,255,255,0.62)}
+  .pk-video-quote figcaption strong{color:#fff;font-size:16px;font-weight:700}
+  .pk-video-note{margin:26px 0 0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+  @media(max-width:860px){
+    .pk-video-grid{grid-template-columns:1fr;gap:30px;max-width:340px}
+    .pk-video-quote{text-align:center}
+    .pk-video-quote figcaption{align-items:center}
+  }
   .pk-why{background:var(--cream)}
   .pk-intro{max-width:720px;margin-bottom:48px}
   .pk-intro h2{font-size:clamp(32px,3.6vw,44px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:16px}
@@ -1008,19 +1033,19 @@
 <section class="pk-video-section">
   <div class="container">
     <p class="pk-video-lead">This is how one of our schools describes everyday life with <span translate=no class=notranslate>Frånvarokollen</span>:</p>
-    <div class="pk-video" id="partnerVideo_en">
-      <!-- VIDEO PLACEHOLDER: when the file lands, put it at /assets/partner/partnerskola.mp4 (+ poster jpg),
-           delete the .pk-video-placeholder div and uncomment the <video> tag. Same in both language blocks. -->
-      <!--
-      <video controls playsinline preload="metadata" poster="/assets/partner/partnerskola-poster.jpg">
-        <source src="/assets/partner/partnerskola.mp4" type="video/mp4">
-      </video>
-      -->
-      <div class="pk-video-placeholder" aria-hidden="true">
-        <div class="pk-play"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
-        <p>A film from one of our schools</p>
-        <span class="mono">Coming soon</span>
+    <div class="pk-video-grid">
+      <div class="pk-video" id="partnerVideo_en">
+        <video controls playsinline preload="none" width="480" height="854"
+               poster="/assets/partner/partnerskola-poster.jpg" aria-label="Ilda at Hallernaskolan on her everyday work with Frånvarokollen">
+          <source src="/assets/partner/partnerskola.mp4" type="video/mp4">
+          <p>Your browser cannot play this video. <a href="/assets/partner/partnerskola.mp4">Download the film</a>.</p>
+        </video>
       </div>
+      <figure class="pk-video-quote">
+        <blockquote>“I’m very happy with the system because I get a much better overview. It saves me a lot of time because it handles the admin side itself.”</blockquote>
+        <figcaption><strong>Ilda</strong><span>Hallernaskolan 7–9, Stenungsund</span></figcaption>
+        <p class="pk-video-note">The film is in Swedish, with Swedish subtitles.</p>
+      </figure>
     </div>
   </div>
 </section>
