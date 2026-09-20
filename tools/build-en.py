@@ -54,10 +54,10 @@ PAGES = {
         "og_description": "15 places. Open to schools across Sweden. Shape Frånvarokollen from the inside.",
         # JSON-LD strings that are Swedish in the source and need English wording here
         "ld_swaps": {
-            '"name": "Ilda på Hallernaskolan om Frånvarokollen"':
-                '"name": "Ilda at Hallernaskolan on Frånvarokollen"',
-            '"description": "Ilda, som arbetar på Hallernaskolan 7–9 i Stenungsund, berättar hur Frånvarokollen ger bättre överblick, sparar tid och minskar stressen på morgonen."':
-                '"description": "Ilda, who works at Hallernaskolan 7–9 in Stenungsund, explains how Frånvarokollen gives a better overview, saves time and reduces morning stress. The film is in Swedish."',
+            '"name": "Ilda i Stenungsunds kommun om Frånvarokollen"':
+                '"name": "Ilda in Stenungsunds kommun on Frånvarokollen"',
+            '"description": "Ilda, som arbetar i en skola i Stenungsunds kommun, berättar hur Frånvarokollen ger bättre överblick, sparar tid och minskar stressen på morgonen."':
+                '"description": "Ilda, who works at a school in Stenungsunds kommun, explains how Frånvarokollen gives a better overview, saves time and reduces morning stress. The film is in Swedish."',
         },
     },
 }
