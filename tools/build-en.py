@@ -35,9 +35,9 @@ PAGES = {
     "index.html": {
         "out": "en/index.html",
         "sv_url": "/", "en_url": "/en/",
-        "title": "Frånvarokollen – Absence and substitute management for schools",
-        "description": "Frånvarokollen helps cover coordinators and principals handle staff absence, find substitutes and keep track of staffing and costs – in one system. Built in Sweden, data stored in the EU, GDPR-compliant.",
-        "og_description": "Handle absence, find substitutes and keep track of staffing and costs – in one system. Built in Sweden, data stored in the EU.",
+        "title": "Frånvarokollen – System for school staff absence and staffing",
+        "description": "One sick call changes the plan. Frånvarokollen brings absence, staffing and follow-up together in one system – with a clear view of lessons, substitutes and costs. Data stored in the EU.",
+        "og_description": "One sick call changes the plan. Stay in control of absence, staffing and costs – in one system. Built in Sweden, data stored in the EU.",
     },
     "om-oss.html": {
         "out": "en/about.html",
