@@ -144,6 +144,7 @@ def build_en(src_name, cfg, src):
     s = strip_lang(s, "sv")
     s = activate_lang(s, "en")
     s = s.replace('<html lang="sv">', '<html lang="en">', 1)
+    s = s.replace('/hero-sv.mp4', '/hero-en.mp4').replace('/hero-poster-sv.jpg', '/hero-poster-en.jpg')
     # the EN blocks carry an <h2> in the source (so the SV page has one h1); promote it here
     s = s.replace('<h2 class="vd-headline">', '<h1 class="vd-headline">').replace('</h2>', '</h1>', 1) if '<h2 class="vd-headline">' in s else s
     s = s.replace('<h2 class="pk-title">Partnerplatsen</h2>', '<h1>Partnerplatsen</h1>')
