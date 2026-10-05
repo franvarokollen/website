@@ -5,6 +5,10 @@
    "<span translate=no class=notranslate>Frånvarokollen</span> är ett webbaserat system för svenska skolor som samlar frånvaroregistrering för personal, vikarieförslag och bemanningsanalys på ett ställe. Vikariesamordnaren ser dagens luckor, får förslag på vem som kan täcka och rektor får uppföljning på belastning och kostnader."
   ],
   [
+   "Tillhandahåller ni vikarier?",
+   "Nej. <span translate=no class=notranslate>Frånvarokollen</span> är ett system, inte en vikarieförmedling eller ett bemanningsföretag, och vi skickar inga vikarier till skolan. Ni använder er egen personal och era egna vikarier, och <span translate=no class=notranslate>Frånvarokollen</span> hjälper er att samordna dem: se vilka lektioner som påverkas, vem som kan täcka och vad det kostar."
+  ],
+  [
    "Fattar systemet beslut om vem som ska vikariera?",
    "Nej. <span translate=no class=notranslate>Frånvarokollen</span> föreslår vikarier rankade efter schema, behörighet och belastning, men det är alltid samordnaren som bestämmer. Systemet gör underlaget tydligt, inte beslutet automatiskt."
   ],
@@ -33,6 +37,10 @@
   [
    "What is Frånvarokollen?",
    "<span translate=no class=notranslate>Frånvarokollen</span> is a web-based system for Swedish schools that brings staff absence registration, substitute suggestions and staffing analytics together in one place. The cover coordinator sees today's gaps, gets suggestions for who can cover, and the principal gets follow-up on workload and costs."
+  ],
+  [
+   "Do you supply substitutes?",
+   "No. <span translate=no class=notranslate>Frånvarokollen</span> is software, not a substitute agency or staffing company, and we do not send substitutes to your school. You use your own staff and your own substitutes, and <span translate=no class=notranslate>Frånvarokollen</span> helps you coordinate them: see which lessons are affected, who can cover and what it costs."
   ],
   [
    "Does the system decide who covers a lesson?",
