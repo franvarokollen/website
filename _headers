@@ -1,0 +1,13 @@
+# Cloudflare static-asset headers. HTML is left at the default so edits show up straight away.
+# Media and images are cached for a week: long enough to speed up repeat visits,
+# short enough that a replaced video or logo is picked up soon.
+/*.mp4
+  Cache-Control: public, max-age=604800
+/*.jpg
+  Cache-Control: public, max-age=604800
+/*.png
+  Cache-Control: public, max-age=604800
+/*.svg
+  Cache-Control: public, max-age=604800
+/assets/*
+  Cache-Control: public, max-age=604800
