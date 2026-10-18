@@ -8,7 +8,7 @@
 <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/nunito-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/assets/fonts/fonts.css">
 <style>
 
   :root{
@@ -768,7 +768,7 @@
   <div data-lang="sv" class="active">
     <div class="lang-notice">🇸🇪 Detta dokument är på svenska. <a href="#" onclick="setLang('en');return false;">Read in English →</a></div>
     <h1>Integritetspolicy</h1>
-    <p class="policy-meta">Senast uppdaterad: 2026-05-19 &nbsp;·&nbsp; Version 1.0</p>
+    <p class="policy-meta">Senast uppdaterad: 2026-10-18 &nbsp;·&nbsp; Version 1.1</p>
     
 <h2>1. Vem är personuppgiftsansvarig?</h2>
 <p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB<br>Organisationsnummer: 559585-6450<br>Säte: Stockholm<br>E-post: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
@@ -785,16 +785,15 @@
 
 <h2>3. Besökare på franvarokollen.com</h2>
 <h3>3.1 Vilka personuppgifter behandlar vi?</h3>
-<p>När du besöker vår webbplats samlar vi in begränsad, anonymiserad teknisk information via Vercel Web Analytics: sidvisningar, hänvisningskälla, allmän geografisk region (landsnivå), webbläsartyp och enhetstyp.</p>
-<p>Vi använder inte cookies för spårning eller analys. Vercel Web Analytics är cookielöst och anonymiseras vid insamling.</p>
+<p>Vi använder ingen webbanalys och inga cookies på den publika webbplatsen. När du besöker sidan behandlar vår hostingleverantör Cloudflare tekniska uppgifter som krävs för att leverera sidan och skydda den mot attacker, till exempel IP-adress, webbläsartyp och tidsstämpel.</p>
 <h3>3.2 Varför behandlar vi det?</h3>
-<p>För att förstå hur vår webbplats används och hur vi kan förbättra den.</p>
+<p>För att kunna leverera webbplatsen säkert och skydda den mot missbruk.</p>
 <h3>3.3 Rättslig grund</h3>
 <p>Berättigat intresse (GDPR artikel 6.1 f).</p>
 <h3>3.4 Hur länge sparar vi det?</h3>
-<p>30 dagar (Vercels standardretention för Web Analytics).</p>
+<p>Kortvarigt, enligt Cloudflares standardrutiner för tekniska loggar. Vi sparar inga besöksloggar själva.</p>
 <h3>3.5 Mottagare</h3>
-<p>Vercel Inc. — vår underleverantör för webbplatshosting och analys, som behandlar data inom EU (Frankfurt). Vercel agerar som personuppgiftsbiträde åt oss.</p>
+<p>Cloudflare, Inc. — vår underleverantör för webbplatshosting (Cloudflare Pages). Cloudflare agerar som personuppgiftsbiträde åt oss.</p>
 
 <h2>4. Potentiella kunder och kontakter</h2>
 <h3>4.1 Vilka personuppgifter behandlar vi?</h3>
@@ -827,11 +826,11 @@
 <table>
 <tr><th>Leverantör</th><th>Tjänst</th><th>Region</th></tr>
 <tr><td>Supabase Inc.</td><td>Databas, autentisering, lagring</td><td>AWS EU (Irland/Tyskland)</td></tr>
-<tr><td>Vercel Inc.</td><td>Webbplatshosting, applikationshosting</td><td>Frankfurt, Tyskland</td></tr>
+<tr><td>Vercel Inc.</td><td>Applikationshosting</td><td>Frankfurt, Tyskland</td></tr>
 <tr><td>Functional Software Inc. (Sentry)</td><td>Felsövervakning</td><td>EU (Frankfurt)</td></tr>
 <tr><td>Google Ireland Limited</td><td>E-post, dokumentlagring, OAuth</td><td>EU</td></tr>
 <tr><td>Microsoft Ireland Operations Ltd</td><td>OAuth-autentisering</td><td>EU</td></tr>
-<tr><td>Cloudflare, Inc.</td><td>DNS, DDoS-skydd</td><td>Globalt edge (DNS only)</td></tr>
+<tr><td>Cloudflare, Inc.</td><td>Webbplatshosting, DNS, DDoS-skydd</td><td>Globalt edge-nätverk</td></tr>
 </table>
 
 <h2>8. Överföring utanför EU/EES</h2>
@@ -871,7 +870,7 @@
   <div data-lang="en">
     <div class="lang-notice">🇬🇧 This document is in English. <a href="#" onclick="setLang('sv');return false;">Läs på svenska →</a></div>
     <h1>Privacy Policy</h1>
-    <p class="policy-meta">Senast uppdaterad: 2026-05-19 &nbsp;·&nbsp; Version 1.0</p>
+    <p class="policy-meta">Senast uppdaterad: 2026-10-18 &nbsp;·&nbsp; Version 1.1</p>
     
 <h2>1. Who is the data controller?</h2>
 <p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB<br>Organisation number: 559585-6450<br>Registered seat: Stockholm, Sweden<br>Email: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></p>
@@ -887,11 +886,11 @@
 
 <h2>3. Visitors to franvarokollen.com</h2>
 <h3>3.1 What personal data do we process?</h3>
-<p>We collect limited, anonymised technical information via Vercel Web Analytics: page views, referral source, general geographic region (country-level), browser type and device type. We do not use cookies for tracking or analytics.</p>
-<h3>3.2 Why?</h3><p>To understand and improve our website.</p>
+<p>We do not use any web analytics or cookies on the public website. When you visit, our hosting provider Cloudflare processes the technical data needed to deliver the page and protect it against attacks, such as IP address, browser type and timestamp.</p>
+<h3>3.2 Why?</h3><p>To deliver the website securely and protect it against abuse.</p>
 <h3>3.3 Legal basis</h3><p>Legitimate interest (GDPR Article 6(1)(f)).</p>
-<h3>3.4 Retention</h3><p>30 days (Vercel's default retention).</p>
-<h3>3.5 Recipients</h3><p>Vercel Inc. — EU (Frankfurt) — acting as data processor.</p>
+<h3>3.4 Retention</h3><p>Short-term, per Cloudflare's standard practice for technical logs. We keep no visitor logs ourselves.</p>
+<h3>3.5 Recipients</h3><p>Cloudflare, Inc. — website hosting (Cloudflare Pages) — acting as data processor.</p>
 
 <h2>4. Prospects and contacts</h2>
 <h3>4.1 What do we process?</h3>
@@ -924,11 +923,11 @@
 <table>
 <tr><th>Provider</th><th>Service</th><th>Region</th></tr>
 <tr><td>Supabase Inc.</td><td>Database, authentication, storage</td><td>AWS EU (Ireland/Germany)</td></tr>
-<tr><td>Vercel Inc.</td><td>Website and application hosting</td><td>Frankfurt, Germany</td></tr>
+<tr><td>Vercel Inc.</td><td>Application hosting</td><td>Frankfurt, Germany</td></tr>
 <tr><td>Functional Software Inc. (Sentry)</td><td>Error monitoring</td><td>EU (Frankfurt)</td></tr>
 <tr><td>Google Ireland Limited</td><td>Email, document storage, OAuth</td><td>EU</td></tr>
 <tr><td>Microsoft Ireland Operations Ltd</td><td>OAuth authentication</td><td>EU</td></tr>
-<tr><td>Cloudflare, Inc.</td><td>DNS, DDoS protection</td><td>Global edge (DNS only)</td></tr>
+<tr><td>Cloudflare, Inc.</td><td>Website hosting, DNS, DDoS protection</td><td>Global edge network</td></tr>
 </table>
 
 <h2>8. International transfers</h2>
