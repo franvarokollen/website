@@ -63,22 +63,6 @@
         },
         {
           "@type": "Question",
-          "name": "Where is our data stored, and is it GDPR-compliant?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "All data is stored on servers within the EU. Frånvarokollen is built for Swedish schools with GDPR as the starting point: data minimisation, clear access control and data processing agreements for schools and school organisers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do staff log in?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "With the school's existing accounts via Google Workspace or Microsoft 365 (SSO). No new passwords to keep track of, and permissions follow the school's directory."
-          }
-        },
-        {
-          "@type": "Question",
           "name": "Do we need to change our timetabling system?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -95,10 +79,114 @@
         },
         {
           "@type": "Question",
+          "name": "Where is our data stored?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Stockholm. The database and the servers that run the service are in Stockholm, and technical error reports are handled within the EU. See the list of sub-processors in our privacy policy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is responsible for the personal data, and is there a data processing agreement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The school or its organiser is the data controller and Frånvarokollen Sverige AB is the data processor. A data processing agreement (PUB-avtal) is signed as part of the agreement. It sets out which data may be processed, how it is protected, who is responsible for what, and what happens to the data when the agreement ends."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What data is in the system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only staff data needed to manage absence and day-to-day staffing: staff name, timetable code, email address, role, employment percentage and working hours; the timetable (lessons, times, rooms, subjects and class or group names); absence (date, full or part day and absence category); cover (who covers which lesson, cancelled lessons and estimated substitute costs); external substitutes (name, phone number, email address, subjects, availability and hourly cost); and system users (name, email address and permission level)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there any student data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The system has nowhere to store data about individual students, grades or student health. The timetable contains class and group names, such as 7B, as they appear in the school's timetable file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the absence reason sensitive personal data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Sick category is. The fact that an employee is off sick counts as health data and therefore as special category data under the GDPR. The system stores only the category, never a diagnosis, symptoms or a description. The categories are Sick, VAB (care of a sick child), Training, Parental leave, Personal and Other."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you handle personal identity numbers (personnummer)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The system looks for personal identity numbers in timetable files by recognising their format and date, and for ten-digit numbers without separators it also checks the check digit. Any numbers found are shown to the person uploading the file and removed before the file is processed. The same check runs in the database, which does not allow them to be saved in name and note fields."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who can see the data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only school leadership and the users the school itself appoints. Owners and coordinators can enter and change data; the School leadership role is read-only. No school can see another school's data; this is enforced in the database itself (Row Level Security). The system does not rank individuals or track their absence over time, and statistics are shown per absence category. A user deactivated under Settings loses all access immediately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do staff sign in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With a Microsoft or Google account, for example the school's Microsoft 365 or Google Workspace. That means we store no passwords, and when you sign in with your municipality's or school's account your own security requirements apply, such as two-factor authentication. The school itself decides in Frånvarokollen who has access and with which role."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the data protected?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All traffic is encrypted (TLS) and data is stored encrypted. Each school's data is kept separate in the database itself, and that separation is checked by automated tests. The database is backed up daily. The software is updated when security fixes are released, and the code is automatically scanned for vulnerabilities and leaked keys. Only the people at Frånvarokollen who run the service have technical administrator access, and they are bound by confidentiality under the data processing agreement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which sub-processors do you use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Supabase (database and sign-in, Stockholm), Vercel (hosting of the web service, Stockholm) and Sentry (technical error reports, EU). These providers have parent companies outside the EU, and any transfers are covered by the EU Standard Contractual Clauses or the EU-US Data Privacy Framework. The service sends no email itself: messages to staff open in the user's own email program. See the full list."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is our data used for AI, testing or development?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kollen, which produces the substitute suggestions, is rule-based and runs in the user's browser. No data is sent to any external AI service. For testing and development we use anonymised data from our own internal tools, never schools' real data."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if there is a security incident?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Under the data processing agreement we notify the school or its organiser without undue delay, and within 24 hours at the latest, of any confirmed or suspected personal data breach. We also provide the information needed to assess the incident and any report to the Swedish Authority for Privacy Protection (IMY)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long is data kept, and what happens when the agreement ends?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Data is kept for as long as the school uses the service. If you want a shorter retention period, for example for absence history, we can agree on that. The data belongs to the school: when the agreement ends we hand it over in a readable format or delete it, as you choose. Deletion happens within 30 days and is confirmed in writing."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "How do we get started?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The easiest way is to apply for a partner place or email info@franvarokollen.com and we'll book a short walkthrough based on your school's size and way of working."
+            "text": "The easiest way is to apply for a partner place or email info@franvarokollen.com and we'll book a short walkthrough based on your school's size and way of working. Do you or your data protection officer have questions about the agreement, personal data or security? Email gdpr@franvarokollen.com or book a video call and we'll go through them together."
           }
         }
       ]
@@ -1086,14 +1174,6 @@
       <div class="faq-a"><p>No. <span translate=no class=notranslate>Frånvarokollen</span> suggests substitutes ranked by schedule, qualifications and workload, but the coordinator always decides. The system makes the picture clear; it does not automate the decision.</p></div>
     </details>
     <details class="faq-item">
-      <summary><span>Where is our data stored, and is it GDPR-compliant?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-      <div class="faq-a"><p>All data is stored on servers within the EU. <span translate=no class=notranslate>Frånvarokollen</span> is built for Swedish schools with GDPR as the starting point: data minimisation, clear access control and data processing agreements for schools and school organisers.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary><span>How do staff log in?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-      <div class="faq-a"><p>With the school's existing accounts via Google Workspace or Microsoft 365 (SSO). No new passwords to keep track of, and permissions follow the school's directory.</p></div>
-    </details>
-    <details class="faq-item">
       <summary><span>Do we need to change our timetabling system?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
       <div class="faq-a"><p>No. <span translate=no class=notranslate>Frånvarokollen</span> is a standalone tool that complements what you already have. You keep building timetables where you do today and use <span translate=no class=notranslate>Frånvarokollen</span> for absence, cover and follow-up.</p></div>
     </details>
@@ -1102,8 +1182,60 @@
       <div class="faq-a"><p>Primary and secondary schools, municipal as well as independent, with one or more people coordinating cover. It works equally well for a single school or an organiser with several units.</p></div>
     </details>
     <details class="faq-item">
+      <summary><span>Where is our data stored?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>In Stockholm. The database and the servers that run the service are in Stockholm, and technical error reports are handled within the EU. See the <a href="/integritetspolicy#sub-processors">list of sub-processors</a> in our privacy policy.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Who is responsible for the personal data, and is there a data processing agreement?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>The school or its organiser is the data controller and <span translate=no class=notranslate>Frånvarokollen</span> Sverige AB is the data processor. A data processing agreement (PUB-avtal) is signed as part of the agreement. It sets out which data may be processed, how it is protected, who is responsible for what, and what happens to the data when the agreement ends.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>What data is in the system?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Only staff data needed to manage absence and day-to-day staffing: staff name, timetable code, email address, role, employment percentage and working hours; the timetable (lessons, times, rooms, subjects and class or group names); absence (date, full or part day and absence category); cover (who covers which lesson, cancelled lessons and estimated substitute costs); external substitutes (name, phone number, email address, subjects, availability and hourly cost); and system users (name, email address and permission level).</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Is there any student data?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>No. The system has nowhere to store data about individual students, grades or student health. The timetable contains class and group names, such as 7B, as they appear in the school's timetable file.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Is the absence reason sensitive personal data?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>The Sick category is. The fact that an employee is off sick counts as health data and therefore as special category data under the GDPR. The system stores only the category, never a diagnosis, symptoms or a description. The categories are Sick, VAB (care of a sick child), Training, Parental leave, Personal and Other.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Do you handle personal identity numbers (personnummer)?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>No. The system looks for personal identity numbers in timetable files by recognising their format and date, and for ten-digit numbers without separators it also checks the check digit. Any numbers found are shown to the person uploading the file and removed before the file is processed. The same check runs in the database, which does not allow them to be saved in name and note fields.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Who can see the data?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Only school leadership and the users the school itself appoints. Owners and coordinators can enter and change data; the School leadership role is read-only. No school can see another school's data; this is enforced in the database itself (Row Level Security). The system does not rank individuals or track their absence over time, and statistics are shown per absence category. A user deactivated under Settings loses all access immediately.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>How do staff sign in?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>With a Microsoft or Google account, for example the school's Microsoft 365 or Google Workspace. That means we store no passwords, and when you sign in with your municipality's or school's account your own security requirements apply, such as two-factor authentication. The school itself decides in <span translate=no class=notranslate>Frånvarokollen</span> who has access and with which role.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>How is the data protected?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>All traffic is encrypted (TLS) and data is stored encrypted. Each school's data is kept separate in the database itself, and that separation is checked by automated tests. The database is backed up daily. The software is updated when security fixes are released, and the code is automatically scanned for vulnerabilities and leaked keys. Only the people at <span translate=no class=notranslate>Frånvarokollen</span> who run the service have technical administrator access, and they are bound by confidentiality under the data processing agreement.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Which sub-processors do you use?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Supabase (database and sign-in, Stockholm), Vercel (hosting of the web service, Stockholm) and Sentry (technical error reports, EU). These providers have parent companies outside the EU, and any transfers are covered by the EU Standard Contractual Clauses or the EU-US Data Privacy Framework. The service sends no email itself: messages to staff open in the user's own email program. See the <a href="/integritetspolicy#sub-processors">full list</a>.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Is our data used for AI, testing or development?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>No. Kollen, which produces the substitute suggestions, is rule-based and runs in the user's browser. No data is sent to any external AI service. For testing and development we use anonymised data from our own internal tools, never schools' real data.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>What happens if there is a security incident?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Under the data processing agreement we notify the school or its organiser without undue delay, and within 24 hours at the latest, of any confirmed or suspected personal data breach. We also provide the information needed to assess the incident and any report to the Swedish Authority for Privacy Protection (IMY).</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>How long is data kept, and what happens when the agreement ends?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Data is kept for as long as the school uses the service. If you want a shorter retention period, for example for absence history, we can agree on that. The data belongs to the school: when the agreement ends we hand it over in a readable format or delete it, as you choose. Deletion happens within 30 days and is confirmed in writing.</p></div>
+    </details>
+    <details class="faq-item">
       <summary><span>How do we get started?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-      <div class="faq-a"><p>The easiest way is to <a href="/en/partner-schools">apply for a partner place</a> or email <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a> and we'll book a short walkthrough based on your school's size and way of working.</p></div>
+      <div class="faq-a"><p>The easiest way is to <a href="/en/partner-schools">apply for a partner place</a> or email <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a> and we'll book a short walkthrough based on your school's size and way of working. Do you or your data protection officer have questions about the agreement, personal data or security? Email <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a> or book a video call and we'll go through them together.</p></div>
     </details>
   </div>
   <div class="faq-cta">

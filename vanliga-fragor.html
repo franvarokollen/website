@@ -63,22 +63,6 @@
         },
         {
           "@type": "Question",
-          "name": "Var lagras våra data och är det GDPR-anpassat?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "All data lagras på servrar inom EU. Frånvarokollen är byggt för svensk skola med GDPR som utgångspunkt: minimering av personuppgifter, tydlig åtkomststyrning och personuppgiftsbiträdesavtal för skolor och huvudmän."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Hur loggar personalen in?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Med skolans befintliga konton via Google Workspace eller Microsoft 365 (SSO). Inga nya lösenord att hålla reda på och behörigheter följer skolans katalog."
-          }
-        },
-        {
-          "@type": "Question",
           "name": "Behöver vi byta schemasystem?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -95,10 +79,114 @@
         },
         {
           "@type": "Question",
+          "name": "Var lagras våra uppgifter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "I Stockholm. Databasen och de servrar som driver tjänsten finns i Stockholm, och tekniska felrapporter hanteras inom EU. Se listan över underbiträden i vår integritetspolicy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vem ansvarar för personuppgifterna, och finns det ett PUB-avtal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Skolan eller huvudmannen är personuppgiftsansvarig och Frånvarokollen Sverige AB är personuppgiftsbiträde. Ett personuppgiftsbiträdesavtal (PUB-avtal) undertecknas som en del av avtalet. Det reglerar vilka uppgifter som får behandlas, hur de skyddas, vem som ansvarar för vad och vad som händer med uppgifterna när avtalet upphör."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vilka uppgifter finns i systemet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Endast uppgifter om personal som behövs för att hantera frånvaro och den dagliga bemanningen: personalens namn, schemakod, e-postadress, roll, sysselsättningsgrad och arbetstider; schemat (lektioner, tider, salar, ämnen samt klass- eller gruppnamn); frånvaro (datum, hel- eller deldag och frånvarokategori); bemanning (vem som täcker vilken lektion, inställda lektioner och uppskattade vikariekostnader); externa vikarier (namn, telefonnummer, e-postadress, ämnen, tillgänglighet och timkostnad); samt systemanvändare (namn, e-postadress och behörighetsnivå)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Finns det några elevuppgifter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Systemet saknar utrymme för att lagra uppgifter om enskilda elever, betyg eller elevhälsa. Schemat innehåller klass- och gruppnamn, till exempel 7B, så som de anges i skolans schemafil."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Är frånvaroorsaken en känslig personuppgift?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kategorin Sjuk är det. Att en medarbetare är sjukfrånvarande räknas som en hälsouppgift och därmed som en känslig personuppgift enligt GDPR. Systemet lagrar endast kategorin, aldrig någon diagnos, några symtom eller någon beskrivning. Kategorierna är Sjuk, VAB (vård av barn), Utbildning, Föräldraledighet, Personligt och Övrigt."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hanteras personnummer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Systemet letar efter personnummer i schemafiler genom att känna igen format och datum, och för tiosiffriga nummer utan skiljetecken kontrolleras även kontrollsiffran. Nummer som hittas visas för den som laddar upp filen och tas bort innan filen bearbetas. Samma kontroll görs i databasen, som inte tillåter att personnummer sparas i namn- och anteckningsfält."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vem kan se uppgifterna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Endast skolledningen och de användare som skolan själv utser. Ägare och samordnare kan registrera och ändra uppgifter, och rollen Skolledning ger endast läsbehörighet. Ingen skola kan se en annan skolas uppgifter; det säkerställs direkt i databasen (Row Level Security). Systemet rangordnar inte individer och följer inte deras frånvaro över tid, statistiken visas per frånvarokategori. En användare som inaktiveras under Inställningar förlorar omedelbart all tillgång."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur loggar personalen in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Med ett Microsoft- eller Google-konto, till exempel skolans Microsoft 365 eller Google Workspace. Vi lagrar därför inga lösenord, och när ni loggar in med kommunens eller skolans konto gäller era egna säkerhetskrav, till exempel tvåfaktorsautentisering. Vem som får tillgång, och med vilken roll, bestämmer skolan själv i Frånvarokollen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur skyddas uppgifterna?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All trafik är krypterad (TLS) och uppgifterna lagras krypterat. Varje skolas uppgifter hålls åtskilda direkt i databasen, och separationen kontrolleras med automatiserade tester. Databasen säkerhetskopieras dagligen. Programvaran uppdateras när säkerhetsrättningar släpps, och koden skannas automatiskt efter sårbarheter och läckta nycklar. Endast de personer på Frånvarokollen som sköter driften har teknisk administratörsbehörighet, och de omfattas av sekretess enligt PUB-avtalet."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vilka underbiträden används?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Supabase (databas och inloggning, Stockholm), Vercel (drift av webbtjänsten, Stockholm) och Sentry (tekniska felrapporter, EU). Leverantörerna har moderbolag utanför EU, och eventuella överföringar regleras genom EU:s standardavtalsklausuler eller EU-US Data Privacy Framework. Tjänsten skickar inte själv någon e-post: meddelanden till personal öppnas i användarens eget e-postprogram. Se hela listan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Används våra uppgifter för AI, testning eller utveckling?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nej. Kollen, som tar fram vikarieförslagen, är regelbaserad och körs i användarens webbläsare. Inga uppgifter skickas till någon extern AI-tjänst. Vid testning och utveckling använder vi anonymiserade uppgifter från våra egna interna verktyg, aldrig skolornas riktiga uppgifter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Vad händer vid en säkerhetsincident?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enligt PUB-avtalet meddelar vi skolan eller huvudmannen utan onödigt dröjsmål, och senast inom 24 timmar, om en bekräftad eller misstänkt personuppgiftsincident. Vi lämnar också den information som behövs för att bedöma incidenten och en eventuell anmälan till Integritetsskyddsmyndigheten (IMY)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hur länge sparas uppgifterna, och vad händer när avtalet upphör?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Uppgifterna sparas så länge skolan använder tjänsten. Önskar ni en kortare lagringstid, till exempel för frånvarohistorik, kan vi komma överens om det. Uppgifterna tillhör skolan: när avtalet upphör lämnar vi över dem i ett läsbart format eller raderar dem, enligt ert val. Radering sker inom 30 dagar och bekräftas skriftligen."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Hur kommer vi igång?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Enklast är att ansöka om en partnerplats eller mejla info@franvarokollen.com så bokar vi en kort genomgång utifrån er skolas storlek och arbetssätt."
+            "text": "Enklast är att ansöka om en partnerplats eller mejla info@franvarokollen.com så bokar vi en kort genomgång utifrån er skolas storlek och arbetssätt. Har ni eller ert dataskyddsombud frågor om avtal, personuppgifter eller säkerhet? Mejla gdpr@franvarokollen.com eller boka ett digitalt möte, så går vi igenom dem tillsammans."
           }
         }
       ]
@@ -1086,14 +1174,6 @@
       <div class="faq-a"><p>Nej. <span translate=no class=notranslate>Frånvarokollen</span> föreslår vikarier rankade efter schema, behörighet och belastning, men det är alltid samordnaren som bestämmer. Systemet gör underlaget tydligt, inte beslutet automatiskt.</p></div>
     </details>
     <details class="faq-item">
-      <summary><span>Var lagras våra data och är det GDPR-anpassat?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-      <div class="faq-a"><p>All data lagras på servrar inom EU. <span translate=no class=notranslate>Frånvarokollen</span> är byggt för svensk skola med GDPR som utgångspunkt: minimering av personuppgifter, tydlig åtkomststyrning och personuppgiftsbiträdesavtal för skolor och huvudmän.</p></div>
-    </details>
-    <details class="faq-item">
-      <summary><span>Hur loggar personalen in?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-      <div class="faq-a"><p>Med skolans befintliga konton via Google Workspace eller Microsoft 365 (SSO). Inga nya lösenord att hålla reda på och behörigheter följer skolans katalog.</p></div>
-    </details>
-    <details class="faq-item">
       <summary><span>Behöver vi byta schemasystem?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
       <div class="faq-a"><p>Nej. <span translate=no class=notranslate>Frånvarokollen</span> är ett fristående verktyg som kompletterar det ni redan har. Ni fortsätter lägga schema där ni gör det i dag och använder <span translate=no class=notranslate>Frånvarokollen</span> för frånvaro, vikarier och uppföljning.</p></div>
     </details>
@@ -1102,8 +1182,60 @@
       <div class="faq-a"><p>Grundskolor och gymnasieskolor, kommunala såväl som fristående, med en eller flera personer som samordnar vikarier. Systemet fungerar lika bra för en skola som för en huvudman med flera enheter.</p></div>
     </details>
     <details class="faq-item">
+      <summary><span>Var lagras våra uppgifter?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>I Stockholm. Databasen och de servrar som driver tjänsten finns i Stockholm, och tekniska felrapporter hanteras inom EU. Se <a href="/integritetspolicy#underbitraden">listan över underbiträden</a> i vår integritetspolicy.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Vem ansvarar för personuppgifterna, och finns det ett PUB-avtal?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Skolan eller huvudmannen är personuppgiftsansvarig och <span translate=no class=notranslate>Frånvarokollen</span> Sverige AB är personuppgiftsbiträde. Ett personuppgiftsbiträdesavtal (PUB-avtal) undertecknas som en del av avtalet. Det reglerar vilka uppgifter som får behandlas, hur de skyddas, vem som ansvarar för vad och vad som händer med uppgifterna när avtalet upphör.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Vilka uppgifter finns i systemet?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Endast uppgifter om personal som behövs för att hantera frånvaro och den dagliga bemanningen: personalens namn, schemakod, e-postadress, roll, sysselsättningsgrad och arbetstider; schemat (lektioner, tider, salar, ämnen samt klass- eller gruppnamn); frånvaro (datum, hel- eller deldag och frånvarokategori); bemanning (vem som täcker vilken lektion, inställda lektioner och uppskattade vikariekostnader); externa vikarier (namn, telefonnummer, e-postadress, ämnen, tillgänglighet och timkostnad); samt systemanvändare (namn, e-postadress och behörighetsnivå).</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Finns det några elevuppgifter?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Nej. Systemet saknar utrymme för att lagra uppgifter om enskilda elever, betyg eller elevhälsa. Schemat innehåller klass- och gruppnamn, till exempel 7B, så som de anges i skolans schemafil.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Är frånvaroorsaken en känslig personuppgift?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Kategorin Sjuk är det. Att en medarbetare är sjukfrånvarande räknas som en hälsouppgift och därmed som en känslig personuppgift enligt GDPR. Systemet lagrar endast kategorin, aldrig någon diagnos, några symtom eller någon beskrivning. Kategorierna är Sjuk, VAB (vård av barn), Utbildning, Föräldraledighet, Personligt och Övrigt.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Hanteras personnummer?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Nej. Systemet letar efter personnummer i schemafiler genom att känna igen format och datum, och för tiosiffriga nummer utan skiljetecken kontrolleras även kontrollsiffran. Nummer som hittas visas för den som laddar upp filen och tas bort innan filen bearbetas. Samma kontroll görs i databasen, som inte tillåter att personnummer sparas i namn- och anteckningsfält.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Vem kan se uppgifterna?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Endast skolledningen och de användare som skolan själv utser. Ägare och samordnare kan registrera och ändra uppgifter, och rollen Skolledning ger endast läsbehörighet. Ingen skola kan se en annan skolas uppgifter; det säkerställs direkt i databasen (Row Level Security). Systemet rangordnar inte individer och följer inte deras frånvaro över tid, statistiken visas per frånvarokategori. En användare som inaktiveras under Inställningar förlorar omedelbart all tillgång.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Hur loggar personalen in?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Med ett Microsoft- eller Google-konto, till exempel skolans Microsoft 365 eller Google Workspace. Vi lagrar därför inga lösenord, och när ni loggar in med kommunens eller skolans konto gäller era egna säkerhetskrav, till exempel tvåfaktorsautentisering. Vem som får tillgång, och med vilken roll, bestämmer skolan själv i <span translate=no class=notranslate>Frånvarokollen</span>.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Hur skyddas uppgifterna?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>All trafik är krypterad (TLS) och uppgifterna lagras krypterat. Varje skolas uppgifter hålls åtskilda direkt i databasen, och separationen kontrolleras med automatiserade tester. Databasen säkerhetskopieras dagligen. Programvaran uppdateras när säkerhetsrättningar släpps, och koden skannas automatiskt efter sårbarheter och läckta nycklar. Endast de personer på <span translate=no class=notranslate>Frånvarokollen</span> som sköter driften har teknisk administratörsbehörighet, och de omfattas av sekretess enligt PUB-avtalet.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Vilka underbiträden används?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Supabase (databas och inloggning, Stockholm), Vercel (drift av webbtjänsten, Stockholm) och Sentry (tekniska felrapporter, EU). Leverantörerna har moderbolag utanför EU, och eventuella överföringar regleras genom EU:s standardavtalsklausuler eller EU-US Data Privacy Framework. Tjänsten skickar inte själv någon e-post: meddelanden till personal öppnas i användarens eget e-postprogram. Se <a href="/integritetspolicy#underbitraden">hela listan</a>.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Används våra uppgifter för AI, testning eller utveckling?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Nej. Kollen, som tar fram vikarieförslagen, är regelbaserad och körs i användarens webbläsare. Inga uppgifter skickas till någon extern AI-tjänst. Vid testning och utveckling använder vi anonymiserade uppgifter från våra egna interna verktyg, aldrig skolornas riktiga uppgifter.</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Vad händer vid en säkerhetsincident?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Enligt PUB-avtalet meddelar vi skolan eller huvudmannen utan onödigt dröjsmål, och senast inom 24 timmar, om en bekräftad eller misstänkt personuppgiftsincident. Vi lämnar också den information som behövs för att bedöma incidenten och en eventuell anmälan till Integritetsskyddsmyndigheten (IMY).</p></div>
+    </details>
+    <details class="faq-item">
+      <summary><span>Hur länge sparas uppgifterna, och vad händer när avtalet upphör?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="faq-a"><p>Uppgifterna sparas så länge skolan använder tjänsten. Önskar ni en kortare lagringstid, till exempel för frånvarohistorik, kan vi komma överens om det. Uppgifterna tillhör skolan: när avtalet upphör lämnar vi över dem i ett läsbart format eller raderar dem, enligt ert val. Radering sker inom 30 dagar och bekräftas skriftligen.</p></div>
+    </details>
+    <details class="faq-item">
       <summary><span>Hur kommer vi igång?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-      <div class="faq-a"><p>Enklast är att <a href="/bli-partnerskola">ansöka om en partnerplats</a> eller mejla <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a> så bokar vi en kort genomgång utifrån er skolas storlek och arbetssätt.</p></div>
+      <div class="faq-a"><p>Enklast är att <a href="/bli-partnerskola">ansöka om en partnerplats</a> eller mejla <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a> så bokar vi en kort genomgång utifrån er skolas storlek och arbetssätt. Har ni eller ert dataskyddsombud frågor om avtal, personuppgifter eller säkerhet? Mejla <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a> eller boka ett digitalt möte, så går vi igenom dem tillsammans.</p></div>
     </details>
   </div>
   <div class="faq-cta">

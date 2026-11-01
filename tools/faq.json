@@ -13,14 +13,6 @@
    "Nej. <span translate=no class=notranslate>Frånvarokollen</span> föreslår vikarier rankade efter schema, behörighet och belastning, men det är alltid samordnaren som bestämmer. Systemet gör underlaget tydligt, inte beslutet automatiskt."
   ],
   [
-   "Var lagras våra data och är det GDPR-anpassat?",
-   "All data lagras på servrar inom EU. <span translate=no class=notranslate>Frånvarokollen</span> är byggt för svensk skola med GDPR som utgångspunkt: minimering av personuppgifter, tydlig åtkomststyrning och personuppgiftsbiträdesavtal för skolor och huvudmän."
-  ],
-  [
-   "Hur loggar personalen in?",
-   "Med skolans befintliga konton via Google Workspace eller Microsoft 365 (SSO). Inga nya lösenord att hålla reda på och behörigheter följer skolans katalog."
-  ],
-  [
    "Behöver vi byta schemasystem?",
    "Nej. <span translate=no class=notranslate>Frånvarokollen</span> är ett fristående verktyg som kompletterar det ni redan har. Ni fortsätter lägga schema där ni gör det i dag och använder <span translate=no class=notranslate>Frånvarokollen</span> för frånvaro, vikarier och uppföljning."
   ],
@@ -29,8 +21,60 @@
    "Grundskolor och gymnasieskolor, kommunala såväl som fristående, med en eller flera personer som samordnar vikarier. Systemet fungerar lika bra för en skola som för en huvudman med flera enheter."
   ],
   [
+   "Var lagras våra uppgifter?",
+   "I Stockholm. Databasen och de servrar som driver tjänsten finns i Stockholm, och tekniska felrapporter hanteras inom EU. Se <a href=\"/integritetspolicy#underbitraden\">listan över underbiträden</a> i vår integritetspolicy."
+  ],
+  [
+   "Vem ansvarar för personuppgifterna, och finns det ett PUB-avtal?",
+   "Skolan eller huvudmannen är personuppgiftsansvarig och <span translate=no class=notranslate>Frånvarokollen</span> Sverige AB är personuppgiftsbiträde. Ett personuppgiftsbiträdesavtal (PUB-avtal) undertecknas som en del av avtalet. Det reglerar vilka uppgifter som får behandlas, hur de skyddas, vem som ansvarar för vad och vad som händer med uppgifterna när avtalet upphör."
+  ],
+  [
+   "Vilka uppgifter finns i systemet?",
+   "Endast uppgifter om personal som behövs för att hantera frånvaro och den dagliga bemanningen: personalens namn, schemakod, e-postadress, roll, sysselsättningsgrad och arbetstider; schemat (lektioner, tider, salar, ämnen samt klass- eller gruppnamn); frånvaro (datum, hel- eller deldag och frånvarokategori); bemanning (vem som täcker vilken lektion, inställda lektioner och uppskattade vikariekostnader); externa vikarier (namn, telefonnummer, e-postadress, ämnen, tillgänglighet och timkostnad); samt systemanvändare (namn, e-postadress och behörighetsnivå)."
+  ],
+  [
+   "Finns det några elevuppgifter?",
+   "Nej. Systemet saknar utrymme för att lagra uppgifter om enskilda elever, betyg eller elevhälsa. Schemat innehåller klass- och gruppnamn, till exempel 7B, så som de anges i skolans schemafil."
+  ],
+  [
+   "Är frånvaroorsaken en känslig personuppgift?",
+   "Kategorin Sjuk är det. Att en medarbetare är sjukfrånvarande räknas som en hälsouppgift och därmed som en känslig personuppgift enligt GDPR. Systemet lagrar endast kategorin, aldrig någon diagnos, några symtom eller någon beskrivning. Kategorierna är Sjuk, VAB (vård av barn), Utbildning, Föräldraledighet, Personligt och Övrigt."
+  ],
+  [
+   "Hanteras personnummer?",
+   "Nej. Systemet letar efter personnummer i schemafiler genom att känna igen format och datum, och för tiosiffriga nummer utan skiljetecken kontrolleras även kontrollsiffran. Nummer som hittas visas för den som laddar upp filen och tas bort innan filen bearbetas. Samma kontroll görs i databasen, som inte tillåter att personnummer sparas i namn- och anteckningsfält."
+  ],
+  [
+   "Vem kan se uppgifterna?",
+   "Endast skolledningen och de användare som skolan själv utser. Ägare och samordnare kan registrera och ändra uppgifter, och rollen Skolledning ger endast läsbehörighet. Ingen skola kan se en annan skolas uppgifter; det säkerställs direkt i databasen (Row Level Security). Systemet rangordnar inte individer och följer inte deras frånvaro över tid, statistiken visas per frånvarokategori. En användare som inaktiveras under Inställningar förlorar omedelbart all tillgång."
+  ],
+  [
+   "Hur loggar personalen in?",
+   "Med ett Microsoft- eller Google-konto, till exempel skolans Microsoft 365 eller Google Workspace. Vi lagrar därför inga lösenord, och när ni loggar in med kommunens eller skolans konto gäller era egna säkerhetskrav, till exempel tvåfaktorsautentisering. Vem som får tillgång, och med vilken roll, bestämmer skolan själv i <span translate=no class=notranslate>Frånvarokollen</span>."
+  ],
+  [
+   "Hur skyddas uppgifterna?",
+   "All trafik är krypterad (TLS) och uppgifterna lagras krypterat. Varje skolas uppgifter hålls åtskilda direkt i databasen, och separationen kontrolleras med automatiserade tester. Databasen säkerhetskopieras dagligen. Programvaran uppdateras när säkerhetsrättningar släpps, och koden skannas automatiskt efter sårbarheter och läckta nycklar. Endast de personer på <span translate=no class=notranslate>Frånvarokollen</span> som sköter driften har teknisk administratörsbehörighet, och de omfattas av sekretess enligt PUB-avtalet."
+  ],
+  [
+   "Vilka underbiträden används?",
+   "Supabase (databas och inloggning, Stockholm), Vercel (drift av webbtjänsten, Stockholm) och Sentry (tekniska felrapporter, EU). Leverantörerna har moderbolag utanför EU, och eventuella överföringar regleras genom EU:s standardavtalsklausuler eller EU-US Data Privacy Framework. Tjänsten skickar inte själv någon e-post: meddelanden till personal öppnas i användarens eget e-postprogram. Se <a href=\"/integritetspolicy#underbitraden\">hela listan</a>."
+  ],
+  [
+   "Används våra uppgifter för AI, testning eller utveckling?",
+   "Nej. Kollen, som tar fram vikarieförslagen, är regelbaserad och körs i användarens webbläsare. Inga uppgifter skickas till någon extern AI-tjänst. Vid testning och utveckling använder vi anonymiserade uppgifter från våra egna interna verktyg, aldrig skolornas riktiga uppgifter."
+  ],
+  [
+   "Vad händer vid en säkerhetsincident?",
+   "Enligt PUB-avtalet meddelar vi skolan eller huvudmannen utan onödigt dröjsmål, och senast inom 24 timmar, om en bekräftad eller misstänkt personuppgiftsincident. Vi lämnar också den information som behövs för att bedöma incidenten och en eventuell anmälan till Integritetsskyddsmyndigheten (IMY)."
+  ],
+  [
+   "Hur länge sparas uppgifterna, och vad händer när avtalet upphör?",
+   "Uppgifterna sparas så länge skolan använder tjänsten. Önskar ni en kortare lagringstid, till exempel för frånvarohistorik, kan vi komma överens om det. Uppgifterna tillhör skolan: när avtalet upphör lämnar vi över dem i ett läsbart format eller raderar dem, enligt ert val. Radering sker inom 30 dagar och bekräftas skriftligen."
+  ],
+  [
    "Hur kommer vi igång?",
-   "Enklast är att <a href=\"/bli-partnerskola\">ansöka om en partnerplats</a> eller mejla <a href=\"mailto:info@franvarokollen.com\">info@franvarokollen.com</a> så bokar vi en kort genomgång utifrån er skolas storlek och arbetssätt."
+   "Enklast är att <a href=\"/bli-partnerskola\">ansöka om en partnerplats</a> eller mejla <a href=\"mailto:info@franvarokollen.com\">info@franvarokollen.com</a> så bokar vi en kort genomgång utifrån er skolas storlek och arbetssätt. Har ni eller ert dataskyddsombud frågor om avtal, personuppgifter eller säkerhet? Mejla <a href=\"mailto:gdpr@franvarokollen.com\">gdpr@franvarokollen.com</a> eller boka ett digitalt möte, så går vi igenom dem tillsammans."
   ]
  ],
  "en": [
@@ -47,14 +91,6 @@
    "No. <span translate=no class=notranslate>Frånvarokollen</span> suggests substitutes ranked by schedule, qualifications and workload, but the coordinator always decides. The system makes the picture clear; it does not automate the decision."
   ],
   [
-   "Where is our data stored, and is it GDPR-compliant?",
-   "All data is stored on servers within the EU. <span translate=no class=notranslate>Frånvarokollen</span> is built for Swedish schools with GDPR as the starting point: data minimisation, clear access control and data processing agreements for schools and school organisers."
-  ],
-  [
-   "How do staff log in?",
-   "With the school's existing accounts via Google Workspace or Microsoft 365 (SSO). No new passwords to keep track of, and permissions follow the school's directory."
-  ],
-  [
    "Do we need to change our timetabling system?",
    "No. <span translate=no class=notranslate>Frånvarokollen</span> is a standalone tool that complements what you already have. You keep building timetables where you do today and use <span translate=no class=notranslate>Frånvarokollen</span> for absence, cover and follow-up."
   ],
@@ -63,8 +99,60 @@
    "Primary and secondary schools, municipal as well as independent, with one or more people coordinating cover. It works equally well for a single school or an organiser with several units."
   ],
   [
+   "Where is our data stored?",
+   "In Stockholm. The database and the servers that run the service are in Stockholm, and technical error reports are handled within the EU. See the <a href=\"/integritetspolicy#sub-processors\">list of sub-processors</a> in our privacy policy."
+  ],
+  [
+   "Who is responsible for the personal data, and is there a data processing agreement?",
+   "The school or its organiser is the data controller and <span translate=no class=notranslate>Frånvarokollen</span> Sverige AB is the data processor. A data processing agreement (PUB-avtal) is signed as part of the agreement. It sets out which data may be processed, how it is protected, who is responsible for what, and what happens to the data when the agreement ends."
+  ],
+  [
+   "What data is in the system?",
+   "Only staff data needed to manage absence and day-to-day staffing: staff name, timetable code, email address, role, employment percentage and working hours; the timetable (lessons, times, rooms, subjects and class or group names); absence (date, full or part day and absence category); cover (who covers which lesson, cancelled lessons and estimated substitute costs); external substitutes (name, phone number, email address, subjects, availability and hourly cost); and system users (name, email address and permission level)."
+  ],
+  [
+   "Is there any student data?",
+   "No. The system has nowhere to store data about individual students, grades or student health. The timetable contains class and group names, such as 7B, as they appear in the school's timetable file."
+  ],
+  [
+   "Is the absence reason sensitive personal data?",
+   "The Sick category is. The fact that an employee is off sick counts as health data and therefore as special category data under the GDPR. The system stores only the category, never a diagnosis, symptoms or a description. The categories are Sick, VAB (care of a sick child), Training, Parental leave, Personal and Other."
+  ],
+  [
+   "Do you handle personal identity numbers (personnummer)?",
+   "No. The system looks for personal identity numbers in timetable files by recognising their format and date, and for ten-digit numbers without separators it also checks the check digit. Any numbers found are shown to the person uploading the file and removed before the file is processed. The same check runs in the database, which does not allow them to be saved in name and note fields."
+  ],
+  [
+   "Who can see the data?",
+   "Only school leadership and the users the school itself appoints. Owners and coordinators can enter and change data; the School leadership role is read-only. No school can see another school's data; this is enforced in the database itself (Row Level Security). The system does not rank individuals or track their absence over time, and statistics are shown per absence category. A user deactivated under Settings loses all access immediately."
+  ],
+  [
+   "How do staff sign in?",
+   "With a Microsoft or Google account, for example the school's Microsoft 365 or Google Workspace. That means we store no passwords, and when you sign in with your municipality's or school's account your own security requirements apply, such as two-factor authentication. The school itself decides in <span translate=no class=notranslate>Frånvarokollen</span> who has access and with which role."
+  ],
+  [
+   "How is the data protected?",
+   "All traffic is encrypted (TLS) and data is stored encrypted. Each school's data is kept separate in the database itself, and that separation is checked by automated tests. The database is backed up daily. The software is updated when security fixes are released, and the code is automatically scanned for vulnerabilities and leaked keys. Only the people at <span translate=no class=notranslate>Frånvarokollen</span> who run the service have technical administrator access, and they are bound by confidentiality under the data processing agreement."
+  ],
+  [
+   "Which sub-processors do you use?",
+   "Supabase (database and sign-in, Stockholm), Vercel (hosting of the web service, Stockholm) and Sentry (technical error reports, EU). These providers have parent companies outside the EU, and any transfers are covered by the EU Standard Contractual Clauses or the EU-US Data Privacy Framework. The service sends no email itself: messages to staff open in the user's own email program. See the <a href=\"/integritetspolicy#sub-processors\">full list</a>."
+  ],
+  [
+   "Is our data used for AI, testing or development?",
+   "No. Kollen, which produces the substitute suggestions, is rule-based and runs in the user's browser. No data is sent to any external AI service. For testing and development we use anonymised data from our own internal tools, never schools' real data."
+  ],
+  [
+   "What happens if there is a security incident?",
+   "Under the data processing agreement we notify the school or its organiser without undue delay, and within 24 hours at the latest, of any confirmed or suspected personal data breach. We also provide the information needed to assess the incident and any report to the Swedish Authority for Privacy Protection (IMY)."
+  ],
+  [
+   "How long is data kept, and what happens when the agreement ends?",
+   "Data is kept for as long as the school uses the service. If you want a shorter retention period, for example for absence history, we can agree on that. The data belongs to the school: when the agreement ends we hand it over in a readable format or delete it, as you choose. Deletion happens within 30 days and is confirmed in writing."
+  ],
+  [
    "How do we get started?",
-   "The easiest way is to <a href=\"/bli-partnerskola\">apply for a partner place</a> or email <a href=\"mailto:info@franvarokollen.com\">info@franvarokollen.com</a> and we'll book a short walkthrough based on your school's size and way of working."
+   "The easiest way is to <a href=\"/bli-partnerskola\">apply for a partner place</a> or email <a href=\"mailto:info@franvarokollen.com\">info@franvarokollen.com</a> and we'll book a short walkthrough based on your school's size and way of working. Do you or your data protection officer have questions about the agreement, personal data or security? Email <a href=\"mailto:gdpr@franvarokollen.com\">gdpr@franvarokollen.com</a> or book a video call and we'll go through them together."
   ]
  ]
 }

@@ -733,6 +733,7 @@
   .policy-wrap ul,.policy-wrap ol{color:var(--ink);line-height:1.75;margin:0 0 16px 24px}
   .policy-wrap li{margin-bottom:6px}
   .policy-wrap table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+  @media (max-width:640px){.policy-wrap table{display:block;overflow-x:auto;font-size:13px}}
   .policy-wrap th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-weight:700}
   .policy-wrap td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
   .policy-wrap tr:nth-child(even) td{background:var(--cream-deep)}
@@ -768,147 +769,128 @@
   <div data-lang="sv" class="active">
     <div class="lang-notice">🇸🇪 Detta dokument är på svenska. <a href="#" onclick="setLang('en');return false;">Read in English →</a></div>
     <h1>Cookiepolicy</h1>
-    <p class="policy-meta">Senast uppdaterad: 2026-10-18 &nbsp;·&nbsp; Version 1.1</p>
-    
+    <p class="policy-meta">Senast uppdaterad: 2026-11-01 &nbsp;·&nbsp; Version 2.0</p>
+
 <h2>1. Sammanfattning</h2>
-<p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB använder ett mycket begränsat antal cookies. Vår filosofi:</p>
+<p>Den här policyn gäller både vår webbplats <strong>franvarokollen.com</strong> och den inloggade tjänsten <strong><span translate=no class=notranslate>Frånvarokollen</span></strong>. Den beskriver alla cookies och liknande tekniker som används på båda ställena.</p>
 <ul>
-<li>Vi använder inga marknadsförings- eller spårningscookies, inga tredjepartscookies, inga "social media pixels", ingen profilering.</li>
-<li>Vi använder ingen webbanalys på den publika webbplatsen.</li>
-<li>Vi använder endast strikt nödvändiga cookies — och endast i inloggad miljö.</li>
-<li>Du behöver inte godkänna någonting för att besöka vår webbplats.</li>
+<li><strong>Webbplatsen</strong> sätter inga cookies. Den sparar bara ditt språkval (svenska eller engelska) i din webbläsare.</li>
+<li><strong>Tjänsten</strong> använder en enda cookie, för att hålla dig inloggad, och sparar ditt språkval i webbläsaren.</li>
+<li>Vi använder inga cookies för statistik, analys, marknadsföring eller spårning, varken på webbplatsen eller i tjänsten.</li>
+<li>Allt vi använder är antingen nödvändigt för att tjänsten ska fungera eller något du själv har valt. Därför behöver vi inte be om ditt samtycke, och det finns ingen cookiebanner.</li>
 </ul>
 
-<h2>2. Vad är cookies?</h2>
-<p>En cookie är en liten textfil som en webbplats kan spara på din enhet. Cookies används för olika ändamål — från att komma ihåg att du är inloggad, till att spåra ditt beteende över webbplatser för marknadsföring.</p>
+<h2>2. Vad är cookies och liknande tekniker?</h2>
+<p>En cookie är en liten textfil som en webbplats sparar i din webbläsare. Liknande tekniker är till exempel <em>localStorage</em>, där en webbplats kan spara små uppgifter i din webbläsare. Till skillnad från en cookie skickas uppgifter i localStorage inte automatiskt till någon server. Reglerna i lagen om elektronisk kommunikation gäller för båda.</p>
 
-<h2>3. Vår filosofi kring cookies</h2>
-<p>Vi bygger <span translate=no class=notranslate>Frånvarokollen</span> för svenska grundskolor. Vår målgrupp värderar integritet högt och vår produkt hanterar känslig data om skolpersonal. Det vore inkonsekvent att spåra besökare på vår webbplats med tredjepartscookies.</p>
-<p>Det betyder att ingen "cookie consent banner" behövs på vår webbplats — eftersom vi inte använder cookies som kräver samtycke.</p>
-
-<h2>4. Cookies vi använder</h2>
-<h3>4.1 På den publika webbplatsen (franvarokollen.com)</h3>
-<p><strong>Inga cookies.</strong> Vår webbplats är byggd för att fungera utan cookies.</p>
-<h3>4.2 I den inloggade tjänsten <span translate=no class=notranslate>Frånvarokollen</span></h3>
+<h2>3. Webbplatsen franvarokollen.com</h2>
 <table>
-<tr><th>Namn</th><th>Syfte</th><th>Typ</th><th>Lagringstid</th><th>Leverantör</th></tr>
-<tr><td>sb-access-token</td><td>Autentisering — håller din session aktiv</td><td>Sessionscookie</td><td>Session</td><td>Supabase</td></tr>
-<tr><td>sb-refresh-token</td><td>Återautentisering — förnyar session säkert</td><td>Persistent</td><td>Upp till 7 dagar</td><td>Supabase</td></tr>
-<tr><td>__Host-supabase-auth-token</td><td>CSRF-skydd</td><td>Sessionscookie</td><td>Session</td><td>Supabase</td></tr>
+<tr><th>Namn</th><th>Typ</th><th>Syfte</th><th>Lagringstid</th><th>Sätts av</th></tr>
+<tr><td>fk_lang</td><td>localStorage</td><td>Kommer ihåg om du har valt svenska eller engelska</td><td>Tills du rensar webbplatsdata i webbläsaren</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
 </table>
-<p>Dessa cookies är strikt nödvändiga enligt ePrivacy-direktivet (artikel 5.3) och kräver inte samtycke.</p>
-<h3>4.3 Liknande tekniker</h3>
-<p><strong>localStorage</strong> — för UI-preferenser (språkinställning, tema). Sparas i din webbläsare och skickas aldrig till oss.<br>
-<strong>sessionStorage</strong> — för tillfällig data under ditt aktiva besök. Raderas när du stänger fliken.</p>
+<p>Webbplatsen sätter inga cookies. Typsnitt, bilder och filmer levereras från vår egen domän, och webbplatsen hämtar inget från andra företag när du besöker den. Ikonerna för LinkedIn, Facebook, Instagram och Pinterest är vanliga länkar och laddar inget från de tjänsterna förrän du klickar på dem.</p>
+<p><strong>Intresseanmälan.</strong> Om du skickar intresseformuläret på webbplatsen skickar din webbläsare det du har fyllt i direkt till Google Forms, som vi använder för att ta emot anmälningar. Ingenting skickas till Google förrän du klickar på skicka. Om du samtidigt är inloggad på ett Google-konto kan din webbläsare skicka med Googles egna cookies, enligt <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">Googles cookiepolicy</a>. Vill du undvika det kan du i stället mejla oss på <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a>.</p>
 
-<h2>5. Webbanalys</h2>
-<p>Vi använder ingen webbanalys på den publika webbplatsen. Typsnitt och övriga filer levereras från vår egen domän — inga anrop görs till Google Fonts eller andra tredjepartstjänster när du besöker sidan.</p>
-<p>Vi använder inte Google Analytics, Facebook Pixel, LinkedIn Insight Tag eller liknande spårningstekniker.</p>
+<h2>4. Tjänsten <span translate=no class=notranslate>Frånvarokollen</span> (inloggad)</h2>
+<table>
+<tr><th>Namn</th><th>Typ</th><th>Syfte</th><th>Lagringstid</th><th>Sätts av</th></tr>
+<tr><td>sb-&lt;id&gt;-auth-token<br><small>(kan delas upp i flera delar, till exempel .0 och .1)</small></td><td>Cookie (förstapart)</td><td>Håller dig inloggad efter att du loggat in med Microsoft eller Google</td><td>Raderas när du loggar ut, annars som längst 400 dagar. Själva inloggningen kontrolleras och förnyas löpande och upphör när skolan inaktiverar ditt konto.</td><td><span translate=no class=notranslate>Frånvarokollen</span> (via vår databasleverantör Supabase)</td></tr>
+<tr><td>franvaro-lang</td><td>localStorage</td><td>Kommer ihåg ditt språkval i tjänsten</td><td>Tills du rensar webbplatsdata i webbläsaren</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
+</table>
+<p><strong>Inloggning med Microsoft eller Google.</strong> När du loggar in skickas du till Microsofts eller Googles inloggningssida. De sidorna sätter sina egna cookies på sina egna domäner, enligt respektive företags villkor. Det gäller oavsett vilken tjänst du loggar in i och styrs inte av oss.</p>
+<p><strong>Felrapporter.</strong> Om ett tekniskt fel uppstår skickar tjänsten en felrapport till vår leverantör Sentry inom EU. Felrapporteringen sätter inga cookies, spelar inte in vad du gör på skärmen och är inställd så att den inte skickar med personuppgifter som namn eller e-postadress. Läs mer i vår <a href="/integritetspolicy">integritetspolicy</a>.</p>
 
-<h2>6. Vad vi INTE använder</h2>
+<h2>5. Varför behövs inget samtycke?</h2>
+<p>Enligt lagen (2022:482) om elektronisk kommunikation, 9 kap. 28 §, krävs samtycke för att spara eller läsa uppgifter i din webbläsare, utom när det behövs för att leverera en tjänst som du uttryckligen har bett om. Inloggningscookien behövs för att du ska kunna använda tjänsten, och språkvalet sparas bara för att du själv har valt språk. Inget av det används till något annat.</p>
+
+<h2>6. Det här använder vi inte</h2>
 <ul>
-<li>❌ Google Analytics eller andra externa analysverktyg</li>
-<li>❌ Facebook Pixel, LinkedIn Insight Tag, Twitter Pixel</li>
-<li>❌ Marknadsföringscookies (retargeting eller annonsering)</li>
-<li>❌ Tredjepartsannonser eller adservers</li>
-<li>❌ Fingerprinting</li>
-<li>❌ Hotjar, Mouseflow eller "session replay"-verktyg</li>
-<li>❌ Cross-site tracking av något slag</li>
+<li>Google Analytics eller andra verktyg för besöksstatistik</li>
+<li>Facebook Pixel, LinkedIn Insight Tag eller andra spårningspixlar</li>
+<li>Cookies för marknadsföring, annonser eller retargeting</li>
+<li>Inspelning av hur du använder sidan (till exempel Hotjar)</li>
+<li>Fingerprinting eller annan spårning mellan webbplatser</li>
 </ul>
+<p>Om vi någon gång vill börja använda något av detta ber vi om ditt samtycke först och uppdaterar den här policyn innan det tas i bruk.</p>
 
-<h2>7. Dina val</h2>
-<h3>7.1 Webbplatsen (utloggat)</h3>
-<p>Eftersom vi inte använder cookies på den publika webbplatsen finns det inget att slå av.</p>
-<h3>7.2 Tjänsten (inloggat)</h3>
-<p>De strikt nödvändiga cookies som används vid inloggning är oundvikliga — tjänsten kan inte fungera utan dem.</p>
-<h3>7.3 Webbläsarinställningar</h3>
-<p>De flesta webbläsare låter dig blockera, radera och granska cookies. Se respektive webbläsares hjälpsidor: <a href="https://support.google.com/chrome" target="_blank">Chrome</a>, <a href="https://support.mozilla.org" target="_blank">Firefox</a>, <a href="https://support.apple.com" target="_blank">Safari</a>, <a href="https://support.microsoft.com" target="_blank">Edge</a>.</p>
+<h2>7. Så tar du bort det som sparats</h2>
+<p>Du kan när som helst radera cookies och webbplatsdata i din webbläsares inställningar, vanligtvis under Integritet eller Sekretess. Raderar du inloggningscookien blir du utloggad från tjänsten. Raderar du språkvalet visas sidan på svenska nästa gång.</p>
 
-<h2>8. Cookies från externa länkar</h2>
-<p>Vår webbplats kan innehålla externa länkar. Vi ansvarar inte för cookies som sätts av andra webbplatser.</p>
+<h2>8. Ändringar</h2>
+<p>Om vi ändrar vilka cookies eller liknande tekniker vi använder uppdaterar vi den här policyn och datumet ovan. Vi går igenom policyn minst var sjätte månad.</p>
+<table>
+<tr><th>Version</th><th>Datum</th><th>Ändring</th></tr>
+<tr><td>2.0</td><td>2026-11-01</td><td>Omskriven så att den gäller både webbplatsen och tjänsten. Inloggningscookien och lagringen i webbläsaren beskrivs som de faktiskt fungerar. Språkvalet på webbplatsen, intresseformuläret, inloggning via Microsoft eller Google och felrapportering har lagts till. Avsnittet om tillsynsmyndigheter och länkarna till webbläsarnas hjälpsidor har tagits bort.</td></tr>
+<tr><td>1.1</td><td>2026-10-18</td><td>Uppgifter om webbanalys borttagna, typsnitt levereras från egen domän.</td></tr>
+<tr><td>1.0</td><td>2026-06-06</td><td>Första versionen.</td></tr>
+</table>
 
-<h2>9. Ändringar</h2>
-<p>Om vi ändrar vilka cookies vi använder uppdaterar vi denna policy. Vid materiella ändringar informeras besökare och befintliga kunder. Policyn granskas minst var 6:e månad.</p>
-
-<h2>10. Tillsyn</h2>
-<p><a href="https://pts.se" target="_blank">Post- och telestyrelsen (PTS)</a> — för regler om cookies och elektronisk kommunikation.<br>
-<a href="https://imy.se" target="_blank">Integritetsskyddsmyndigheten (IMY)</a> — för dataskyddsfrågor.</p>
-
-<h2>11. Kontakt</h2>
-<p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB<br>E-post: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a><br>Org.nr: 559585-6450<br>Säte: Stockholm</p>
-
+<h2>9. Kontakt</h2>
+<p>Frågor om cookies eller om hur vi behandlar personuppgifter skickar du till <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a>.</p>
+<p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB<br>Org.nr: 559585-6450<br>Säte: Stockholm</p>
   </div>
   <div data-lang="en">
-    <div class="lang-notice">🇬🇧 This document is in English. <a href="#" onclick="setLang('sv');return false;">Läs på svenska →</a></div>
+    <div class="lang-notice">🇬🇧 This English version is provided for information only; the Swedish version is authoritative. <a href="#" onclick="setLang('sv');return false;">Läs på svenska →</a></div>
     <h1>Cookie Policy</h1>
-    <p class="policy-meta">Senast uppdaterad: 2026-10-18 &nbsp;·&nbsp; Version 1.1</p>
-    
+    <p class="policy-meta">Last updated: 2026-11-01 &nbsp;·&nbsp; Version 2.0</p>
+
 <h2>1. Summary</h2>
-<p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB uses a very limited number of cookies. Our philosophy:</p>
+<p>This policy covers both our website <strong>franvarokollen.com</strong> and the signed-in <strong><span translate=no class=notranslate>Frånvarokollen</span></strong> service. It describes every cookie and similar technology used in either place.</p>
 <ul>
-<li>No marketing or tracking cookies. No third-party cookies. No social media pixels. No profiling.</li>
-<li>We do not use any web analytics on the public website.</li>
-<li>We use only strictly necessary cookies — and only in the signed-in environment.</li>
-<li>You don't need to consent to anything to visit our website.</li>
+<li><strong>The website</strong> sets no cookies. It only saves your language choice (Swedish or English) in your browser.</li>
+<li><strong>The service</strong> uses a single cookie, to keep you signed in, and saves your language choice in your browser.</li>
+<li>We use no cookies for statistics, analytics, marketing or tracking, on the website or in the service.</li>
+<li>Everything we use is either needed for the service to work or something you chose yourself. So we do not need to ask for your consent, and there is no cookie banner.</li>
 </ul>
 
-<h2>2. What are cookies?</h2>
-<p>A cookie is a small text file that a website can save on your device. Cookies are used for various purposes — from keeping you signed in to tracking your behaviour across sites for marketing.</p>
+<h2>2. What are cookies and similar technologies?</h2>
+<p>A cookie is a small text file a website saves in your browser. Similar technologies include <em>localStorage</em>, where a website can save small pieces of data in your browser. Unlike a cookie, data in localStorage is not automatically sent to any server. The rules in the Swedish Electronic Communications Act apply to both.</p>
 
-<h2>3. Our cookie philosophy</h2>
-<p>We build <span translate=no class=notranslate>Frånvarokollen</span> for Swedish schools. Our audience values privacy highly and our product handles data about school staff. We have therefore built our website without unnecessary cookies — meaning no cookie consent banner is needed.</p>
-
-<h2>4. Cookies we use</h2>
-<h3>4.1 On the public website (franvarokollen.com)</h3>
-<p><strong>None.</strong> Our website is built to function without cookies.</p>
-<h3>4.2 In the signed-in <span translate=no class=notranslate>Frånvarokollen</span> service</h3>
+<h2>3. The website franvarokollen.com</h2>
 <table>
-<tr><th>Name</th><th>Purpose</th><th>Type</th><th>Duration</th><th>Provider</th></tr>
-<tr><td>sb-access-token</td><td>Authentication — keeps your session active</td><td>Session cookie</td><td>Session</td><td>Supabase</td></tr>
-<tr><td>sb-refresh-token</td><td>Re-authentication — renews session securely</td><td>Persistent</td><td>Up to 7 days</td><td>Supabase</td></tr>
-<tr><td>__Host-supabase-auth-token</td><td>CSRF protection</td><td>Session cookie</td><td>Session</td><td>Supabase</td></tr>
+<tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th><th>Set by</th></tr>
+<tr><td>fk_lang</td><td>localStorage</td><td>Remembers whether you chose Swedish or English</td><td>Until you clear site data in your browser</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
 </table>
-<p>These cookies are strictly necessary under the ePrivacy Directive (Article 5(3)) and do not require consent.</p>
-<h3>4.3 Similar technologies</h3>
-<p><strong>localStorage</strong> — for UI preferences (language, theme). Stored in your browser only, never sent to us.<br>
-<strong>sessionStorage</strong> — for temporary data during your active session. Cleared when you close the tab.</p>
+<p>The website sets no cookies. Fonts, images and videos are served from our own domain, and the website loads nothing from other companies when you visit. The LinkedIn, Facebook, Instagram and Pinterest icons are plain links and load nothing from those services until you click them.</p>
+<p><strong>Expression of interest.</strong> If you submit the expression-of-interest form on the website, your browser sends what you filled in directly to Google Forms, which we use to receive sign-ups. Nothing is sent to Google until you click submit. If you are also signed in to a Google account, your browser may send Google's own cookies with it, under <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">Google's cookie policy</a>. To avoid that, email us at <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a> instead.</p>
 
-<h2>5. Web analytics</h2>
-<p>We do not use any web analytics on the public website. Fonts and other files are served from our own domain — no requests are made to Google Fonts or other third-party services when you visit.</p>
-<p>We do not use Google Analytics, Facebook Pixel, LinkedIn Insight Tag, or similar tracking technologies.</p>
+<h2>4. The <span translate=no class=notranslate>Frånvarokollen</span> service (signed in)</h2>
+<table>
+<tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th><th>Set by</th></tr>
+<tr><td>sb-&lt;id&gt;-auth-token<br><small>(may be split into several parts, such as .0 and .1)</small></td><td>Cookie (first party)</td><td>Keeps you signed in after you sign in with Microsoft or Google</td><td>Deleted when you sign out, otherwise at most 400 days. The sign-in itself is checked and renewed continuously and ends when the school deactivates your account.</td><td><span translate=no class=notranslate>Frånvarokollen</span> (via our database provider Supabase)</td></tr>
+<tr><td>franvaro-lang</td><td>localStorage</td><td>Remembers your language choice in the service</td><td>Until you clear site data in your browser</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
+</table>
+<p><strong>Signing in with Microsoft or Google.</strong> When you sign in you are sent to Microsoft's or Google's sign-in page. Those pages set their own cookies on their own domains, under each company's terms. That happens whichever service you sign in to and is not controlled by us.</p>
+<p><strong>Error reports.</strong> If a technical error occurs, the service sends an error report to our provider Sentry within the EU. Error reporting sets no cookies, does not record what you do on screen, and is configured not to include personal data such as names or email addresses. See our <a href="/integritetspolicy">privacy policy</a>.</p>
 
-<h2>6. What we do NOT use</h2>
+<h2>5. Why is no consent needed?</h2>
+<p>Under the Swedish Electronic Communications Act (2022:482), chapter 9, section 28, consent is required to store or read data in your browser, except where it is needed to deliver a service you have explicitly asked for. The sign-in cookie is needed for you to use the service, and the language choice is saved only because you chose a language. Neither is used for anything else.</p>
+
+<h2>6. What we do not use</h2>
 <ul>
-<li>❌ Google Analytics or other external analytics tools</li>
-<li>❌ Facebook Pixel, LinkedIn Insight Tag, Twitter Pixel</li>
-<li>❌ Marketing cookies (retargeting or advertising)</li>
-<li>❌ Third-party advertising or ad servers</li>
-<li>❌ Fingerprinting</li>
-<li>❌ Hotjar, Mouseflow or "session replay" tools</li>
-<li>❌ Cross-site tracking of any kind</li>
+<li>Google Analytics or other visitor-statistics tools</li>
+<li>Facebook Pixel, LinkedIn Insight Tag or other tracking pixels</li>
+<li>Cookies for marketing, advertising or retargeting</li>
+<li>Recording of how you use the page (such as Hotjar)</li>
+<li>Fingerprinting or any other cross-site tracking</li>
 </ul>
+<p>If we ever want to start using any of these, we will ask for your consent first and update this policy before it is put to use.</p>
 
-<h2>7. Your choices</h2>
-<h3>7.1 The website (signed-out)</h3>
-<p>Since we don't use cookies on the public website, there is nothing to turn off.</p>
-<h3>7.2 The service (signed-in)</h3>
-<p>The strictly necessary cookies used during sign-in are unavoidable — the service cannot function without them.</p>
-<h3>7.3 Browser settings</h3>
-<p>Most browsers let you block, clear, and review cookies. See: <a href="https://support.google.com/chrome" target="_blank">Chrome</a>, <a href="https://support.mozilla.org" target="_blank">Firefox</a>, <a href="https://support.apple.com" target="_blank">Safari</a>, <a href="https://support.microsoft.com" target="_blank">Edge</a>.</p>
+<h2>7. How to remove what is stored</h2>
+<p>You can delete cookies and site data at any time in your browser settings, usually under Privacy. Deleting the sign-in cookie signs you out of the service. Deleting the language choice shows the page in Swedish next time.</p>
 
-<h2>8. Cookies from external links</h2>
-<p>Our website may contain external links. We are not responsible for cookies set by other websites.</p>
+<h2>8. Changes</h2>
+<p>If we change which cookies or similar technologies we use, we update this policy and the date above. We review the policy at least every six months.</p>
+<table>
+<tr><th>Version</th><th>Date</th><th>Change</th></tr>
+<tr><td>2.0</td><td>2026-11-01</td><td>Rewritten to cover both the website and the service. The sign-in cookie and browser storage are described as they actually work. Added the website's language choice, the interest form, sign-in via Microsoft or Google, and error reporting. Removed the supervisory-authorities section and the links to browser help pages.</td></tr>
+<tr><td>1.1</td><td>2026-10-18</td><td>Web analytics claims removed; fonts served from our own domain.</td></tr>
+<tr><td>1.0</td><td>2026-06-06</td><td>First version.</td></tr>
+</table>
 
-<h2>9. Changes</h2>
-<p>If we change which cookies we use, we will update this policy. Material changes are communicated to visitors and customers. This policy is reviewed at least every 6 months.</p>
-
-<h2>10. Supervisory authorities</h2>
-<p><a href="https://pts.se" target="_blank">Post- och telestyrelsen (PTS)</a> — for cookie and electronic communications rules.<br>
-<a href="https://imy.se" target="_blank">Integritetsskyddsmyndigheten (IMY)</a> — for data protection matters.</p>
-
-<h2>11. Contact</h2>
-<p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB<br>Email: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a><br>Organisation number: 559585-6450<br>Registered seat: Stockholm, Sweden</p>
-
+<h2>9. Contact</h2>
+<p>Send questions about cookies or how we handle personal data to <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a>.</p>
+<p><span translate=no class=notranslate>Frånvarokollen</span> Sverige AB<br>Organisation number: 559585-6450<br>Registered seat: Stockholm, Sweden</p>
   </div>
   <div class="back-bottom"><a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg><span data-lang="sv" class="active">← Tillbaka till startsidan</span><span data-lang="en">← Back to homepage</span></a></div>
 </div>
