@@ -13,7 +13,7 @@
     /vanliga-fragor and /en/faq by tools/build-faq.py. Run the
     script, then bump lastmod here. xhtml:link alternates pair each SV page with its EN version.
   - /anvandarvillkor and /terms are server-rendered from the portal's Terms of Service
-    document. Their lastmod is the date that document last changed in the portal —
+    document. Their lastmod is the date that document last changed in the portal -
     bump both entries when a new Terms version is published.
   - changefreq and priority are omitted: Google ignores both.
   - The app (app.franvarokollen.com) is never listed here. It is a staff tool behind auth

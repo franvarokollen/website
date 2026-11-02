@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-build-en.py — generates the server-rendered English pages under /en/ from the
+build-en.py - generates the server-rendered English pages under /en/ from the
 Swedish source pages, so Google can index the English content on its own URLs
 (with hreflang), instead of only seeing the client-side language toggle.
 
@@ -24,7 +24,7 @@ The Swedish source pages are also touched: they get hreflang links and the EN
 toggle button is pointed at the /en/ URL. Their hidden [data-lang="en"] blocks
 are left in place so the source stays editable and the build is re-runnable.
 
-Requires node (to evaluate the JS translations object) — no npm packages.
+Requires node (to evaluate the JS translations object) - no npm packages.
 """
 import json, os, re, subprocess, sys, html
 

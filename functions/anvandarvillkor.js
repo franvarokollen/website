@@ -1,5 +1,5 @@
 // ============================================================
-// functions/anvandarvillkor.js  — Cloudflare Pages Function
+// functions/anvandarvillkor.js  - Cloudflare Pages Function
 // Route: /anvandarvillkor
 // Fetches the published Terms of Service from the Skolkollen API,
 // renders body_sv as Swedish markdown, returns a server-rendered HTML page
@@ -31,10 +31,10 @@ export async function onRequestGet(context) {
       doc = data && (data.doc || data);
     }
   } catch (_) {
-    // network failure — fall through to fallback
+    // network failure - fall through to fallback
   }
 
-  // 3a. No usable document — return on-brand fallback (HTTP 200, always resolves)
+  // 3a. No usable document - return on-brand fallback (HTTP 200, always resolves)
   if (!doc || !doc.body_sv) {
     return new Response(fallbackPage("sv"), {
       status: 200,
@@ -43,13 +43,13 @@ export async function onRequestGet(context) {
   }
 
   // 3b. Render the page
-  const version  = String(doc.version || "—");
+  const version  = String(doc.version || "-");
   const docTitle = doc.title || "Användarvillkor";
   const effectiveDate = doc.effective_date
     ? new Date(doc.effective_date).toLocaleDateString("sv-SE", {
         day: "numeric", month: "long", year: "numeric",
       })
-    : "—";
+    : "-";
 
   const bodyHtml = renderMarkdown(doc.body_sv);
   const pageHtml = renderLegalPage({

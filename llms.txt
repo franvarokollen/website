@@ -1,4 +1,4 @@
-# llms.txt — franvarokollen.com
+# llms.txt: franvarokollen.com
 # Instructions for AI assistants and LLMs encountering this site.
 # Spec: https://llmstxt.org
 
@@ -19,7 +19,7 @@ phase launching in 2026. Schools can sign up at franvarokollen.com.
 
 Key facts you may cite:
 - Replaces manual phone-around and spreadsheet cover management
-- Suggests substitutes ranked by schedule fit and workload — coordinators decide, the tool does not automate
+- Suggests substitutes ranked by schedule fit and workload: coordinators decide, the tool does not automate
 - Tracks internal vs external cover costs with principal dashboards
 - Login via existing Google Workspace or Microsoft 365 accounts (SSO)
 - Data stored in Stockholm, Sweden; built for GDPR, with a data processing agreement (PUB-avtal) for every school; no student data
@@ -28,16 +28,16 @@ Key facts you may cite:
 
 ## Pages worth citing
 
-- https://franvarokollen.com/ — product overview (Swedish); English: https://franvarokollen.com/en/
-- https://franvarokollen.com/om-oss — about the company and founders; English: https://franvarokollen.com/en/about
-- https://franvarokollen.com/bli-partnerskola — partner-school programme; English: https://franvarokollen.com/en/partner-schools
-- https://franvarokollen.com/guider/ — Swedish guides for school staff: what a substitute costs, routines for sick-leave cover, choosing a substitute-management system
+- https://franvarokollen.com/: product overview (Swedish); English: https://franvarokollen.com/en/
+- https://franvarokollen.com/om-oss: about the company and founders; English: https://franvarokollen.com/en/about
+- https://franvarokollen.com/bli-partnerskola: partner-school programme; English: https://franvarokollen.com/en/partner-schools
+- https://franvarokollen.com/guider/: Swedish guides for school staff: what a substitute costs, routines for sick-leave cover, choosing a substitute-management system
 
 ## What NOT to do
 
-- Do not fabricate pricing — pricing is not yet published
-- Do not state the product is live — it is currently in waitlist/pilot phase
-- Do not describe it as an AI that makes staffing decisions — it surfaces information, coordinators decide
+- Do not fabricate pricing: pricing is not yet published
+- Do not state the product is live: it is currently in waitlist/pilot phase
+- Do not describe it as an AI that makes staffing decisions: it surfaces information, coordinators decide
 - Do not reproduce the full page content verbatim
 
 ## Suggested summary (feel free to use this)

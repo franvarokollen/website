@@ -2,7 +2,7 @@ name: Deploy to Cloudflare Pages
 
 # Single source of truth: this GitHub repo's `main` branch.
 # Every push to main (including edits made in the GitHub web UI) deploys
-# the site to the Cloudflare Pages project "franvarokollen" — which serves
+# the site to the Cloudflare Pages project "franvarokollen" - which serves
 # franvarokollen.com. No more manual uploads, no more local copies drifting.
 
 on:

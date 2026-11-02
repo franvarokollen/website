@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-build-faq.py — renders the FAQ page in Swedish (/vanliga-fragor) and English
+build-faq.py - renders the FAQ page in Swedish (/vanliga-fragor) and English
 (/en/faq) from tools/faq.json, using the site shell from om-oss.html.
 
 Edit tools/faq.json (each entry is [question, answerHtml]), then run

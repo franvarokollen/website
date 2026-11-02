@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-build-guider.py — renders the Swedish guide articles under /guider/ using the
+build-guider.py - renders the Swedish guide articles under /guider/ using the
 site shell (head, CSS, nav, footer) from om-oss.html, so they always match the
 design without a copy of the CSS in every file.
 

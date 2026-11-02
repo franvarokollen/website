@@ -1,4 +1,4 @@
-# robots.txt — franvarokollen.com
+# robots.txt - franvarokollen.com
 # Controls which web crawlers can access which parts of the site.
 
 # Allow all crawlers, search engines and AI assistants alike
