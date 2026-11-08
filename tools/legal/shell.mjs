@@ -438,7 +438,7 @@ export function renderLegalPage({
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Frånvarokollen Sverige AB · <span data-i18n="footer.org">Org.nr: 559585-6450</span></span>
+      <span>© 2026 Frånvarokollen Sverige AB · <span data-i18n="footer.org">${isSv ? "Org.nr: 559585-6450 · Momsreg.nr: SE559585645001 · Engelbrektsvägen 29, 177 51 Järfälla" : "Org.no: 559585-6450 · VAT no: SE559585645001 · Engelbrektsvägen 29, 177 51 Järfälla, Sweden"}</span></span>
       <span data-i18n="footer.made">Byggd i Sverige</span>
     </div>
   </div>
