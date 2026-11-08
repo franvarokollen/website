@@ -1,140 +1,14 @@
-// ============================================================
-// functions/_lib/legal.js
-// Shared helpers for the /anvandarvillkor and /terms Pages Functions.
-// Shell copied verbatim from integritetspolicy.html (head, CSS, nav, body
-// structure) so the rendered pages are chrome-identical to that page.
-// ============================================================
-
-// ── HTML escaping ────────────────────────────────────────────
-export function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-// ── Markdown → HTML renderer ─────────────────────────────────
-// Covers: headings (#–####), paragraphs, unordered lists (- / * ),
-// blockquotes (> ), bold (**…**), inline links ([text](https://…|mailto:…)).
-// Source text is HTML-escaped BEFORE any pattern is applied - injection-safe.
-// House style: the site never shows an em dash. Text stored in the portal may
-// still contain them, so a spaced one becomes a comma and a bare one a hyphen.
-export function stripEmDashes(str) {
-  const emDash = String.fromCharCode(0x2014);
-  const pattern = new RegExp("\\s*" + emDash + "\\s*", "g");
-  return String(str).replace(pattern, (m) => (/\s/.test(m) ? ", " : "-"));
-}
-
-export function renderMarkdown(md) {
-  const lines = stripEmDashes(md).replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
-
-  const html = [];
-  let inList = false;
-  let inBlockquote = false;
-
-  const closeList = () => { if (inList)       { html.push("</ul>");         inList = false;       } };
-  const closeBq   = ()  => { if (inBlockquote) { html.push("</blockquote>"); inBlockquote = false; } };
-
-  // Inline formatting - applied after escaping.
-  const inline = (raw) => {
-    let s = escapeHtml(raw);
-    // bold **…**
-    s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-    // inline link [text](url) - https:// or mailto: only
-    s = s.replace(
-      /\[([^\]]+)\]\((https?:\/\/[^)]+|mailto:[^)]+)\)/g,
-      '<a href="$2">$1</a>'
-    );
-    return s;
-  };
-
-  for (const line of lines) {
-    if (line.trim() === "") {
-      closeList();
-      closeBq();
-      continue;
-    }
-
-    // Headings (#, ##, ###, ####)
-    const hm = line.match(/^(#{1,4})\s+(.+)$/);
-    if (hm) {
-      closeList(); closeBq();
-      html.push(`<h${hm[1].length}>${inline(hm[2])}</h${hm[1].length}>`);
-      continue;
-    }
-
-    // Unordered list item (- or *)
-    const lm = line.match(/^[-*]\s+(.+)$/);
-    if (lm) {
-      closeBq();
-      if (!inList) { html.push("<ul>"); inList = true; }
-      html.push(`<li>${inline(lm[1])}</li>`);
-      continue;
-    }
-
-    // Blockquote
-    const bm = line.match(/^>\s?(.*)$/);
-    if (bm) {
-      closeList();
-      if (!inBlockquote) { html.push('<blockquote class="policy-bq">'); inBlockquote = true; }
-      html.push(`<p>${inline(bm[1])}</p>`);
-      continue;
-    }
-
-    // Plain paragraph
-    closeList(); closeBq();
-    html.push(`<p>${inline(line)}</p>`);
-  }
-
-  closeList();
-  closeBq();
-  return html.join("\n");
-}
-
-// ── Full page template ───────────────────────────────────────
-// Shell is verbatim from integritetspolicy.html:
-//   - <head>: same charset/viewport/favicon data-URI/font links/inlined <style>
-//   - <body>: same .nav header (sticky, full logo SVG, nav-links, lang switcher,
-//             login btn, mobile menu toggle)
-//   - Content in .policy-wrap > <h1> + .policy-meta + rendered body
-//   - No <footer> element (integritetspolicy.html has none)
-//   - Same <script> for lang-toggle / mobile-menu
-// Note: <meta name="robots" content="noindex"> is intentionally OMITTED here.
-//   integritetspolicy.html carries noindex because it's a duplicate-language page.
-//   The Terms pages (/anvandarvillkor and /terms) are unique canonical pages that
-//   should be discoverable by search engines.
-export function renderLegalPage({
-  lang,           // "sv" | "en"
-  title,          // document title string
-  version,        // version string e.g. "1.0"
-  effectiveDate,  // pre-formatted date string
-  bodyHtml,       // rendered markdown HTML
-  langSwitchHref, // href of the other-language version
-  langSwitchLabel // link text e.g. "Read in English"
-}) {
-  const isSv = lang === "sv";
-  title = stripEmDashes(title);
-
-  const metaLine = isSv
-    ? `Version ${escapeHtml(version)} &middot; Senast uppdaterad ${escapeHtml(effectiveDate)}`
-    : `Version ${escapeHtml(version)} &middot; Last updated ${escapeHtml(effectiveDate)}`;
-
-  const backLabel  = isSv ? "← Tillbaka till startsidan" : "← Back to homepage";
-  const loginLabel = isSv ? "Gå med nu" : "Join now";
-
-  return `<!doctype html>
-<html lang="${lang}">
+<!doctype html>
+<html lang="sv">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>${escapeHtml(title)} | Frånvarokollen</title>
-<link rel="canonical" href="https://franvarokollen.com/${isSv ? "anvandarvillkor" : "terms"}" />
+<title>Användarvillkor för Frånvarokollen | Frånvarokollen</title>
+<link rel="canonical" href="https://franvarokollen.com/anvandarvillkor" />
 <link rel="alternate" hreflang="sv" href="https://franvarokollen.com/anvandarvillkor" />
 <link rel="alternate" hreflang="en" href="https://franvarokollen.com/terms" />
-<meta property="og:title" content="${escapeHtml(title)} | Frånvarokollen" />
-<meta property="og:url" content="https://franvarokollen.com/${isSv ? "anvandarvillkor" : "terms"}" />
+<meta property="og:title" content="Användarvillkor för Frånvarokollen | Frånvarokollen" />
+<meta property="og:url" content="https://franvarokollen.com/anvandarvillkor" />
 <meta property="og:site_name" content="Frånvarokollen" />
 <link rel="icon" href="/favicon.png" sizes="96x96" type="image/png" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -379,26 +253,146 @@ export function renderLegalPage({
 
     <div class="nav-actions">
       <div class="lang" role="group" aria-label="Språk">
-        <button class="${isSv ? "active" : ""}" data-lang-btn="sv" aria-pressed="${isSv}">SV</button>
-        <button class="${!isSv ? "active" : ""}" data-lang-btn="en" aria-pressed="${!isSv}">EN</button>
+        <button class="active" data-lang-btn="sv" aria-pressed="true">SV</button>
+        <button class="" data-lang-btn="en" aria-pressed="false">EN</button>
       </div>
-      <button class="nav-login">${loginLabel}</button>
+      <button class="nav-login">Gå med nu</button>
     </div>
   </div>
 </header>
 <div class="policy-wrap">
-  <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>${backLabel}</a>
-  <h1>${escapeHtml(title)}</h1>
-  <p class="policy-meta">${metaLine}</p>
-  <a href="${escapeHtml(langSwitchHref)}" class="lang-switch">
+  <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Tillbaka till startsidan</a>
+  <h1>Användarvillkor för Frånvarokollen</h1>
+  <p class="policy-meta">Version 2.0 &middot; Senast uppdaterad 8 november 2026</p>
+  <a href="/terms" class="lang-switch">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><circle cx="8" cy="8" r="6"/><path d="M8 2a9 9 0 0 1 0 12M8 2a9 9 0 0 0 0 12M2 8h12"/></svg>
-    ${escapeHtml(langSwitchLabel)}
+    Read in English
   </a>
   <div class="policy-body">
-    ${bodyHtml}
+    <h2>1. Om dessa villkor</h2>
+<p>Dessa Användarvillkor (&quot;Villkoren&quot;) gäller all användning av webbplatsen franvarokollen.com och Frånvarokollens tjänst (&quot;Tjänsten&quot;) innan ett Kundavtal har undertecknats.</p>
+<p>Med Kundavtal avses det avtal som en organisation (&quot;Kunden&quot;) ingår med Frånvarokollen om användning av Tjänsten, till exempel ett pilotavtal eller ett partnerskoleavtal, med tillhörande personuppgiftsbiträdesavtal (PUB-avtal).</p>
+<p>Frånvarokollen Sverige AB, organisationsnummer 559585-6450, med säte i Stockholm (&quot;Frånvarokollen&quot;, &quot;vi&quot;, &quot;oss&quot;), tillhandahåller Tjänsten.</p>
+<p>Genom att besöka franvarokollen.com, registrera intresse för Tjänsten, delta i en demonstration eller på annat sätt interagera med Tjänsten godkänner du dessa Villkor.</p>
+<h2>2. Tjänsten</h2>
+<p>Frånvarokollen är en mjukvarutjänst för hantering av frånvaro, vikarietillsättningar och relaterad analys för svenska grundskolor. Tjänsten är avsedd för skolledning och den personal som hanterar frånvaro och bemanning, inte för elever eller vårdnadshavare.</p>
+<p>Tjänsten används endast av organisationer som har ingått ett Kundavtal med Frånvarokollen. Frånvarokollen ger organisationen en engångskod för att skapa skolans konto, och skolans ägare och koordinatorer bjuder sedan in sina kollegor. Det går inte att registrera sig som användare via webbplatsen.</p>
+<h2>3. Förhållande till andra avtal</h2>
+<p>Dessa Villkor gäller fram till dess att ett Kundavtal har undertecknats mellan Kunden och Frånvarokollen. När ett Kundavtal är undertecknat ersätter Kundavtalet dessa Villkor i sin helhet för den Kunden.</p>
+<p>Behandling av personuppgifter regleras av:</p>
+<ul>
+<li>Vår <a href="https://franvarokollen.com/integritetspolicy">Integritetspolicy</a>, för besökare och presumtiva kunder</li>
+<li>PUB-avtalet som ingår i Kundavtalet, för kunder</li>
+</ul>
+<h2>4. Tillåten användning</h2>
+<p>Du får använda webbplatsen och eventuell demonstrationsmiljö i syfte att:</p>
+<ul>
+<li>Få information om Tjänsten</li>
+<li>Utvärdera om Tjänsten passar din skolas behov</li>
+<li>Genomföra en demonstration tillsammans med Frånvarokollens personal</li>
+<li>Kommunicera med oss inför ett eventuellt avtal</li>
+</ul>
+<h2>5. Otillåten användning</h2>
+<p>Du får inte:</p>
+<ul>
+<li>Använda webbplatsen eller Tjänsten i strid med svensk lag eller annan tillämplig rätt</li>
+<li>Försöka få obehörig åtkomst till Tjänsten, dess användarkonton, infrastruktur eller källkod</li>
+<li>Försöka dekompilera, reverse-engineera eller på annat sätt utforska Tjänstens tekniska uppbyggnad</li>
+<li>Kopiera, distribuera eller publicera innehåll från webbplatsen utan vårt skriftliga samtycke (med undantag för normal användning som länkning, citat med källangivelse och tillfällig lagring i webbläsares cache)</li>
+<li>Använda automatiserade verktyg (botar, skrapare) för att hämta information från webbplatsen i stor skala</li>
+<li>Genomföra säkerhetstester, penetrationstester eller liknande aktiviteter utan vårt föregående skriftliga samtycke</li>
+<li>Använda webbplatsen för att sprida skadlig kod, skräppost eller annat skadligt material</li>
+<li>Föra in eller försöka föra in personuppgifter om elever, personnummer, personuppgifter rörande lagöverträdelser enligt GDPR artikel 10 eller känsliga personuppgifter enligt GDPR artikel 9, utöver de frånvarokategorier som Tjänsten tillhandahåller och som regleras i Kundavtalet</li>
+</ul>
+<p><strong>Om Villkoren inte följs.</strong> Tjänsten spärrar automatiskt personnummer i namn- och anteckningsfält. I övrigt granskar vi inte uppgifterna i Tjänsten. Får vi kännedom om innehåll som strider mot dessa Villkor eller mot lag kan vi begränsa åtkomsten till innehållet eller till Tjänsten, om möjligt efter att först ha kontaktat den berörda organisationen. Sådana beslut fattas av en person och motiveras skriftligen. Du kan begära att ett beslut omprövas via <a href="mailto:support@franvarokollen.com">support@franvarokollen.com</a>.</p>
+<p>Upptäcker du en säkerhetsbrist är vi tacksamma om du rapporterar den till oss via kontaktuppgifterna i punkt 16.</p>
+<h2>6. Konton och åtkomst till Tjänsten</h2>
+<p>Tillgång till själva Tjänsten ges endast till organisationer som har ingått ett Kundavtal med Frånvarokollen. Skolans konto skapas efter:</p>
+<ul>
+<li>Undertecknat Kundavtal</li>
+<li>Undertecknat personuppgiftsbiträdesavtal (PUB-avtal)</li>
+<li>Att Kunden har utsett en ägare, som skapar skolans konto med en engångskod från Frånvarokollen</li>
+</ul>
+<p>Du kan inte själv registrera ett användarkonto via webbplatsen.</p>
+<p>Vid demonstrationer kan tillfälliga konton med påhittade uppgifter tillhandahållas. Uppgifter om verklig personal får föras in i Tjänsten först när Kundavtal och PUB-avtal har undertecknats.</p>
+<h2>7. Immateriella rättigheter</h2>
+<p>Frånvarokollen Sverige AB äger samtliga immateriella rättigheter till webbplatsen, Tjänsten, varumärket &quot;Frånvarokollen&quot;, logotyper, design, källkod, dokumentation och allt övrigt innehåll.</p>
+<p>Inget i dessa Villkor överlåter någon immateriell rättighet till dig.</p>
+<p>Du får länka till franvarokollen.com på rimliga sätt utan särskilt tillstånd, så länge länken inte skapar missuppfattningar om förhållandet mellan dig och Frånvarokollen.</p>
+<h2>8. Personuppgifter och cookies</h2>
+<p>Vår behandling av personuppgifter beskrivs i vår <a href="https://franvarokollen.com/integritetspolicy">Integritetspolicy</a>.</p>
+<p>Användning av kakor (cookies) och liknande tekniker beskrivs i vår <a href="https://franvarokollen.com/cookies">Cookiepolicy</a>.</p>
+<p>Webbplatsen franvarokollen.com sätter inga kakor. Tjänsten använder endast de kakor som behövs för inloggning.</p>
+<h2>9. Tillgänglighet och ändringar</h2>
+<p>Webbplatsen och eventuell demonstrationsmiljö tillhandahålls i befintligt skick. Vi strävar efter hög tillgänglighet men lämnar inga garantier för att webbplatsen är fri från fel, avbrott eller säkerhetsbrister.</p>
+<p>Vi kan när som helst:</p>
+<ul>
+<li>Uppdatera, ändra eller ta bort innehåll på webbplatsen</li>
+<li>Ändra Tjänstens funktionalitet eller utseende</li>
+<li>Tillfälligt eller permanent avbryta tillgången till delar av webbplatsen eller demonstrationsmiljön</li>
+<li>Uppdatera dessa Villkor enligt punkt 14</li>
+</ul>
+<h2>10. Ansvarsbegränsning</h2>
+<p>Webbplatsen och eventuell demonstrationsåtkomst tillhandahålls utan kostnad och utan garantier.</p>
+<p>Frånvarokollens totala ansvar gentemot dig i samband med din användning av webbplatsen eller eventuell demonstrationsåtkomst enligt dessa Villkor är begränsat till ett tusen (1 000) kronor.</p>
+<p>Frånvarokollen ansvarar inte för:</p>
+<ul>
+<li>Indirekta skador, följdskador, utebliven vinst, förlorade affärsmöjligheter eller skador på anseende</li>
+<li>Skador som beror på din egen utrustning, internetuppkoppling eller programvara</li>
+<li>Skador som beror på att du brutit mot dessa Villkor</li>
+<li>Innehåll på externa webbplatser som länkas från franvarokollen.com</li>
+</ul>
+<p>Denna ansvarsbegränsning gäller inte för:</p>
+<ul>
+<li>Skador som orsakats av Frånvarokollens grova vårdslöshet eller uppsåt</li>
+<li>Sådant ansvar som inte enligt svensk lag får begränsas</li>
+</ul>
+<p>För Kunder som ingått Kundavtal regleras ansvarsbegränsning av Kundavtalet, och denna punkt 10 gäller inte i den relationen.</p>
+<h2>11. Skadeslöshetshållande</h2>
+<p>Du åtar dig att hålla Frånvarokollen skadeslös från krav, skador, förluster och kostnader (inklusive skäliga juridiska kostnader) som tredje part framställer mot Frånvarokollen och som beror på:</p>
+<ul>
+<li>Din användning av webbplatsen eller demonstrationsmiljön i strid med dessa Villkor</li>
+<li>Ditt brott mot tillämplig lag eller tredje parts rättigheter</li>
+<li>Otillåten användning enligt punkt 5</li>
+</ul>
+<h2>12. Sekretess vid demonstrationer</h2>
+<p>Information som du får tillgång till under en demonstration av Tjänsten, inklusive icke-publik funktionalitet, prestanda, utvecklingsplaner eller priser, är konfidentiell.</p>
+<p>Du får inte:</p>
+<ul>
+<li>Sprida sådan information vidare till tredje part utan vårt skriftliga samtycke</li>
+<li>Publicera skärmbilder, videor eller annan dokumentation av demonstrationsmiljön på offentliga forum (sociala medier, publika webbplatser, konferenser och liknande) utan vårt skriftliga samtycke</li>
+</ul>
+<p>Detta åtagande gäller även om en demonstration aldrig leder till ett undertecknat Kundavtal. Åtagandet gäller inte i den mån lag kräver att informationen lämnas ut, till exempel enligt offentlighetsprincipen.</p>
+<h2>13. Länkar till externa webbplatser</h2>
+<p>Franvarokollen.com kan innehålla länkar till externa webbplatser. Vi ansvarar inte för innehåll, tillgänglighet eller hantering av personuppgifter på sådana externa webbplatser. Du följer länken på egen risk.</p>
+<h2>14. Ändringar av Villkoren</h2>
+<p>Vi kan komma att uppdatera dessa Villkor. Aktuell version finns alltid publicerad på franvarokollen.com/anvandarvillkor med datum för senaste uppdatering.</p>
+<p>Vid väsentliga ändringar:</p>
+<ul>
+<li>Meddelar vi det med en tydlig markering på webbplatsen</li>
+<li>Uppdaterar vi datumet &quot;Senast uppdaterad&quot; högst upp</li>
+</ul>
+<p>Genom att fortsätta använda webbplatsen efter en ändring godkänner du de uppdaterade Villkoren.</p>
+<h2>15. Tillämplig lag och tvist</h2>
+<p>Dessa Villkor tolkas och tillämpas enligt svensk rätt, utan tillämpning av dess lagvalsregler.</p>
+<p>Tvist som inte kan lösas genom överenskommelse avgörs av Stockholms tingsrätt som första instans.</p>
+<p>Ingenting i dessa Villkor inskränker rättigheter som följer av tvingande lag.</p>
+<h2>16. Kontaktuppgifter</h2>
+<p>Frånvarokollen Sverige AB</p>
+<p>Organisationsnummer: 559585-6450</p>
+<p>Säte: Stockholm</p>
+<p>Postadress och momsregistreringsnummer finns längst ned på varje sida på franvarokollen.com.</p>
+<p>E-post:</p>
+<ul>
+<li>Allmänna frågor: <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a></li>
+<li>Dataskyddsfrågor: <a href="mailto:gdpr@franvarokollen.com">gdpr@franvarokollen.com</a></li>
+<li>Support och säkerhetsfrågor: <a href="mailto:support@franvarokollen.com">support@franvarokollen.com</a></li>
+</ul>
+<p><strong>Kontaktpunkt enligt EU:s förordning om digitala tjänster (DSA).</strong> Myndigheter, Europeiska kommissionen, nämnden för digitala tjänster och användare kan kontakta oss elektroniskt på <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a>, på svenska eller engelska.</p>
+<p><strong>Anmälan av olagligt innehåll.</strong> Den som anser att Tjänsten innehåller olagligt innehåll kan anmäla det till <a href="mailto:support@franvarokollen.com">support@franvarokollen.com</a>. Ange var innehållet finns, varför det är olagligt, ditt namn och din e-postadress samt att anmälan görs i god tro. Vi bekräftar att anmälan har tagits emot, bedömer den skyndsamt och meddelar vårt beslut och skälen för det.</p>
   </div>
   <div class="back-bottom">
-    <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>${backLabel}</a>
+    <a href="/" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>← Tillbaka till startsidan</a>
   </div>
 </div>
 <footer class="footer">
@@ -453,40 +447,4 @@ export function renderLegalPage({
   }
 </script>
 </body>
-</html>`;
-}
-
-// ── Fallback page ────────────────────────────────────────────
-// On-brand minimal page returned (HTTP 200) when upstream fetch fails.
-// Never returns a blank 404 - legal pages must always resolve.
-export function fallbackPage(lang) {
-  const isSv = lang === "sv";
-  const title    = isSv ? "Användarvillkor" : "Terms of Service";
-  const heading  = isSv ? "Användarvillkor" : "Terms of Service";
-  const body     = isSv
-    ? "Dokumentet är tillfälligt otillgängligt. Försök igen om en stund."
-    : "This document is temporarily unavailable. Please try again shortly.";
-  const backLink = isSv ? "Till startsidan" : "Back to home";
-
-  return `<!doctype html>
-<html lang="${lang}">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>${escapeHtml(title)} | Frånvarokollen</title>
-<style>
-  body{font-family:system-ui,sans-serif;max-width:640px;margin:80px auto;padding:0 24px;color:#0F172A;line-height:1.6}
-  h1{font-size:28px;font-weight:800;color:#0D1E36;margin:0 0 16px;letter-spacing:-0.02em}
-  p{color:#64748B;font-size:16px;margin:0 0 24px}
-  a{color:#2563EB;font-weight:600}
-  .brand{font-size:13px;font-weight:700;color:#0D1E36;margin-bottom:40px;display:block}
-</style>
-</head>
-<body>
-<a href="/" class="brand">Frånvarokollen</a>
-<h1>${escapeHtml(heading)}</h1>
-<p>${escapeHtml(body)}</p>
-<p><a href="/">← ${escapeHtml(backLink)}</a></p>
-</body>
-</html>`;
-}
+</html>
