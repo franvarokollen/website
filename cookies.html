@@ -769,13 +769,13 @@
   <div data-lang="sv" class="active">
     <div class="lang-notice">🇸🇪 Detta dokument är på svenska. <a href="#" onclick="setLang('en');return false;">Read in English →</a></div>
     <h1>Cookiepolicy</h1>
-    <p class="policy-meta">Senast uppdaterad: 2026-11-01 &nbsp;·&nbsp; Version 2.0</p>
+    <p class="policy-meta">Senast uppdaterad: 2026-11-08 &nbsp;·&nbsp; Version 2.1</p>
 
 <h2>1. Sammanfattning</h2>
 <p>Den här policyn gäller både vår webbplats <strong>franvarokollen.com</strong> och den inloggade tjänsten <strong><span translate=no class=notranslate>Frånvarokollen</span></strong>. Den beskriver alla cookies och liknande tekniker som används på båda ställena.</p>
 <ul>
 <li><strong>Webbplatsen</strong> sätter inga cookies. Den sparar bara ditt språkval (svenska eller engelska) i din webbläsare.</li>
-<li><strong>Tjänsten</strong> använder en enda cookie, för att hålla dig inloggad, och sparar ditt språkval i webbläsaren.</li>
+<li><strong>Tjänsten</strong> använder en inloggningscookie och, bara medan du loggar in, en tillfällig säkerhetscookie. Den sparar också ditt språkval i webbläsaren.</li>
 <li>Vi använder inga cookies för statistik, analys, marknadsföring eller spårning, varken på webbplatsen eller i tjänsten.</li>
 <li>Allt vi använder är antingen nödvändigt för att tjänsten ska fungera eller något du själv har valt. Därför behöver vi inte be om ditt samtycke, och det finns ingen cookiebanner.</li>
 </ul>
@@ -785,23 +785,25 @@
 
 <h2>3. Webbplatsen franvarokollen.com</h2>
 <table>
-<tr><th>Namn</th><th>Typ</th><th>Syfte</th><th>Lagringstid</th><th>Sätts av</th></tr>
-<tr><td>fk_lang</td><td>localStorage</td><td>Kommer ihåg om du har valt svenska eller engelska</td><td>Tills du rensar webbplatsdata i webbläsaren</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
+<tr><th>Namn</th><th>Typ</th><th>Syfte</th><th>Lagringstid</th></tr>
+<tr><td>fk_lang</td><td>localStorage</td><td>Kommer ihåg om du har valt svenska eller engelska</td><td>Tills du rensar webbplatsdata i webbläsaren</td></tr>
 </table>
 <p>Webbplatsen sätter inga cookies. Typsnitt, bilder och filmer levereras från vår egen domän, och webbplatsen hämtar inget från andra företag när du besöker den. Ikonerna för LinkedIn, Facebook, Instagram och Pinterest är vanliga länkar och laddar inget från de tjänsterna förrän du klickar på dem.</p>
 <p><strong>Intresseanmälan.</strong> Om du skickar intresseformuläret på webbplatsen skickar din webbläsare det du har fyllt i direkt till Google Forms, som vi använder för att ta emot anmälningar. Ingenting skickas till Google förrän du klickar på skicka. Om du samtidigt är inloggad på ett Google-konto kan din webbläsare skicka med Googles egna cookies, enligt <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">Googles cookiepolicy</a>. Vill du undvika det kan du i stället mejla oss på <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a>.</p>
 
 <h2>4. Tjänsten <span translate=no class=notranslate>Frånvarokollen</span> (inloggad)</h2>
 <table>
-<tr><th>Namn</th><th>Typ</th><th>Syfte</th><th>Lagringstid</th><th>Sätts av</th></tr>
-<tr><td>sb-&lt;id&gt;-auth-token<br><small>(kan delas upp i flera delar, till exempel .0 och .1)</small></td><td>Cookie (förstapart)</td><td>Håller dig inloggad efter att du loggat in med Microsoft eller Google</td><td>Raderas när du loggar ut, annars som längst 400 dagar. Själva inloggningen kontrolleras och förnyas löpande och upphör när skolan inaktiverar ditt konto.</td><td><span translate=no class=notranslate>Frånvarokollen</span> (via vår databasleverantör Supabase)</td></tr>
-<tr><td>franvaro-lang</td><td>localStorage</td><td>Kommer ihåg ditt språkval i tjänsten</td><td>Tills du rensar webbplatsdata i webbläsaren</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
+<tr><th>Namn</th><th>Typ</th><th>Syfte</th><th>Lagringstid</th></tr>
+<tr><td>sb-&lt;id&gt;-auth-token<br><small>(kan delas upp i flera delar, till exempel .0 och .1)</small></td><td>Cookie (förstapart)</td><td>Håller dig inloggad efter att du loggat in med Microsoft eller Google</td><td>Raderas när du loggar ut, annars som längst 400 dagar. Själva inloggningen kontrolleras och förnyas löpande och upphör när skolan inaktiverar ditt konto.</td></tr>
+<tr><td>sb-&lt;id&gt;-auth-token-code-verifier</td><td>Cookie (förstapart)</td><td>Tillfällig säkerhetsnyckel som skyddar inloggningen med Microsoft eller Google</td><td>Bara under inloggningen. Tas bort när inloggningen är klar.</td></tr>
+<tr><td>franvaro-lang</td><td>localStorage</td><td>Kommer ihåg ditt språkval i tjänsten</td><td>Tills du rensar webbplatsdata i webbläsaren</td></tr>
 </table>
+<p>Cookierna sätts av <span translate=no class=notranslate>Frånvarokollen</span> via vår databasleverantör Supabase.</p>
 <p><strong>Inloggning med Microsoft eller Google.</strong> När du loggar in skickas du till Microsofts eller Googles inloggningssida. De sidorna sätter sina egna cookies på sina egna domäner, enligt respektive företags villkor. Det gäller oavsett vilken tjänst du loggar in i och styrs inte av oss.</p>
-<p><strong>Felrapporter.</strong> Om ett tekniskt fel uppstår skickar tjänsten en felrapport till vår leverantör Sentry inom EU. Felrapporteringen sätter inga cookies, spelar inte in vad du gör på skärmen och är inställd så att den inte skickar med personuppgifter som namn eller e-postadress. Läs mer i vår <a href="/integritetspolicy">integritetspolicy</a>.</p>
+<p><strong>Felrapporter.</strong> Om ett tekniskt fel uppstår skickar tjänsten en felrapport till vår leverantör Sentry inom EU. Felrapporteringen sätter inga cookies, spelar inte in vad du gör på skärmen och är inställd så att den inte skickar med användaruppgifter som namn, e-postadress eller IP-adress. Läs mer i vår <a href="/integritetspolicy">integritetspolicy</a>.</p>
 
 <h2>5. Varför behövs inget samtycke?</h2>
-<p>Enligt lagen (2022:482) om elektronisk kommunikation, 9 kap. 28 §, krävs samtycke för att spara eller läsa uppgifter i din webbläsare, utom när det behövs för att leverera en tjänst som du uttryckligen har bett om. Inloggningscookien behövs för att du ska kunna använda tjänsten, och språkvalet sparas bara för att du själv har valt språk. Inget av det används till något annat.</p>
+<p>Enligt lagen (2022:482) om elektronisk kommunikation, 9 kap. 28 §, krävs samtycke för att spara eller läsa uppgifter i din webbläsare, utom när det behövs för att leverera en tjänst som du uttryckligen har bett om. Inloggningscookien och den tillfälliga säkerhetscookien behövs för att du ska kunna logga in och använda tjänsten, och språkvalet sparas bara för att du själv har valt språk. Inget av det används till något annat.</p>
 
 <h2>6. Det här använder vi inte</h2>
 <ul>
@@ -820,6 +822,7 @@
 <p>Om vi ändrar vilka cookies eller liknande tekniker vi använder uppdaterar vi den här policyn och datumet ovan. Vi går igenom policyn minst var sjätte månad.</p>
 <table>
 <tr><th>Version</th><th>Datum</th><th>Ändring</th></tr>
+<tr><td>2.1</td><td>2026-11-08</td><td>Den tillfälliga säkerhetscookien under inloggning har lagts till. Felrapporter skickar inte heller med IP-adress.</td></tr>
 <tr><td>2.0</td><td>2026-11-01</td><td>Omskriven så att den gäller både webbplatsen och tjänsten. Inloggningscookien och lagringen i webbläsaren beskrivs som de faktiskt fungerar. Språkvalet på webbplatsen, intresseformuläret, inloggning via Microsoft eller Google och felrapportering har lagts till. Avsnittet om tillsynsmyndigheter och länkarna till webbläsarnas hjälpsidor har tagits bort.</td></tr>
 <tr><td>1.1</td><td>2026-10-18</td><td>Uppgifter om webbanalys borttagna, typsnitt levereras från egen domän.</td></tr>
 <tr><td>1.0</td><td>2026-06-06</td><td>Första versionen.</td></tr>
@@ -832,13 +835,13 @@
   <div data-lang="en">
     <div class="lang-notice">🇬🇧 This English version is provided for information only; the Swedish version is authoritative. <a href="#" onclick="setLang('sv');return false;">Läs på svenska →</a></div>
     <h1>Cookie Policy</h1>
-    <p class="policy-meta">Last updated: 2026-11-01 &nbsp;·&nbsp; Version 2.0</p>
+    <p class="policy-meta">Last updated: 2026-11-08 &nbsp;·&nbsp; Version 2.1</p>
 
 <h2>1. Summary</h2>
 <p>This policy covers both our website <strong>franvarokollen.com</strong> and the signed-in <strong><span translate=no class=notranslate>Frånvarokollen</span></strong> service. It describes every cookie and similar technology used in either place.</p>
 <ul>
 <li><strong>The website</strong> sets no cookies. It only saves your language choice (Swedish or English) in your browser.</li>
-<li><strong>The service</strong> uses a single cookie, to keep you signed in, and saves your language choice in your browser.</li>
+<li><strong>The service</strong> uses a sign-in cookie and, only while you are signing in, a temporary security cookie. It also saves your language choice in your browser.</li>
 <li>We use no cookies for statistics, analytics, marketing or tracking, on the website or in the service.</li>
 <li>Everything we use is either needed for the service to work or something you chose yourself. So we do not need to ask for your consent, and there is no cookie banner.</li>
 </ul>
@@ -848,23 +851,25 @@
 
 <h2>3. The website franvarokollen.com</h2>
 <table>
-<tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th><th>Set by</th></tr>
-<tr><td>fk_lang</td><td>localStorage</td><td>Remembers whether you chose Swedish or English</td><td>Until you clear site data in your browser</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
+<tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th></tr>
+<tr><td>fk_lang</td><td>localStorage</td><td>Remembers whether you chose Swedish or English</td><td>Until you clear site data in your browser</td></tr>
 </table>
 <p>The website sets no cookies. Fonts, images and videos are served from our own domain, and the website loads nothing from other companies when you visit. The LinkedIn, Facebook, Instagram and Pinterest icons are plain links and load nothing from those services until you click them.</p>
 <p><strong>Expression of interest.</strong> If you submit the expression-of-interest form on the website, your browser sends what you filled in directly to Google Forms, which we use to receive sign-ups. Nothing is sent to Google until you click submit. If you are also signed in to a Google account, your browser may send Google's own cookies with it, under <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">Google's cookie policy</a>. To avoid that, email us at <a href="mailto:info@franvarokollen.com">info@franvarokollen.com</a> instead.</p>
 
 <h2>4. The <span translate=no class=notranslate>Frånvarokollen</span> service (signed in)</h2>
 <table>
-<tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th><th>Set by</th></tr>
-<tr><td>sb-&lt;id&gt;-auth-token<br><small>(may be split into several parts, such as .0 and .1)</small></td><td>Cookie (first party)</td><td>Keeps you signed in after you sign in with Microsoft or Google</td><td>Deleted when you sign out, otherwise at most 400 days. The sign-in itself is checked and renewed continuously and ends when the school deactivates your account.</td><td><span translate=no class=notranslate>Frånvarokollen</span> (via our database provider Supabase)</td></tr>
-<tr><td>franvaro-lang</td><td>localStorage</td><td>Remembers your language choice in the service</td><td>Until you clear site data in your browser</td><td><span translate=no class=notranslate>Frånvarokollen</span></td></tr>
+<tr><th>Name</th><th>Type</th><th>Purpose</th><th>Duration</th></tr>
+<tr><td>sb-&lt;id&gt;-auth-token<br><small>(may be split into several parts, such as .0 and .1)</small></td><td>Cookie (first party)</td><td>Keeps you signed in after you sign in with Microsoft or Google</td><td>Deleted when you sign out, otherwise at most 400 days. The sign-in itself is checked and renewed continuously and ends when the school deactivates your account.</td></tr>
+<tr><td>sb-&lt;id&gt;-auth-token-code-verifier</td><td>Cookie (first party)</td><td>Temporary security key that protects sign-in with Microsoft or Google</td><td>Only during sign-in. Removed when sign-in is complete.</td></tr>
+<tr><td>franvaro-lang</td><td>localStorage</td><td>Remembers your language choice in the service</td><td>Until you clear site data in your browser</td></tr>
 </table>
+<p>The cookies are set by <span translate=no class=notranslate>Frånvarokollen</span> via our database provider Supabase.</p>
 <p><strong>Signing in with Microsoft or Google.</strong> When you sign in you are sent to Microsoft's or Google's sign-in page. Those pages set their own cookies on their own domains, under each company's terms. That happens whichever service you sign in to and is not controlled by us.</p>
-<p><strong>Error reports.</strong> If a technical error occurs, the service sends an error report to our provider Sentry within the EU. Error reporting sets no cookies, does not record what you do on screen, and is configured not to include personal data such as names or email addresses. See our <a href="/integritetspolicy">privacy policy</a>.</p>
+<p><strong>Error reports.</strong> If a technical error occurs, the service sends an error report to our provider Sentry within the EU. Error reporting sets no cookies, does not record what you do on screen, and is configured not to include user data such as name, email address or IP address. See our <a href="/integritetspolicy">privacy policy</a>.</p>
 
 <h2>5. Why is no consent needed?</h2>
-<p>Under the Swedish Electronic Communications Act (2022:482), chapter 9, section 28, consent is required to store or read data in your browser, except where it is needed to deliver a service you have explicitly asked for. The sign-in cookie is needed for you to use the service, and the language choice is saved only because you chose a language. Neither is used for anything else.</p>
+<p>Under the Swedish Electronic Communications Act (2022:482), chapter 9, section 28, consent is required to store or read data in your browser, except where it is needed to deliver a service you have explicitly asked for. The sign-in cookie and the temporary security cookie are needed for you to sign in and use the service, and the language choice is saved only because you chose a language. Neither is used for anything else.</p>
 
 <h2>6. What we do not use</h2>
 <ul>
@@ -883,6 +888,7 @@
 <p>If we change which cookies or similar technologies we use, we update this policy and the date above. We review the policy at least every six months.</p>
 <table>
 <tr><th>Version</th><th>Date</th><th>Change</th></tr>
+<tr><td>2.1</td><td>2026-11-08</td><td>Added the temporary security cookie used during sign-in. Error reports also exclude IP addresses.</td></tr>
 <tr><td>2.0</td><td>2026-11-01</td><td>Rewritten to cover both the website and the service. The sign-in cookie and browser storage are described as they actually work. Added the website's language choice, the interest form, sign-in via Microsoft or Google, and error reporting. Removed the supervisory-authorities section and the links to browser help pages.</td></tr>
 <tr><td>1.1</td><td>2026-10-18</td><td>Web analytics claims removed; fonts served from our own domain.</td></tr>
 <tr><td>1.0</td><td>2026-06-06</td><td>First version.</td></tr>
